@@ -1,0 +1,36 @@
+% macros for theses at the PST group
+% 
+% Matthias Hölzl, 2006
+% Annabelle Klarl, 2011
+
+\usepackage{listings} % source code printer package
+
+% for code snippets -> see also http://www.ctan.org/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstnewenvironment{pseudocode}[1][]
+{\lstset{
+	language=Java,
+	tabsize=3,
+	mathescape=true,	
+	frame=single,
+	framexleftmargin=5mm,
+	xleftmargin=0cm,
+	%aboveskip=,
+	%belowskip=,
+	%backgroundcolor=\color{yellow},
+	escapeinside='',
+	showstringspaces=false,
+	captionpos=b,
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=5pt,
+	%firstnumber=100
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bf,
+	morekeywords={},
+	deletekeywords={},
+	identifierstyle=,
+	commentstyle=\color{grey},
+	escapechar=§
+	}
+}{}

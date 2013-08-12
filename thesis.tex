@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%               LaTeX-Template for theses at the PST group.
+%
+% Authors:
+%       Matthias Hölzl/Moritz Hammer, 2006
+%       Annabelle Klarl 2011
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{thesisPST}
+\include{macros}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Change according to your thesis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% change according to your thesis (german or english!)
+\thesisType{Masterarbeit} 
+\thesisAuthor{Arthur Dent}
+\thesisProgram{Informatik Master}
+
+\thesisTitle{Fragengenerierung durch genetische Programmierung}
+
+% Do not delete this command!
+% If you do not have a a subtitle, leave it empty!
+\subtitle{Finale Definition der Frage zur Antwort 42}
+
+\referee{Prof.~Dr.~Martin Wirsing}
+\supervisor{PST Mitarbeiter}
+
+\handInDate{15. Januar 2020}
+
+\selectlanguage{ngerman}
+%\selectlanguage{english}
+
+% use this command to define syllable division for special words (e.g. class names)
+\hyphenation{Be-ant-wortung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter % for Roman numbering 
+\maketitlepage
+\cleardoublepage
+\selbststaendigkeitserklaerung
+\cleardoublepage
+\pagestyle{headings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Change according to your thesis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{text/abstract}
+\input{text/acknowledgements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\tableofcontents
+
+\mainmatter % for Arabic numbering
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Change according to your thesis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{text/beispielkapitel} 
+% include more chapters
+
+% optional
+\input{text/appendices}
+
+\backmatter % Do not move this command!
+
+% optional
+\phantomsection
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis} % change according to language (adds the list of figures to the table of contents)
+\listoffigures
+
+% optional
+\listoftables
+\phantomsection
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis} % change according to language (adds the list of tables to the table of contents)
+
+% change according to language
+\chapter{Inhalt der beigelegten CD}
+Die beigelegte CD enthält folgenden Inhalt:
+\begin{itemize}
+	\item diese Masterarbeit in PDF Format,
+	\item Videos mit Interview von Fans,
+	\item den Source-Code der Implementierung einer Maschine zur Beantwortung der Fragen aller Fragen. Der Source-Code ist im Ordner \emph{src} zu finden.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Literaturverzeichnis} % change according to language (adds the bibliography to the table of contents)
+\bibliographystyle{alphadin} % select this for a German thesis
+%\bibliographystyle{alpha} % select this for an English thesis
+\bibliography{thesis}
+
+
+\end{document}
