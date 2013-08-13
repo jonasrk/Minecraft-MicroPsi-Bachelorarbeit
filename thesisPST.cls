@@ -3,7 +3,7 @@
 %         DOCUMENT CLASS for theses at the PST group
 % 
 % Authors:
-%      Matthias Hölzl, 2006
+%      Matthias HÃ¶lzl, 2006
 %      Annabelle Klarl, 2011
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -39,7 +39,7 @@
 \LoadClass[a4paper,11pt,twoside]{book}
 
 % Encoding: Allows the usage of umlauts
-\RequirePackage[latin1]{inputenc}
+\RequirePackage[utf8]{inputenc}
 % Sets the language of this document
 \RequirePackage[ngerman,english]{babel}
 % Allows the usage of images (needed for the titlepage)
