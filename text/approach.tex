@@ -4,9 +4,9 @@ The objective of this thesis is to build and test an interface in between MicroP
 
 The modular architecture of MicroPsi 2 allows it to add new simulation environments (or worlds, as they are called in microPsi) fairly easy. A world needs interfaces to Data Source and Data Targets and a step-function that evolves the world.
 
-That being said, a big part of the project is about visualization. Inside the MicroPsi Core Application, a 3D-visualization of the Minecraft world and the agent within is aimed for. There are two main reasons for this goal. The first reason is, that the agents behavior within the simulation environment is supposed to be monitored from the MicroPsi webinterface in an aesthetically appealing way. The secons reason is, that the image data is supposed to be processed by the agent as one of it's senses.
+On the other hand, communication with a Minecraft Server typically requires a constant flow of data packets going in and out. Most third party clients, including Bots, facilitate own event loops. What has been done for this project, was breaking down the event loop of the used bot framework and rebuild it as the step function of the MicroPsi 2 world. It should be noted, that the frequency in which the framework steps the bot has to be at least chosen so, that it is able to send keep-alive-signals to Server, to not get kicked.
 
-The functionality is to be tested with a simple Braitenberg-vehicle experiment.
+That being said, a big part of the project is about visualization. Inside the MicroPsi Core Application, a 3D-visualization of the Minecraft world and the agent within is aimed for. There are two main reasons for this goal. The first reason is, that the agents behavior within the simulation environment is supposed to be monitored from the MicroPsi webinterface in an aesthetically appealing way. The secons reason is, that the image data is supposed to be processed by the agent as one of it's senses.
 
 Do obtain these goals, the Minecraft Client-Server-Protocol had to be researched, learned and imitated.
 
@@ -70,6 +70,8 @@ Eventually, building upon an existing Bot framework led to an integration with t
 % TODO je nach Größe des Kapitels, das hier vielleicht eine Ebene höher ziehen (versuche dich hier erstmal nur auf die fertige Lösung zu konzentrieren und warum du dich dafür entschieden hast. Es ist nicht interessant, was du sonst alles ausprobiert hast, außer dass du konkret angibst, warum du dich für die jetztige Implementierung im Vergleich zu anderen entschieden hast)
 
 \section{A! Case Study}
+
+The functionality is to be tested with a simple Braitenberg-vehicle experiment.
 
 \subsection{Experiment}
 ... experiment to test functionality of the system ...

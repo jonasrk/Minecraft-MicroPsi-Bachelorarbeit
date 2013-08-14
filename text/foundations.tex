@@ -64,6 +64,7 @@ The current priority of MicroPsi 2 lies on affective simulation for problem solv
 
     \section{A! Minecraft}
 ... a more complex simulation environment could be fun ...
+%TODO define term player
 
 ... the story of Minecraft ...
 ... Minecrafts poularity (and demographics) ...
@@ -74,7 +75,7 @@ One computer-game in particular stood out in the last years --- not for A.I. rea
 
 Even though the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software as well as one client per player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
 
-Minecraft is a complex yet easily accesible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of gamemodifications.
+Minecraft is a complex yet easily accesible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of game-modifications.
 
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular charecteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
@@ -82,6 +83,12 @@ Another interesting aspect about Minecraft is the procedural semantic the game w
 ... brief description of the basic mechanisms ...
 
         \subsection{The Cient Server Protokoll}
+Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. "All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
+
+To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight forward. It is exclusively send form clients to servers and starts with the Packet ID (as every Packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to "modify the players bounding box when going up stairs, crouching, etc…", another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
+
+Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, therefrom calculate the absolute coordinates of the destination of the movement and then send a "Client Position" packet with these coordinates. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
+
 ... the language an external client needs to speak, to take place in a Minecraft world ...
 
         \subsection{Suitability of Minecraft as a simulation environment}
