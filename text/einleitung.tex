@@ -1,0 +1,45 @@
+\chapter{A! Introduction}
+The hunt for artificial intelligence started many years ago. Dividing the subjects into the strong and weak parts means seperating it goals into usefull applications and those that try to learn about the nature of intelligence itself. The ultimate task of strong A.I. --- recreating human intelligence --- admitably still seems to be science fiction, though.
+
+A new generation of cognitive scientists, psychologists and computer scientists strives to implement new Ideas for simulated cognition --- building cognitive architectures. Many of them do so by simulating in one way or the other, what could be called "neural networks".
+
+To test the functionality of such cognitive architectures and to figure out their capabilities and potential we need to research their behavior inside defined environemts. As implementing AI into the physical world (as robots for examples) requires building apropriate hardware and patience, computer-simulated environments are an important part of that research.
+
+MicroPsi is both: a cognitive architecture and also a set of and an interface to simulation environments.
+
+\section{Motivation}
+Even though there have been more complex simulation enviroments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi 2 has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building a new 3D-world, we set out for something a little more innovative.
+
+Video games are natural applications of artificial intelligence. The quality of a games A.I. can make all the difference in between a great title and an unenternaining demo of computer graphics.
+
+One computer-game in particular stood out in the last years --- not for A.I. reasons though. It is called Minecraft and is benefiting of high popularity ever since its first release in 2009. Since copies of the game can be obtained commercially for the first time in 2011, the different versions of the game sold more than 26 million times - the PC version priced at about 20 Euros. It should be noted, that the games developer studio Mojang is a so called "Indie" developer that is not associated with any classical game publisher but distributes copies of their game exclusively via their own website.
+
+Even though the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software as well as one client per player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
+
+Minecraft is a complex yet easily accesible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of gamemodifications.
+
+Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular charecteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
+
+\section{Objective}
+The objective of this thesis is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world (e.g. server) can be used as a simulation environment for the MicroPsi 2 Framework, which will act as an artificial player.
+
+That being said, a big part of the project is about visualization. Inside the MicroPsi Core Application, a 3D-visualization of the Minecraft world and the agent within is aimed for. There are two main reasons for this goal. The first reason is, that the agents behavior within the simulation environment is supposed to be monitored from the MicroPsi webinterface in an aesthetically appealing way. The secons reason is, that the image data is supposed to be processed by the agent as one of it's senses.
+
+The functionality is to be tested with a simple Braitenberg-vehicle experiment.
+
+In the future, multiple agents shall interact with the same environment and collaborate with each other.
+
+\section{Approach}
+Do obtain these goals, the Minecraft Client-Server-Protocol had to be researched, learned and imitated.
+
+Then, artificial Minecraft players (written in Python) had to be searched, found and researched.
+
+Eventually, building upon an existing Bot framework led to an integration with the MicroPsi framework.
+
+\section{Outcome}
+After several iterations and trying out different approaches and technologies the Interface is now functional.
+
+The experiment with the simulated Braitenbergvehikel resulted in proofing that Minecraft is usable as a simulation environment.
+
+\section{Outline}
+...
