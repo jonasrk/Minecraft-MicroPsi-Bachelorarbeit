@@ -2,6 +2,8 @@
 
 The objective of this thesis is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world (e.g. server) can be used as a simulation environment for the MicroPsi 2 Framework, which will act as an artificial player.
 
+The modular architecture of MicroPsi 2 allows it to add new simulation environments (or worlds, as they are called in microPsi) fairly easy. A world needs interfaces to Data Source and Data Targets and a step-function that evolves the world.
+
 That being said, a big part of the project is about visualization. Inside the MicroPsi Core Application, a 3D-visualization of the Minecraft world and the agent within is aimed for. There are two main reasons for this goal. The first reason is, that the agents behavior within the simulation environment is supposed to be monitored from the MicroPsi webinterface in an aesthetically appealing way. The secons reason is, that the image data is supposed to be processed by the agent as one of it's senses.
 
 The functionality is to be tested with a simple Braitenberg-vehicle experiment.
