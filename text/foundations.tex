@@ -36,10 +36,6 @@ MicroPsi modular structure makes it fairly easy to understand. At first, one can
 
 In a minimal setup microPsi runs three threads. One thread for the webserver, one for the world simulation and for every world-adapter (or agent). If more then one agent or more than one world are launched, they are instantiated as additional threads.
 
-Then, there are nodenets. Nodenets can be stored and edited graphically from within the web-interface.
-
-World-adapters are, what makes nodenets and worlds interact with each other. Therefore they provide Data-Sources and Data-targets, which embody the nodenets input from the world (it's senses/sensors) and output (it's muscles?/motors/actuators).
-
 "MicroPsi consists of a server (the web application), a runtime component, a set of node nets, a set of simulation worlds, a user manager and a configuration manager (figure 2). The server is built on the micro web framework Bottle (Hellkamp 2011) and communicates with all current users via their web browsers through the Server API. User sessions and access rights are handled by the user manager component.
 On startup, the server invokes the runtime component, which interfaces to the server with the MicroPsi API. The runtime is designed to work independently of the server and does not need to be deployed as a web application (command line interac- tion or OS based user interfaces are possible as well).
 The runtime supplies a manager for MicroPsi node nets (see section 4), and a manager for simulation worlds (or interfaces to outside environments, such as robotic bodies, remote data providers, etc.). Standard simulation worlds (section 6) provide agents (node net embodiments) and objects as situated state machines."~\cite{conf/agi/Bach12}
@@ -47,21 +43,31 @@ The runtime supplies a manager for MicroPsi node nets (see section 4), and a man
             \includegraphics[width=5cm]{graphics/micropsi2_uml}
             
                 \paragraph{Agents}
+MicroPsi defines agents as node nets.~\cite{conf/agi/Bach12}
+                
 "MicroPsi interprets cognitive models as agents, situated in dynamic environments. MicroPsi agents are entirely defined as hierarchical spreading activation networks (SAN), which—for lack of a better name—are called node nets. Node nets are the brains of these agents—or rather, an abstraction of the information processing provid- ed by brains, and the environment provides a body and stuff to interact with.
 The body manifests itself as a set of data sources (which can be thought of as the terminals of sensory neurons) and data targets (the abstracted equivalent of motor neurons). By reading activation values from data sources, and sending activation into data targets, the MicroPsi agent may control its body and interact with its world.
 MicroPsi’s node nets can be interpreted as neural networks and afford neural learn- ing paradigms. For the purposes of information storage and retrieval, they can be seen as semantic networks with a small set of typed links to express associative, partonom- ic, taxonomic and causal relationships.
 Since the nodes can also encapsulate state machines and arbitrary operations over the node net, they can also be understood as components of a concurrent, modularized architecture, with activation spreading as the primary means of communication be- tween the modules."~\cite{conf/agi/Bach12}
 
                 \paragraph{Environment}
+The simulations worlds are the environments in which we can study our node nets behavior. Worlds need to provide the worldadapter --- the interface in between the node net and the simulation. Data sources and data targets have to be defined, to get a functional and meaningful experiment going.~\cite{conf/agi/Bach12}
+                
 "Within the MicroPsi framework, agents may be embedded into an environment (world). The environment must provide a world adapter wa for each MicroPsi agent. The world adapter offers data sources, from which the agent’s node net may read environmental information, and data targets, which allow the agent to effect changes in the world. Since the environment only has write access to data sources, and read access to data targets, node net and environment may be updated asynchronously.
 The world adapter may interface a local multi-agent simulation, a robotic body, a computer game client or simulation server, dynamically updated stock data, etc."~\cite{conf/agi/Bach12}
 
                 \paragraph{Applications}
+At the time of the development of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
+
 "Compared with the original implementation of MicroPsi, the current iteration of the framework is still fragmentary; at the time of writing, it supports only a simple generic simulation world for multi agent experiments (instead of the various simula- tion environments provided in MicroPsi 1). Also, 3D viewing components for envi- ronments and facial expressions are completely absent.
 The current priority of MicroPsi 2 lies on affective simulation for problem solving experiments (see Bach 2012b), and its application as a general framework for knowledge representation in a hierarchical semantic network."~\cite{conf/agi/Bach12}
 
 
             \subsubsection{Core}
+Then, there are nodenets. Nodenets can be stored and edited graphically from within the web-interface.
+
+World-adapters are, what makes nodenets and worlds interact with each other. Therefore they provide Data-Sources and Data-targets, which embody the nodenets input from the world (it's senses/sensors) and output (it's muscles?/motors/actuators).
+
 ... the core runs the heart of the simulation ...
 
             \subsubsection{Server}
@@ -73,12 +79,13 @@ The server is built on the Python webframework Bottle.~\cite{conf/agi/Bach12}
 
     \section{A! Minecraft}
 ... a more complex simulation environment could be fun ...
-%TODO define term player
 
 ... the story of Minecraft ...
 ... Minecrafts poularity (and demographics) ...
 
-Video games are natural applications of artificial intelligence. The quality of a games A.I. can make all the difference in between a great title and an unenternaining demo of computer graphics.
+The story of Minecraft has many interesting sides, but one kind it is without doubt: a story of succes.
+
+When Markus ("Notch") Persson built and released the first public version of Minecraft it soon became clear that his creation resonated with many people. The simple concept of world entirely build of standard sized building blocks which the player is allowed to create, destroy and relocate one-by-one let many gamers employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
 
 One computer-game in particular stood out in the last years --- not for A.I. reasons though. It is called Minecraft and is benefiting of high popularity ever since its first release in 2009. Since copies of the game can be obtained commercially for the first time in 2011, the different versions of the game sold more than 26 million times - the PC version priced at about 20 Euros. It should be noted, that the games developer studio Mojang is a so called "Indie" developer that is not associated with any classical game publisher but distributes copies of their game exclusively via their own website.
 
@@ -88,13 +95,27 @@ Minecraft is a complex yet easily accesible virtual world. It is constantly deve
 
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular charecteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
-        \subsection{What is Minecraft?}
-define block
-\includegraphics[width=1cm]{graphics/block}
+        \subsection{What is a Minecraft world?}
+In this section some of the basic concepts of the game are described. Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different kinds (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can rougly be thought of as equaling one meter.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=1cm]{graphics/block}
+  \caption{A "grass" Minecraft Block}
+  \label{mc_block}
+\end{figure}
+        
+A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep).~\cite{mcwiki_chunks}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=1cm]{graphics/chunk}
+  \caption{A chunk}
+  \label{mc_chunk}
+\end{figure}
+
 define player
 \includegraphics[width=1cm]{graphics/player}
-define chunk
-\includegraphics[width=1cm]{graphics/chunk}
 ... brief description of the basic mechanisms ...
 
         \subsection{The Cient Server Protokoll}
