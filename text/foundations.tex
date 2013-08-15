@@ -124,23 +124,40 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
 \end{figure}
 
 ... brief description of the basic mechanisms ...
+... the game has now predefined "goal" ... other than monsters trying to kill you at night ...
 
         \subsection{The Cient Server Protokoll}
-Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. "All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
+Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
+
+"All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
 
 To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight forward. It is exclusively send form clients to servers and starts with the Packet ID (as every Packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to "modify the players bounding box when going up stairs, crouching, etc…", another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
 
-Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, therefrom calculate the absolute coordinates of the destination of the movement and then send a "Client Position" packet with these coordinates. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
+Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, calculate the absolute coordinates of the destination of the movement in regard of it and send a "Client Position" packet with these coordinates to the server. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
 
-Other than movement, there are defined packet(-structures) for every aspect of the game. May it be the initial handshake, the creation or destruction of blocks or activity of other player- or non-player-characters
+Other than movement, there are defined packets(-structures) for every aspect of the game. May it be the initial handshake, the creation or destruction of blocks or activity of other player- or non-player-characters
 
 ... the language an external client needs to speak, to take place in a Minecraft world ...
 
         \subsection{Suitability of Minecraft as a simulation environment}
+There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
+
+First, the game itself is easily accesssible. It is developed using Java (for both the client and the server software) and therefore somewhat platform independent. The "desktop computer version" is sold for Windows, Mac OS X and Linux devices. There are official ports to Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming "Xbox One" is announced. The desktop versions are priced at 19.95€ which makes it affordable to a large audience.
+
+The game itself already has an enormous audience. It is (like most videogames) espacially popular with teenagers (or upcoming scientists). Minecraft being loved by so many people could benefit this project as for giving it more attention.
+
+The game's developer has prooven many times (proof?) that it acts very friendly to other developers when it comes to building game modifications and creating content that uses and/or changes original Minecraft content. In other words: They are not at all restrictive, when it comes to user people doing all kinds of things with their creations. This led to the availability of a fairly complete community-sourced  documentation and explantion of virtually every aspect of the game --- including it's software architecture, data structure and protocols. This is usefull for this project, as chances are low that they will have anything against this project in the forseeable future. (In fact, the game's A.I. creator Jon Kagström seems to be fond of this project)
+
+The Minecraft world with it's logic, semantic and functions offers possibilities for an A.I. to proof being able to interact with the environment both on very simple and primitive ways (e.g. moving around) as well as increasingly complex tasks like building, collecting ressources, craft items from blocks and interacting apropriately with both well-disposed and hostile other incarnations. %TODO find a better word)
+%TODO explain crafting
+
+The semantics of the gameworld share charecteristics with the real world. Moving through the world one quickly realizes that it is build up out of different biomes (eg. forrest or tundra). Also trees, rivers, mountains and ore veins are not hardcoded but generated proceduarally and their structure appers to be (somewhat) fractal.
+        
 ... cheap licenses ...
 ... developer friendly community and game-studio ...
 ... sandbox game with many possibilieties but no pre-defined goals ...
 ... procedural semantic ...
 
     \section{A! Minecraft and MicroPsi}
+Using Minecraft as a simulation environment will give the Psi agent possibilities to show off what kind of sophisticated behavior it is capable of.
 ... a more complex simulation environment could be fun ...
