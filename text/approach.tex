@@ -43,6 +43,29 @@ Opposed to Mineflayer, an example for a game modification bot are the "Cubebots"
 Developed by Nick Gamberini, spock is an open-source bot framework (and therefore a Minecraft client) written in Python. It has been chosen as an essential part of this project for two reasons: Beeing written in Python it painlessly integrates in existing MicroPsi code and the absence of dependencies (with on exception) leave the code understandable and easy to deploy.
 
 \subsection{Implementing the Bot in MicroPsi}
+To make the bot work as a simulation world two main challenges had to be overcome. First, the event loop and handling of spock had to be modified to work with MicroPsi. Therefore, the functions that were usually called from within the eventloop now have to be called from within the step function of the worldadapter. The same holds for event handling. 
+
+Second, a system for communicating "sensory data" and commands in between the bot (or Minecraft world) and the world adapter had to be implemented. Up to a certain degree, spocks plug-in system could be facilitated (well ...). In most/ cases, though, sending commands and receiving data (...) had to be be implemented on packet level.
+
+Sending packets in spock is fairly easy. (see figure \ref{snippet_position-packet}
+
+\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+				
+
+				\end{pseudocode}
+				\caption{Sending a packet that moves the agent on block in x direction}
+				\label{snippet_position-packet}
+			\end{minipage}
+		\end{figure}
+
+%TODO remove well ...
+
+%explain spocks plugin system
+... spocks plugin system ...
+%TODO describe, why the bot is "the world"
 
 
 \subsection{The MicroPsi side}
