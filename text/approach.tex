@@ -40,7 +40,7 @@ Opposed to Mineflayer, an example for a game modification bot are the "Cubebots"
 \subsubsection{other popular Bot projects and game modifications}
 
 \subsubsection{Spockbot von Nickelpro}
-Developed by Nick Gamberini, spock is an open-source bot framework (and therefore a Minecraft client) written in Python. It has been chosen as an essential part of this project for two reasons: Beeing written in Python it painlessly integrates in existing MicroPsi code and the absence of dependencies (with on exception) leave the code understandable and easy to deploy.
+Developed by Nick Gamberini, spock is an open-source (MIT license) bot framework (and therefore a Minecraft client) written in Python. It has been chosen as an essential part of this project for two reasons: Beeing written in Python it painlessly integrates in existing MicroPsi code and the absence of dependencies (with on exception) leave the code understandable and easy to deploy.
 
 \subsection{Implementing the Bot in MicroPsi}
 To make the bot work as a simulation world two main challenges had to be overcome. First, the event loop and handling of spock had to be modified to work with MicroPsi. Therefore, the functions that were usually called from within the eventloop now have to be called from within the step function of the worldadapter. The same holds for event handling. 
@@ -65,7 +65,7 @@ Sending packets in spock is fairly easy. (see figure \ref{snippet_position-packe
 			\end{minipage}
 		\end{figure}
 		
-%TODO code example fails to latex compile with
+%TODO code example fails to latex compile with //
 
 %TODO remove well ...
 
@@ -83,8 +83,13 @@ Sending packets in spock is fairly easy. (see figure \ref{snippet_position-packe
 \subsection{necessary Modifications and Additons in server/control and monitoring interface}
 
 \subsection{The Visualization}
+Early ideation made it clear, that this project should contain a visualization component. 
 
 \subsubsection{Requirements and necessity of a visualization}
+The visualization is supposed to server two causes. First, it should make it effective and pleasurable to monitor the bot's behavior as well as the environment it is behaving in. Second it is supposed two serve the agent as a datasource itself. This means, that from pure world data (what block sits where) a 3D-visiualization is to be generated from within the MicroPsi Python Code. It should contain a perspective that gives a good overview over the bots environment to forward to the webinterace, as well as a first person perspective of the agent, to function as its eyes.
+
+
+
 ... why a visiualization and what is it supposed to do? ...
 
 \paragraph{monitoring the bot from the webinterface}
@@ -94,11 +99,14 @@ Sending packets in spock is fairly easy. (see figure \ref{snippet_position-packe
 
 \subsubsection{Implementation}
 
+It was implemented as follows:
+
 \paragraph{used Data}
 ... required Data for the visualization ...
 ... and how to obtain it (first attempts: telnets/then sockets) ...
 
 \subsubsection{3D Visualisierung mit Pyglet}
+Fortunately, a (Minecraft inspired) open source (MIT license) project has been found, that implements a (very) simple Minecraft clone in (under 500 lines of) Python.\cite{github_minecraftpython}
 ... foundation: that minecraft pyglet clone ...
 
 \subsubsection{Earlier attempts using JavaScript / AJAX}
