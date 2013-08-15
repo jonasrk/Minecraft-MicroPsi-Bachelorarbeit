@@ -80,6 +80,10 @@ Minecraft is a complex yet easily accesible virtual world. It is constantly deve
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular charecteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
         \subsection{What is Minecraft?}
+define block
+define player
+define chunk
+\includegraphics[width=1cm]{graphics/chunk}
 ... brief description of the basic mechanisms ...
 
         \subsection{The Cient Server Protokoll}
@@ -88,6 +92,8 @@ Minecrafts Client-Server-Protocol is (at least not to the public) documented by 
 To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight forward. It is exclusively send form clients to servers and starts with the Packet ID (as every Packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to "modify the players bounding box when going up stairs, crouching, etc…", another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
 
 Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, therefrom calculate the absolute coordinates of the destination of the movement and then send a "Client Position" packet with these coordinates. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
+
+Other than movement, there are defined packet(-structures) for every aspect of the game. May it be the initial handshake, the creation or destruction of blocks or activity of other player- or non-player-characters
 
 ... the language an external client needs to speak, to take place in a Minecraft world ...
 
