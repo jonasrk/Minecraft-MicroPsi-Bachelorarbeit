@@ -53,13 +53,19 @@ Sending packets in spock is fairly easy. (see figure \ref{snippet_position-packe
 			\centering
 			\begin{minipage}{11cm}
 				\begin{pseudocode}
-				
-
+					'x': (client.position['x'] + 1)  / 1,
+    					'y': client.position['y'] / 1,
+					'z': client.position['z'] / 1,
+					'on_ground': False,
+					'stance': client.position['y'] + 0.11
+					}))
 				\end{pseudocode}
 				\caption{Sending a packet that moves the agent on block in x direction}
 				\label{snippet_position-packet}
 			\end{minipage}
 		\end{figure}
+		
+%TODO code example fails to latex compile with
 
 %TODO remove well ...
 
