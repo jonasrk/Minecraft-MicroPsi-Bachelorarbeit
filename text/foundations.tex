@@ -13,7 +13,7 @@ The first implementations are by Dörner and his associates themselves. The used
 
 
         \subsection{Joschas Implementation}
-The work of Dörners team has not been continued, so Joscha Bach and his associates built new implementations of Psi.
+The work on Dörners teams implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
 
             \subsubsection{MicroPsi in Java}
 From 2003 to 2009 they built an implementation in Java. It consisted of a graphical editor and a 3D simulation-environment.~\cite{conf/agi/Bach12}  
@@ -21,7 +21,7 @@ From 2003 to 2009 they built an implementation in Java. It consisted of a graphi
 "The first implementation of the MicroPsi framework spanned the years 2003 to 2009, and was built in Java as a set of plugins for the Eclipse IDE. The graphical edi- tor was built on SWT. It comprised about 60000 lines of code, and although a lot of effort went towards platform independence (with the exception of a DirectX/.Net based 3D viewer component), deployment on the various operating systems and across several versions of Eclipse became support intensive, especially after its adop- tion by teams outside of our group."~\cite{conf/agi/Bach12}
 
             \subsubsection{MicroPsi in Python}
-Amaing at better understandability and to maintain platform independence, MicroPsi has been built ground up again using Python. What is remarkable about the new implementation called MicroPsi, is that the graphical interface is completely rendered inside a webbrowser --- using state-of-the-art internet- and webapplication-technologies.~\cite{conf/agi/Bach12}
+Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again using Python. What is remarkable about the new implementation called MicroPsi, is that the graphical interface is completely rendered inside a webbrowser --- using state-of-the-art internet- and webapplication-technologies.~\cite{conf/agi/Bach12}
         
 Even though there have been more complex simulation enviroments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi 2 has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building a new 3D-world, we set out for something a little more innovative.
 
@@ -32,9 +32,13 @@ Even though there have been more complex simulation enviroments (e.g. 3D-worlds)
 The MicroPsi 2 user interface is rendered completely inside a web browser and the simulation is deployed as a web application. The UI components are based upon HTML/Javascript and "and facilitates the communication between the browser based renderer and the agent simulator via JSON and JSON remote procedure calls. Rendering is supported by Twitter’s widget library Bootstrap (2012) and the Javascript library PaperJS (Lehni and Puckey, 2011)."~\cite{conf/agi/Bach12}
 
             \subsubsection{Module Overview / Architecture}
-MicroPsi modular structure makes it fairly easy to understand. At first, one can diffentiate
-            
-... it consists of a Core an a Server module with different threads running ...
+MicroPsi modular structure makes it fairly easy to understand. At first, one can diffentiate between the server component (or the web-interface) and the actual simulation code (called "core").
+
+In a minimal setup microPsi runs three threads. One thread for the webserver, one for the world simulation and for every world-adapter (or agent). If more then one agent or more than one world are launched, they are instantiated as additional threads.
+
+Then, there are nodenets. Nodenets can be stored and edited graphically from within the web-interface.
+
+World-adapters are, what makes nodenets and worlds interact with each other. Therefore they provide Data-Sources and Data-targets, which embody the nodenets input from the world (it's senses/sensors) and output (it's muscles?/motors/actuators).
 
 "MicroPsi consists of a server (the web application), a runtime component, a set of node nets, a set of simulation worlds, a user manager and a configuration manager (figure 2). The server is built on the micro web framework Bottle (Hellkamp 2011) and communicates with all current users via their web browsers through the Server API. User sessions and access rights are handled by the user manager component.
 On startup, the server invokes the runtime component, which interfaces to the server with the MicroPsi API. The runtime is designed to work independently of the server and does not need to be deployed as a web application (command line interac- tion or OS based user interfaces are possible as well).
@@ -61,6 +65,7 @@ The current priority of MicroPsi 2 lies on affective simulation for problem solv
 ... the core runs the heart of the simulation ...
 
             \subsubsection{Server}
+The server is built on the Python webframework Bottle.~\cite{conf/agi/Bach12}
 ... the server provides the interface ...
 
             \subsubsection{Simulation Environments}
