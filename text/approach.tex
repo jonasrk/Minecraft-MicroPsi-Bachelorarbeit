@@ -88,7 +88,9 @@ Early ideation made it clear, that this project should contain a visualization c
 \subsubsection{Requirements and necessity of a visualization}
 The visualization is supposed to server two causes. First, it should make it effective and pleasurable to monitor the bot's behavior as well as the environment it is behaving in. Second it is supposed two serve the agent as a datasource itself. This means, that from pure world data (what block sits where) a 3D-visiualization is to be generated from within the MicroPsi Python Code. It should contain a perspective that gives a good overview over the bots environment to forward to the webinterace, as well as a first person perspective of the agent, to function as its eyes.
 
+As the open-source game used to implement the visualization used the graphics and game library pyglet (that basically encapsulates PyOpenGL) which brings it's own event-loop and -handling, the event-loop had to by broken apart and rebuild as a part of the world adapter the worldadapter that advances the visualization with every step.
 
+%TODO define pyglet
 
 ... why a visiualization and what is it supposed to do? ...
 
@@ -100,6 +102,8 @@ The visualization is supposed to server two causes. First, it should make it eff
 \subsubsection{Implementation}
 
 It was implemented as follows:
+
+
 
 \paragraph{used Data}
 ... required Data for the visualization ...
@@ -117,6 +121,15 @@ The code of this project could be facilitated to serve as a visualization.
 ... worked well but a little slow ...
 
 \section{A! Implementation}
+
+Viewing the resulting software as a whole, several modules have been added to the architecture: the Minecraft world adapter, the spock bot (communicating with a Minecraft Server) and the (pyglet) Visualization. (see figure \ref{uml_mc})
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/UML_MicroPsi_mit_spock_und_rahmen}
+  \caption{The new architecture of MicroPsi with the Minecraft interface. New modules are framed orange.}
+  \label{uml_mc}
+\end{figure}
 
 ... graphic/UML of the project as a whole ...
 ... illustration of the event loop ...
