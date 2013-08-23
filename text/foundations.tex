@@ -1,13 +1,13 @@
 \chapter{Foundations}
-This work is a work of combining existing technologies. In particular, the two most important ones are Micro Psi 2, the most ambitous framework for the Psi theory, and Minecraft, the super-popular sandbox-videogame.
+This work is a work of combining existing technologies. In particular, the two most important ones are Micro Psi 2, the most ambitious framework for the Psi theory, and Minecraft, the super-popular sandbox-videogame.
 
-To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideos and relevant insights to their architecture are what this chapter is about.
+To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideas and relevant insights to their architecture are what this chapter is about.
 
     \section{A! Psi Implementations}
 Psi has been implemented by different groups at different times.
 
         \subsection{Dörners Implementation}
-The first implementations are by Dörner and his associates themselves. The used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installtions, for example.
+The first implementations are by Dörner and his associates themselves. The used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
 
 ... psi screenshot ...
 
@@ -23,7 +23,7 @@ From 2003 to 2009 they built an implementation in Java. It consisted of a graphi
             \subsubsection{MicroPsi in Python}
 Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again using Python. What is remarkable about the new implementation called MicroPsi, is that the graphical interface is completely rendered inside a webbrowser --- using state-of-the-art internet- and webapplication-technologies.~\cite{conf/agi/Bach12}
         
-Even though there have been more complex simulation enviroments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi 2 has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building a new 3D-world, we set out for something a little more innovative.
+Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi 2 has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building a new 3D-world, we set out for something a little more innovative.
 
 "The cognitive architecture MicroPsi builds on a framework for simulating agents as neuro-symbolic spreading activation networks. These agents are situated in a simulation environment or fitted with robotic bodies. The current implementation of MicroPsi has been re-implemented from the ground up and is described here."~\cite{conf/agi/Bach12}
 
@@ -32,7 +32,7 @@ Even though there have been more complex simulation enviroments (e.g. 3D-worlds)
 The MicroPsi 2 user interface is rendered completely inside a web browser and the simulation is deployed as a web application. The UI components are based upon HTML/Javascript and "and facilitates the communication between the browser based renderer and the agent simulator via JSON and JSON remote procedure calls. Rendering is supported by Twitter’s widget library Bootstrap (2012) and the Javascript library PaperJS (Lehni and Puckey, 2011)."~\cite{conf/agi/Bach12}
 
             \subsubsection{Module Overview / Architecture}
-MicroPsi modular structure makes it fairly easy to understand. At first, one can diffentiate between the server component (or the web-interface) and the actual simulation code (called "core").
+MicroPsi modular structure makes it fairly easy to understand. At first, one can differentiate between the server component (or the web-interface) and the actual simulation code (called "core").
 
 In a minimal setup microPsi runs three threads. One thread for the webserver, one for the world simulation and for every world-adapter (or agent). If more then one agent or more than one world are launched, they are instantiated as additional threads.
 
@@ -81,9 +81,9 @@ The server is built on the Python webframework Bottle.~\cite{conf/agi/Bach12}
 ... a more complex simulation environment could be fun ...
 
 ... the story of Minecraft ...
-... Minecrafts poularity (and demographics) ...
+... Minecrafts popularity (and demographics) ...
 
-The story of Minecraft has many interesting sides, but one kind it is without doubt: a story of succes.
+The story of Minecraft has many interesting sides, but one kind it is without doubt: a story of success.
 
 When Markus ("Notch") Persson built and released the first public version of Minecraft it soon became clear that his creation resonated with many people. The simple concept of world entirely build of standard sized building blocks which the player is allowed to create, destroy and relocate one-by-one let many gamers employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
 
@@ -91,12 +91,12 @@ One computer-game in particular stood out in the last years --- not for A.I. rea
 
 Even though the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software as well as one client per player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
 
-Minecraft is a complex yet easily accesible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of game-modifications.
+Minecraft is a complex yet easily accessible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of game-modifications.
 
-Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular charecteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
+Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
         \subsection{What is a Minecraft world?}
-In this section some of the basic concepts (in regards to our A.I. interface) of the game are described. Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different kinds (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can rougly be thought of as equaling one meter.
+In this section some of the basic concepts (in regards to our A.I. interface) of the game are described. Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different kinds (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can roughly be thought of as equaling one meter.
 
 \begin{figure}[h]
   \centering
@@ -126,7 +126,7 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
 ... brief description of the basic mechanisms ...
 ... the game has now predefined "goal" ... other than monsters trying to kill you at night ...
 
-        \subsection{The Cient Server Protokoll}
+        \subsection{The Client Server Protokoll}
 Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
 "All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
@@ -142,21 +142,21 @@ Other than movement, there are defined packets(-structures) for every aspect of 
         \subsection{Suitability of Minecraft as a simulation environment}
 There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
 
-First, the game itself is easily accesssible. It is developed using Java (for both the client and the server software) and therefore somewhat platform independent. The "desktop computer version" is sold for Windows, Mac OS X and Linux devices. There are official ports to Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming "Xbox One" is announced. The desktop versions are priced at 19.95 euros  which makes it affordable to a large audience.
+First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore somewhat platform independent. The "desktop computer version" is sold for Windows, Mac OS X and Linux devices. There are official ports to Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming "Xbox One" is announced. The desktop versions are priced at 19.95 euros  which makes it affordable to a large audience.
 %TODO find out how to typeset €
 
-The game itself already has an enormous audience. It is (like most videogames) espacially popular with teenagers (or upcoming scientists). Minecraft being loved by so many people could benefit this project as for giving it more attention.
+The game itself already has an enormous audience. It is (like most videogames) especially popular with teenagers (or upcoming scientists). Minecraft being loved by so many people could benefit this project as for giving it more attention.
 
-The game's developer has prooven many times (proof?) that it acts very friendly to other developers when it comes to building game modifications and creating content that uses and/or changes original Minecraft content. In other words: They are not at all restrictive, when it comes to user people doing all kinds of things with their creations. This led to the availability of a fairly complete community-sourced  documentation and explantion of virtually every aspect of the game --- including it's software architecture, data structure and protocols. This is usefull for this project, as chances are low that they will have anything against this project in the forseeable future. (In fact, the game's A.I. creator Jon Kagström seems to be fond of this project)
+The game's developer has proven many times (proof?) that it acts very friendly to other developers when it comes to building game modifications and creating content that uses and/or changes original Minecraft content. In other words: They are not at all restrictive, when it comes to user people doing all kinds of things with their creations. This led to the availability of a fairly complete community-sourced  documentation and explanation of virtually every aspect of the game --- including it's software architecture, data structure and protocols. This is useful for this project, as chances are low that they will have anything against this project in the foreseeable future. (In fact, the game's A.I. creator Jon Kagström seems to be fond of this project)
 
-The Minecraft world with it's logic, semantic and functions offers possibilities for an A.I. to proof being able to interact with the environment both on very simple and primitive ways (e.g. moving around) as well as increasingly complex tasks like building, collecting ressources, craft items from blocks and interacting apropriately with both well-disposed and hostile other incarnations. %TODO find a better word)
+The Minecraft world with it's logic, semantic and functions offers possibilities for an A.I. to proof being able to interact with the environment both on very simple and primitive ways (e.g. moving around) as well as increasingly complex tasks like building, collecting resources, craft items from blocks and interacting appropriately with both well-disposed and hostile other incarnations. %TODO find a better word)
 %TODO explain crafting
 
-The semantics of the gameworld share charecteristics with the real world. Moving through the world one quickly realizes that it is build up out of different biomes (eg. forrest or tundra). Also trees, rivers, mountains and ore veins are not hardcoded but generated proceduarally and their structure appers to be (somewhat) fractal.
+The semantics of the gameworld share characteristics with the real world. Moving through the world one quickly realizes that it is build up out of different biomes (eg. forest or tundra). Also trees, rivers, mountains and ore veins are not hardcoded but generated procedurally and their structure appears to be (somewhat) fractal.
         
 ... cheap licenses ...
 ... developer friendly community and game-studio ...
-... sandbox game with many possibilieties but no pre-defined goals ...
+... sandbox game with many possibilities but no pre-defined goals ...
 ... procedural semantic ...
 
     \section{A! Minecraft and MicroPsi}
