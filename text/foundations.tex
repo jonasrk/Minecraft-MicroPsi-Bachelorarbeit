@@ -56,12 +56,12 @@ The game is attracted great attention ever since its first release in 2009. Sinc
 
 Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
 
-Minecraft is a complex yet easily accessible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of game-modifications.
+Minecraft is a complex yet easily accessible virtual world. It is constantly developed and new features are added regularly. It has a massive fanbase and a huge community of game-modifications.
 
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
         \subsection{What is a Minecraft world?}
-In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.
+In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they share a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.
 
 \begin{figure}[h]
   \centering
@@ -88,8 +88,9 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \label{mc_player}
 \end{figure}
 
+Also, a Minecraft world has a day-night-cycle with 24 hours converting to 14 minutes by default
 
-The game itself has no predefined goal. Players can walk around, discover the generated world (see figure \ref{mc_mechanics} 1) and collect resources by ``destroying'' blocks , with the generated resources equaling the block type. They can combine different resources to ``craft'' items. For example, a player can destroy the blocks that represent a tree (2). The gained ``wood'' ressource could then be used to craft a wooden pickaxe, which could then be used to dig into the ground more effectively to ``mine'' more rare resources, like iron or gold.
+The game itself has no predefined goals. Players can walk around, discover the generated world (see figure \ref{mc_mechanics} 1) and collect resources by ``destroying'' blocks , with the generated resources equaling the block type. They can combine different resources to ``craft'' items. For example, a player can destroy the blocks that represent a tree (2). The gained ``wood'' ressource could then be used to craft a wooden pickaxe, which could then be used to dig into the ground more effectively to ``mine'' more rare resources, like iron or gold.
 
 \begin{figure}[h]
   \centering
@@ -98,15 +99,36 @@ The game itself has no predefined goal. Players can walk around, discover the ge
   \label{mc_mechanics}
 \end{figure}
 
+There exist different game modes. The original "survival" mode adds monsters that attack the player at night. What solutions to survive the player comes up with (eg. building shelter or fighting the monsters) is left up to him or her.
 
-... the game has no predefined "goal" ... other than monsters trying to kill you at night ...
+In "creative" mode, the player is not beeing attacked by monsters, has the ability to fly and instant access to unlimited ressources.
+
+The mode of a Minecraft world does not effect the functionality of this project.
 
         \subsection{The Client Server Protocol}
-Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
+Minecrafts Client-Server-Protocol is not publicly documented by the developers themselves. However, the modding-community gathered full knowledge and understanding of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
-"All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
+Packets are either "server to client", "client to server" or "Two-Way" and begin with a "Packet ID" byte. The structure of the packet's payload depends on it's Packet ID.
+ 
+To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight forward~(see figure \ref{mc_packet}). It is exclusively send form clients to servers and starts with it's Packet ID (as every packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to modify the players bounding box, another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
 
-To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight forward. It is exclusively send form clients to servers and starts with the Packet ID (as every Packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to "modify the players bounding box when going up stairs, crouching, etc…", another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|}\hline
+
+    Field Name & Field Type & Notes \\ \hline
+   Packet ID & Byte & 0x0B \\ \hline
+   X & double & Absolute position \\ \hline
+   Y & double & Absolute position \\ \hline
+   Stance & double & Used to modify the players bounding box \\ \hline
+   Z & double & Absolute position \\ \hline
+   On Ground & boolean & Derived from packet 0x0A \\ \hline
+   
+
+ \end{tabular}
+       \caption{Structure of packet Player Position (0x0B)~\cite{protocol}}
+  \label{mc_packet}
+  \end{table}
 
 Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, calculate the absolute coordinates of the destination of the movement in regard of it and send a "Client Position" packet with these coordinates to the server. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
 
