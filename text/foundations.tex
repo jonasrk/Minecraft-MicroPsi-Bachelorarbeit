@@ -124,46 +124,35 @@ To give an example of one of the easier packets, the "Client Position"-Packet is
    Z & double & Absolute position \\ \hline
    On Ground & boolean & Derived from packet 0x0A \\ \hline
    
+\end{tabular}
+\caption{Structure of the packet "Player Position (0x0B)"~\cite{protocol}}
+\label{mc_packet}
+\end{table}
 
- \end{tabular}
-       \caption{Structure of packet Player Position (0x0B)~\cite{protocol}}
-  \label{mc_packet}
-  \end{table}
+Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, calculate the absolute coordinates of the destination of the movement in regard of it and send a "Client Position" packet with these coordinates to the server. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a walking animation.
 
-Knowledge of this datastructure is already sufficient to move around in the Minecraft world. To go forward, one has to figure out the players current position, calculate the absolute coordinates of the destination of the movement in regard of it and send a "Client Position" packet with these coordinates to the server. If the destination is not more than 100 blocks away from the origin, the server accepts the packet. In the official Minecraft client, a players movement from one point to the other is rendered with a smooth transition.
+Other than movement, packet structures are defined for every aspect of the game. May it be the initial handshake, the creation or destruction of blocks or activities of other player- or non-player-characters.
 
-Other than movement, there are defined packets(-structures) for every aspect of the game. May it be the initial handshake, the creation or destruction of blocks or activity of other player- or non-player-characters
-
-... the language an external client needs to speak, to take place in a Minecraft world ...
+This protocol is what a custom Minecraft client needs to speak.
 
         \subsection{Suitability of Minecraft as a simulation environment}
 There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
 
-First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore somewhat platform independent. The "desktop computer version" is sold for Windows, Mac OS X and Linux devices. There are official ports to Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming "Xbox One" is announced. The desktop versions are priced at 19.95 euros  which makes it affordable to a large audience.
+First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore up to a certain extend platform independent. The "desktop computer version" is sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming game console "Xbox One" is announced. The desktop versions are priced at 19.95 euros, which makes it affordable to a large audience.
 %TODO find out how to typeset €
 
-The game itself already has an enormous audience. It is (like most videogames) especially popular with teenagers (or upcoming scientists). Minecraft being loved by so many people could benefit this project as for giving it more attention.
+The game itself already has an enormous fanbase. It is (like most videogames) especially popular with teenagers. Minecraft being loved by so many people could benefit this project, as for leading to increased attention.
 
-The game's developer has proven many times (proof?) that it acts very friendly to other developers when it comes to building game modifications and creating content that uses and/or changes original Minecraft content. In other words: They are not at all restrictive, when it comes to user people doing all kinds of things with their creations. This led to the availability of a fairly complete community-sourced  documentation and explanation of virtually every aspect of the game --- including it's software architecture, data structure and protocols. This is useful for this project, as chances are low that they will have anything against this project in the foreseeable future. (In fact, the game's A.I. creator Jon Kagström seems to be fond of this project)
+The game's developer has proven many times that it acts very friendly to other developers, when it comes to the creation game modifications and content that uses or changes original Minecraft intellectual property. In other words: Mojang is not restrictive towards users doing all kinds of things with their creations. This led to the availability of a fairly complete community-sourced  documentation and explanation of virtually every aspect of the game --- including it's software architecture, data structure and protocols. This is useful for this project, as chances are low that they will have anything against this project in the foreseeable future. %(In fact, the game's A.I. creator Jon Kagström seems to be fond of this project)
 
-The Minecraft world with it's logic, semantic and functions offers possibilities for an A.I. to proof being able to interact with the environment both on very simple and primitive ways (e.g. moving around) as well as increasingly complex tasks like building, collecting resources, craft items from blocks and interacting appropriately with both well-disposed and hostile other incarnations. %TODO find a better word)
-%TODO explain crafting
+The Minecraft world with it's logic, semantic and functionalities offers possibilities for an A.I. to proove being able to interact with the environment --- in very simple and primitive ways (e.g. moving around), as well as increasingly complex tasks like building, collecting resources, crafting items and interacting appropriately with both well-disposed and hostile other entities.
 
-The semantics of the gameworld share characteristics with the real world. Moving through the world one quickly realizes that it is build up out of different biomes (eg. forest or tundra). Also trees, rivers, mountains and ore veins are not hardcoded but generated procedurally and their structure appears to be (somewhat) fractal.
+The semantics of the gameworld share characteristics with the real world. Moving through the world, one quickly realizes that it generetad different biomes (eg. forest or tundra). Also, trees, rivers, mountains and ore veins are neither hard-coded, nor appear completely random, but are generated procedurally and their structure appears to be (somewhat) fractal.
         
-... cheap licenses ...
-... developer friendly community and game-studio ...
-... sandbox game with many possibilities but no pre-defined goals ...
-... procedural semantic ...
-
-Using Minecraft as a simulation environment will give the Psi agent possibilities to show off what kind of sophisticated behavior it is capable of.
-... a more complex simulation environment could be fun ...
+Using Minecraft as a simulation environment will give Psi agent s possibilities to show off, what kind of sophisticated behavior it is capable of.
 
     \section{A! Minecraft Bots}
     
-        ... other popular Bot projects and game modifications ...
-    
-        \subsection{A! Overview / What has been there so far?}
 There exist many projects , that could be considered minecraft ``bots''. One has to differentiate in between two types. On the one hand there are those, that mimic an entire client software and facilitate communication with the server on the default client software's behalf. On the other hand there are bots which are modifications of the original client (or server) software and usually add non player characters --- like animals and other non-human creatures --- to the game. The code is usually injected through one of the popular "modloaders" (eg. Minecraft Forge).
 
 One example (and probably the most advanced one) for an entire bot framework that replaces the client is Mineflayer.~\cite{github_mineflayer} It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js . However, it has not been used for this project, because a python implementation was aimed for.
