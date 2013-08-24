@@ -1,32 +1,27 @@
 \chapter{Foundations}
-This work is a work of combining existing technologies. In particular, the two most important ones are MicroPsi 2 (in the following MicroPsi), the most ambitious framework for implementing the Psi theory, and Minecraft, the super-popular sandbox-videogame.
+This project is fundamentally about combining existing technologies. In particular, the two most important ones are MicroPsi 2, the most ambitious framework aiming to implement the ideas of the Psi theory, and Minecraft, the super-popular sandbox-videogame.
 
 To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideas and relevant insights to their architecture are what this chapter is about.
 
-    \section{A! Psi Implementations}
-Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves. The used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
+    \section{Psi Implementations}
+Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves. They used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
 
 ... psi screenshot ... %TODO insert screenshot
 
-The work on Dörners team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
+The work on Dörner's team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
 
-From 2003 to 2009 they built an implementation in Java. It consisted of a graphical editor and a 3D simulation-environment.~\cite{conf/agi/Bach12}  
+From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It consisted of a graphical editor and a 3D simulation-environment. Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again using Python. What is remarkable about the new implementation called MicroPsi 2 (in the following MicroPsi), is that the graphical interface is completely rendered inside a webbrowser --- using state-of-the-art internet- and webapplication-technologies.~\cite{conf/agi/Bach12}
 
-"The first implementation of the MicroPsi framework spanned the years 2003 to 2009, and was built in Java as a set of plugins for the Eclipse IDE. The graphical edi- tor was built on SWT. It comprised about 60000 lines of code, and although a lot of effort went towards platform independence (with the exception of a DirectX/.Net based 3D viewer component), deployment on the various operating systems and across several versions of Eclipse became support intensive, especially after its adop- tion by teams outside of our group."~\cite{conf/agi/Bach12}
-
-            \subsubsection{MicroPsi in Python}
-Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again using Python. What is remarkable about the new implementation called MicroPsi, is that the graphical interface is completely rendered inside a webbrowser --- using state-of-the-art internet- and webapplication-technologies.~\cite{conf/agi/Bach12}
+MicroPsi simulates agents as neuro-symbolic spreading activation networks. Agents can be placed and researched in simulation environments or physically embodied as robots.~\cite{conf/agi/Bach12}
         
-Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi 2 has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building a new 3D-world, we set out for something a little more innovative.
-
-"The cognitive architecture MicroPsi builds on a framework for simulating agents as neuro-symbolic spreading activation networks. These agents are situated in a simulation environment or fitted with robotic bodies. The current implementation of MicroPsi has been re-implemented from the ground up and is described here."~\cite{conf/agi/Bach12}
+Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new MicroPsi has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building another 3D-world, with this project we set out for something more experimental.
 
 "Gradual changes in the formalization of MicroPsi and the emergence of new soft- ware development methodologies and tool chains, especially the move from Java design patterns and XML tools towards lightweight and agile Python code, prompted a complete rewrite of the MicroPsi framework, starting in 2011. The following sec- tion describes the overall structure of the framework, followed by detailed definitions of the node net formalism and the structure of simulation worlds that enable running MicroPsi agents."~\cite{conf/agi/Bach12}
 
 The MicroPsi 2 user interface is rendered completely inside a web browser and the simulation is deployed as a web application. The UI components are based upon HTML/Javascript and "and facilitates the communication between the browser based renderer and the agent simulator via JSON and JSON remote procedure calls. Rendering is supported by Twitter’s widget library Bootstrap (2012) and the Javascript library PaperJS (Lehni and Puckey, 2011)."~\cite{conf/agi/Bach12}
 
-            \subsubsection{Module Overview / Architecture}
-MicroPsi modular structure makes it fairly easy to understand. At first, one can differentiate between the server component (or the web-interface) and the actual simulation code (called "core").
+        \subsection{Module Overview / Architecture}
+MicroPsi modular structure is fairly easy to understand. At first, one can differentiate between the server component (or the web-interface) and the actual simulation code (called "core").
 
 In a minimal setup microPsi runs three threads. One thread for the webserver, one for the world simulation and for every world-adapter (or agent). If more then one agent or more than one world are launched, they are instantiated as additional threads.
 
@@ -34,9 +29,9 @@ In a minimal setup microPsi runs three threads. One thread for the webserver, on
 On startup, the server invokes the runtime component, which interfaces to the server with the MicroPsi API. The runtime is designed to work independently of the server and does not need to be deployed as a web application (command line interac- tion or OS based user interfaces are possible as well).
 The runtime supplies a manager for MicroPsi node nets (see section 4), and a manager for simulation worlds (or interfaces to outside environments, such as robotic bodies, remote data providers, etc.). Standard simulation worlds (section 6) provide agents (node net embodiments) and objects as situated state machines."~\cite{conf/agi/Bach12}
 
-            \includegraphics[width=5cm]{graphics/micropsi2_uml}
+            \includegraphics[width=10cm]{graphics/micropsi2_uml}
             
-                \paragraph{Agents}
+            \subsubsection{Agents}
 MicroPsi defines agents as node nets.~\cite{conf/agi/Bach12}
                 
 "MicroPsi interprets cognitive models as agents, situated in dynamic environments. MicroPsi agents are entirely defined as hierarchical spreading activation networks (SAN), which—for lack of a better name—are called node nets. Node nets are the brains of these agents—or rather, an abstraction of the information processing provid- ed by brains, and the environment provides a body and stuff to interact with.
@@ -44,13 +39,13 @@ The body manifests itself as a set of data sources (which can be thought of as t
 MicroPsi’s node nets can be interpreted as neural networks and afford neural learn- ing paradigms. For the purposes of information storage and retrieval, they can be seen as semantic networks with a small set of typed links to express associative, partonom- ic, taxonomic and causal relationships.
 Since the nodes can also encapsulate state machines and arbitrary operations over the node net, they can also be understood as components of a concurrent, modularized architecture, with activation spreading as the primary means of communication be- tween the modules."~\cite{conf/agi/Bach12}
 
-                \paragraph{Environment}
+            \subsubsection{Environment}
 The simulations worlds are the environments in which we can study our node nets behavior. Worlds need to provide the worldadapter --- the interface in between the node net and the simulation. Data sources and data targets have to be defined, to get a functional and meaningful experiment going.~\cite{conf/agi/Bach12}
                 
 "Within the MicroPsi framework, agents may be embedded into an environment (world). The environment must provide a world adapter wa for each MicroPsi agent. The world adapter offers data sources, from which the agent’s node net may read environmental information, and data targets, which allow the agent to effect changes in the world. Since the environment only has write access to data sources, and read access to data targets, node net and environment may be updated asynchronously.
 The world adapter may interface a local multi-agent simulation, a robotic body, a computer game client or simulation server, dynamically updated stock data, etc."~\cite{conf/agi/Bach12}
 
-                \paragraph{Applications}
+            \subsubsection{Applications}
 At the time of the development of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
 
 "Compared with the original implementation of MicroPsi, the current iteration of the framework is still fragmentary; at the time of writing, it supports only a simple generic simulation world for multi agent experiments (instead of the various simula- tion environments provided in MicroPsi 1). Also, 3D viewing components for envi- ronments and facial expressions are completely absent.
@@ -117,10 +112,10 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \label{mc_player}
 \end{figure}
 
-... brief description of the basic mechanisms ...
-... the game has now predefined "goal" ... other than monsters trying to kill you at night ...
+... brief description of the basic mechanisms (eg. building, mining, crafting) ...
+... the game has no predefined "goal" ... other than monsters trying to kill you at night ...
 
-        \subsection{The Client Server Protokoll}
+        \subsection{The Client Server Protocol}
 Minecrafts Client-Server-Protocol is (at least not to the public) documented by the developer themselves. However, the modding-community found it's ways to gather full knowledge of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
 "All packets begin with a single "Packet ID" byte. Listed packet size includes this byte. Packets are either "server to client", "client to server", or "Two-Way" (both). Packets are not prefixed with their length. For variable length packets, you must parse it completely to determine its length." 
@@ -153,7 +148,6 @@ The semantics of the gameworld share characteristics with the real world. Moving
 ... sandbox game with many possibilities but no pre-defined goals ...
 ... procedural semantic ...
 
-    \section{A! Minecraft and MicroPsi}
 Using Minecraft as a simulation environment will give the Psi agent possibilities to show off what kind of sophisticated behavior it is capable of.
 ... a more complex simulation environment could be fun ...
 
@@ -252,8 +246,8 @@ These are used, to parse packets as follows:
 				\label{snippet_position-packet}
 			\end{minipage}
 		\end{figure}
-		
-    \section{Python Minecraft Clones}
+
+\section{Python Multimedia Libraries and Minecraft Clones}
 Minecraft's succes inspired many other projects - including a number of Clones (or Minecraft like games) in a wide variety of programming languages and environments.
 
 Interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like browser game based on WebGL.
