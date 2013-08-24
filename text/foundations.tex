@@ -1,21 +1,15 @@
 \chapter{Foundations}
-This work is a work of combining existing technologies. In particular, the two most important ones are Micro Psi 2, the most ambitious framework for the Psi theory, and Minecraft, the super-popular sandbox-videogame.
+This work is a work of combining existing technologies. In particular, the two most important ones are MicroPsi 2 (in the following MicroPsi), the most ambitious framework for implementing the Psi theory, and Minecraft, the super-popular sandbox-videogame.
 
 To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideas and relevant insights to their architecture are what this chapter is about.
 
     \section{A! Psi Implementations}
-Psi has been implemented by different groups at different times.
+Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves. The used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
 
-        \subsection{Dörners Implementation}
-The first implementations are by Dörner and his associates themselves. The used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
+... psi screenshot ... %TODO insert screenshot
 
-... psi screenshot ...
+The work on Dörners team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
 
-
-        \subsection{Joschas Implementation}
-The work on Dörners teams implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
-
-            \subsubsection{MicroPsi in Java}
 From 2003 to 2009 they built an implementation in Java. It consisted of a graphical editor and a 3D simulation-environment.~\cite{conf/agi/Bach12}  
 
 "The first implementation of the MicroPsi framework spanned the years 2003 to 2009, and was built in Java as a set of plugins for the Eclipse IDE. The graphical edi- tor was built on SWT. It comprised about 60000 lines of code, and although a lot of effort went towards platform independence (with the exception of a DirectX/.Net based 3D viewer component), deployment on the various operating systems and across several versions of Eclipse became support intensive, especially after its adop- tion by teams outside of our group."~\cite{conf/agi/Bach12}
@@ -162,3 +156,110 @@ The semantics of the gameworld share characteristics with the real world. Moving
     \section{A! Minecraft and MicroPsi}
 Using Minecraft as a simulation environment will give the Psi agent possibilities to show off what kind of sophisticated behavior it is capable of.
 ... a more complex simulation environment could be fun ...
+
+    \section{A! Minecraft Bots}
+    
+        ... other popular Bot projects and game modifications ...
+    
+        \subsection{A! Overview / What has been there so far?}
+There exist many projects , that could be considered minecraft ``bots''. One has to differentiate in between two types. On the one hand there are those, that mimic an entire client software and facilitate communication with the server on the default client software's behalf. On the other hand there are bots which are modifications of the original client (or server) software and usually add non player characters --- like animals and other non-human creatures --- to the game. The code is usually injected through one of the popular "modloaders" (eg. Minecraft Forge).
+
+One example (and probably the most advanced one) for an entire bot framework that replaces the client is Mineflayer.~\cite{github_mineflayer} It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js . However, it has not been used for this project, because a python implementation was aimed for.
+
+Opposed to Mineflayer, an example for a game modification bot are the "Cubebots" --- fan-made cubes that aim to help Minecraft players with mundane tasks.\cite{mcforums_cubebots}
+
+... Minecraft Bots with simple as well as sophisticated AI ...
+... MicroPsi 2 with Island and Berlin world ...
+
+        \subsection{Spockbot von Nickelpro}
+Developed by Nick Gamberini, spock is an open-source (MIT license) bot framework (and therefore a Minecraft client) written in Python. It has been chosen as an essential part of this project for two reasons: Being written in Python it painlessly integrates in existing MicroPsi code and the absence of dependencies (with on exception) leave the code understandable and easy to deploy.
+    
+        \subsection{Protocol Implementation in spock}
+Inside the bot-framework spock, the protocol is implemented as follows:
+
+There are datastructures, that describe the Minecraft protocol.
+
+\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+blocks = {
+	0x00: "Air",
+	0x01: "Stone",
+	0x02: "Grass Block",
+	...
+					\end{pseudocode}
+				\caption{data structure for block types}
+				\label{snippet_position-packet}
+			\end{minipage}
+		\end{figure}
+		
+		\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+names = {
+	0x00: "Keep Alive",
+	0x01: "Login Request",
+	0x02: "Handshake",
+	0x03: "Chat Message",
+	...
+					\end{pseudocode}
+				\caption{data structure for packet types}
+				\label{snippet_position-packet}
+			\end{minipage}
+		\end{figure}
+		
+		\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+structs = {
+	#Keep-alive
+	0x00: ("int", "value"),
+	#Login request
+	0x01: (
+			("int", "entity_id"),
+			("string", "level_type"),
+			("byte", "game_mode"),
+			("byte", "dimension"),
+			("byte", "difficulty"),
+			("byte", "not_used"),
+			("ubyte", "max_players")),
+					\end{pseudocode}
+				\caption{data structure for the packets structures}
+				\label{snippet_position-packet}
+			\end{minipage}
+		\end{figure}
+		
+These are used, to parse packets as follows:
+
+		\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+	def decode(self, bbuff):
+		#Ident
+		self.ident = datautils.unpack(bbuff, 'ubyte')
+		
+		#print hex(self.ident)
+		
+		#Payload
+		for dtype, name in mcdata.structs[self.ident][self.direction]:
+			self.data[name] = datautils.unpack(bbuff, dtype)
+					\end{pseudocode}
+				\caption{function for decoding packets}
+				\label{snippet_position-packet}
+			\end{minipage}
+		\end{figure}
+		
+    \section{Python Minecraft Clones}
+Minecraft's succes inspired many other projects - including a number of Clones (or Minecraft like games) in a wide variety of programming languages and environments.
+
+Interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like browser game based on WebGL.
+
+        \subsection{"Minecraft" by Michael Fogleman}
+A particular project, that has the same name as the original game, that inspired it, is "Minecraft" by Michael Fogleman. It is a simple Minecraft slone in under 600 lines of Python and gained some popularity on reddit~\cite{fogle-reddit} and Hacker News.~\cite{fogle_hn}
+
+It is comparably easy to understang and modify. It is based on the Python multimedia library pyglet ( http://www.pyglet.org/ ) .
+
