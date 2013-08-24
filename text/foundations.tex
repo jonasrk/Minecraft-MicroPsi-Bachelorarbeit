@@ -48,25 +48,20 @@ At the time of the writing of this Thesis, MicroPsi comes with two simulation en
 ... screenshot of Island and Berlin ... %TODO insert screenshot
 
     \section{A! Minecraft}
-... a more complex simulation environment could be fun ...
+The story of Minecraft has many interesting aspects, but first and foremost it is a story of immense, unexpected success.
 
-... the story of Minecraft ...
-... Minecrafts popularity (and demographics) ...
+When Markus ("Notch") Persson built and released the first public version of Minecraft, it soon became clear that his creation resonated with many people. The simple concept of a world entirely build of standard sized building blocks which the player can to create, destroy and relocate one-by-one, let many gamers employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
 
-The story of Minecraft has many interesting sides, but one kind it is without doubt: a story of success.
+The game is attracted great attention ever since its first release in 2009. Since copies of the game can be obtained commercially for the first time in 2011, different versions of the game sold more than 26 million times --- with the PC version priced at about 20 Euros, for example. It should be noted, that Minecraft's development studio Mojang is a so called "indie game developer", that is not associated with any classical game publisher, but distributes copies of their game exclusively via their own website.
 
-When Markus ("Notch") Persson built and released the first public version of Minecraft it soon became clear that his creation resonated with many people. The simple concept of world entirely build of standard sized building blocks which the player is allowed to create, destroy and relocate one-by-one let many gamers employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
-
-One computer-game in particular stood out in the last years --- not for A.I. reasons though. It is called Minecraft and is benefiting of high popularity ever since its first release in 2009. Since copies of the game can be obtained commercially for the first time in 2011, the different versions of the game sold more than 26 million times - the PC version priced at about 20 Euros. It should be noted, that the games developer studio Mojang is a so called "Indie" developer that is not associated with any classical game publisher but distributes copies of their game exclusively via their own website.
-
-Even though the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software as well as one client per player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
+Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and build artificial players that way.
 
 Minecraft is a complex yet easily accessible virtual world. It is constantly developed and new features are added regularly. It is a massive fanbase and a huge community of game-modifications.
 
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with and. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and branches and leaves spreading out as fractals, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than most other videogames.
 
         \subsection{What is a Minecraft world?}
-In this section some of the basic concepts (in regards to our A.I. interface) of the game are described. Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different kinds (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can roughly be thought of as equaling one meter.
+In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they have a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.
 
 \begin{figure}[h]
   \centering
@@ -75,7 +70,7 @@ In this section some of the basic concepts (in regards to our A.I. interface) of
   \label{mc_block}
 \end{figure}
         
-A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep).~\cite{mcwiki_chunks}
+A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks..~\cite{mcwiki_chunks}
 
 \begin{figure}[h]
   \centering
@@ -84,7 +79,7 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \label{mc_chunk}
 \end{figure}
 
-"The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. Usually it is displayed as a humanoid.
+"The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed as humanoid.
 
 \begin{figure}[h]
   \centering
@@ -93,7 +88,17 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \label{mc_player}
 \end{figure}
 
-... brief description of the basic mechanisms (eg. building, mining, crafting) ...
+
+The game itself has no predefined goal. Players can walk around, discover the generated world (see figure \ref{mc_mechanics} 1) and collect resources by ``destroying'' blocks , with the generated resources equaling the block type. They can combine different resources to ``craft'' items. For example, a player can destroy the blocks that represent a tree (2). The gained ``wood'' ressource could then be used to craft a wooden pickaxe, which could then be used to dig into the ground more effectively to ``mine'' more rare resources, like iron or gold.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=15cm]{graphics/minecraft_mechanics}
+  \caption{Minecraft Basic Mechanics  (CC-BY-3.0 Mojang AB) \cite{image_mob}} %TODO find out copyright
+  \label{mc_mechanics}
+\end{figure}
+
+
 ... the game has no predefined "goal" ... other than monsters trying to kill you at night ...
 
         \subsection{The Client Server Protocol}
@@ -229,12 +234,12 @@ These are used, to parse packets as follows:
 		\end{figure}
 
 \section{Python Multimedia Libraries and Minecraft Clones}
-Minecraft's succes inspired many other projects - including a number of Clones (or Minecraft like games) in a wide variety of programming languages and environments.
+Minecraft's success inspired many other projects - including a number of Clones (or Minecraft like games) in a wide variety of programming languages and environments.
 
 Interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like browser game based on WebGL.
 
         \subsection{"Minecraft" by Michael Fogleman}
-A particular project, that has the same name as the original game, that inspired it, is "Minecraft" by Michael Fogleman. It is a simple Minecraft slone in under 600 lines of Python and gained some popularity on reddit~\cite{fogle-reddit} and Hacker News.~\cite{fogle_hn}
+A particular project, that has the same name as the original game, that inspired it, is "Minecraft" by Michael Fogleman. It is a simple Minecraft clone in under 600 lines of Python and gained some popularity on reddit~\cite{fogle-reddit} and Hacker News.~\cite{fogle_hn}
 
-It is comparably easy to understang and modify. It is based on the Python multimedia library pyglet ( http://www.pyglet.org/ ) .
+It is comparably easy to understand and modify. It is based on the Python multimedia library pyglet ( http://www.pyglet.org/ ) .
 
