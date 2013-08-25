@@ -65,32 +65,35 @@ Minecraft is a complex, yet easily accessible virtual world. It is in constant d
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than many other videogames.
 
         \subsection{What is a Minecraft world?}
-In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they share a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=1cm]{graphics/block}
-  \caption{A "grass" Minecraft Block (CC-BY-3.0 Mojang AB)\cite{image_mob}}
+\begin{wrapfigure}{r}{0.2\textwidth}
+  \begin{center}
+    \includegraphics[width=0.1\textwidth]{graphics/block}
+  \end{center}
+  \caption{A "grass" Block~\cite{image_mob}}
   \label{mc_block}
-\end{figure}
-        
-A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}
+\end{wrapfigure}
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=1cm]{graphics/chunk}
-  \caption{A Chunk (CC-BY-3.0 Mojang AB)\cite{image_mob}}
+In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they share a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.\\
+A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}\\
+
+\begin{wrapfigure}{l}{0.2\textwidth}
+  \begin{center}
+    \includegraphics[width=0.03\textwidth]{graphics/chunk}
+  \end{center}
+  \caption{A Chunk~\cite{image_mob}}
   \label{mc_chunk}
-\end{figure}
+\end{wrapfigure}        
 
 "The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed humanoid.
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=1cm]{graphics/player}
-  \caption{"the player" (CC-BY-3.0 Mojang AB)\cite{image_mob}}
+\begin{wrapfigure}{r}{0.2\textwidth}
+  \begin{center}
+    \includegraphics[width=0.05\textwidth]{graphics/player}
+  \end{center}
+  \caption{"the player"~\cite{image_mob}}
   \label{mc_player}
-\end{figure}
+\end{wrapfigure}  
 
 Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting to 14 minutes by default
 
@@ -199,7 +202,7 @@ structs = {
 			\end{minipage}
 		\end{figure}
 		
-The structures are used to parse each packet apropriately~(see figure \ref{snippet_parse}).
+The structures are used to parse each packet appropriately~(see figure \ref{snippet_parse}).
 
 		\begin{figure}[ht]
 			\centering
