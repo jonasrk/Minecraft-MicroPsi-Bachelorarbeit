@@ -4,9 +4,14 @@ This project is fundamentally about combining existing technologies. In particul
 To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideas and relevant insights to their architecture are what this chapter is about.
 
     \section{Psi Implementations}
-Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves. They used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
+Psi has been implemented by different groups at different times. The first implementations are by D�rner and his associates themselves~(see figure \ref{psi_screen}). They used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
 
-... psi screenshot ... %TODO insert screenshot
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/psi_screen1}
+  \caption{Dörner's Pascal Psi Implementation}
+  \label{psi_screen}
+\end{figure}
 
 The work on Dörner's team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
 
@@ -14,9 +19,17 @@ From 2003 to 2009 they built an implementation in Java as a set of plugins for t
 
 According to the concepts of the Psi Theory, MicroPsi simulates agents as neuro-symbolic spreading activation networks. Agents can be placed and researched in simulation environments or physically embodied as robots.~\cite{conf/agi/Bach12}
         
-Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new version of MicroPsi has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin. Instead of building another 3D-world, with this project we set out for something more experimental.
+Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new version of MicroPsi has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin~(see figure~\ref{mp2_berlin}). Instead of building another 3D-world, with this project we set out for something more experimental.
 
-... screenshot of Island and Berlin ... %TODO insert screenshot
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/mp2_berlin}
+  \caption{MicroPsi simulation environment Berlin}
+  \label{mp2_berlin}
+\end{figure}
+
 
         \section{MicroPsi 2 Module Overview}
 MicroPsi's modular structure is fairly easy to understand~(see figure ~\ref{micropsi2_modules}). At first, one can differentiate between the server component (or the web-interface) and the actual simulation code (called "core").
