@@ -49,20 +49,20 @@ MicroPsi defines agents as node nets or, to be more specific, hierarchical sprea
         \paragraph{Worlds}
 The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter --- the interface in between a node net and the simulation. Data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. Node nets and environments may be updated asynchronously.~\cite{conf/agi/Bach12}
 
-The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the development of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
+The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
 
     \section{Minecraft}
 The story of Minecraft has many interesting aspects, but first and foremost it is a story of immense, unexpected success.
 
-When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became clear that his creation resonated with many people. The simple concept of a world entirely build of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
+When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became clear that his creation resonated with many people. The simple concept of a world entirely build out of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
 
-The game has attracted great attention ever since its first release in 2009. Since copies of the game could be obtained commercially for the first time, different versions of the game sold more than 26 million times --- with the PC version priced at about 20 Euros, for example. It should be noted, that Minecraft's development studio Mojang is a so called "indie game developer", that is not associated with any classical game publisher, but distributes copies of their game exclusively via their own website.
+The game has attracted great attention ever since its first release in 2009. Since copies of the game could be obtained commercially for the first time, different versions of the game sold more than 26 million times --- with the PC version priced at about 20 Euros, for example. It should be noted, that Minecraft's development studio Mojang is a so called ``indie game developer'', that is not associated with any classical game publisher, but distributes copies of their game exclusively via their own website.
 
 Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered Client-Server-Protocol and therefore build artificial players that way.
 
 Minecraft is a complex, yet easily accessible virtual world. It is in constant development and new features are added regularly. It has a massive fanbase and a huge community around all kinds of game-modifications.
 
-Another interesting aspect about Minecraft is the procedural semantic the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than many other videogames.
+Another interesting aspect about Minecraft is the procedural semantic the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than those of many other videogames.
 
         \subsection{What is a Minecraft world?}
 
@@ -74,17 +74,17 @@ Another interesting aspect about Minecraft is the procedural semantic the game w
   \label{mc_block}
 \end{wrapfigure}
 
-In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they share a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.\\[3ex]
+In this section basic concepts of the game are described (in regards to our A.I. interface). Minecraft worlds are build out of blocks~(see figure ~\ref{mc_block}). Blocks are cubes. There are different types (materials) of blocks and they share a single size, which converts to the basic distance unit of Minecraft. One unit can be thought of as roughly equaling one meter.
 
 \begin{wrapfigure}{l}{0.15\textwidth}
   \begin{center}
-    \includegraphics[width=0.02\textwidth]{graphics/chunk}
+    \includegraphics[width=0.04\textwidth]{graphics/chunk}
   \end{center}
   \caption{A~Chunk~\cite{image_mob}}
   \label{mc_chunk}
 \end{wrapfigure}  
 
-A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}\\[22ex]
+A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}
 
 \begin{wrapfigure}{r}{0.3\textwidth}
   \begin{center}
@@ -94,11 +94,10 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \label{mc_player}
 \end{wrapfigure} 
 
-"The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed humanoid.\\[3ex]
-
+"The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed humanoid.
 Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting to 14 minutes by default
 
-The game itself has no predefined goals. Players can walk around, discover the generated world (see figure \ref{mc_mechanics} 1) and collect resources by ``destroying'' blocks , with the generated resources equaling the block type. They can combine different resources to ``craft'' items. For example, a player can destroy the blocks that represent a tree (2). The gained ``wood'' resource could then be used to craft a wooden pickaxe, which could then be used to dig into the ground more effectively to ``mine'' more rare resources, like iron or gold.
+The game itself has no predefined goals. Players can walk around, discover the generated world (see figure \ref{mc_mechanics} 1) and collect resources by ``destroying'' blocks , with the generated resources equaling the block type. They can combine different resources to ``craft'' items. For example, a player can destroy the blocks that represent a tree~(2). The gained ``wood'' resource could then be used to craft a wooden pickaxe~(2), which could then be used to dig into the ground more effectively~(4) to ``mine'' more rare resources, like iron or gold.
 
 \begin{figure}[h]
   \centering
@@ -118,7 +117,7 @@ Minecraft's Client-Server-Protocol is not publicly documented by the developers 
 
 Packets are either "server to client", "client to server" or "Two-Way" and begin with a "Packet ID" byte. The structure of the packet's payload depends on it's Packet ID.
  
-To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight-forward~(see figure \ref{mc_packet}). It is exclusively send from clients to servers and starts with it's Packet ID (as every packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to modify the players bounding box, another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
+To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight-forward~(see figure \ref{mc_packet}). It is exclusively send from clients to servers and starts with it's Packet ID (as every packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to modify the player's bounding box, another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
 
 \begin{table}[htb]
 \centering
@@ -146,7 +145,7 @@ This protocol is what a custom Minecraft client needs to speak.
         \subsection{Suitability of Minecraft as a simulation environment}
 There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
 
-First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore up to a certain extend platform independent. The "desktop computer version" is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi an a version for the upcoming game console "Xbox One" is announced. The desktop versions are priced at 19.95 euros, which makes it affordable to a large audience.
+First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore, up to a certain extend ,platform independent. The "desktop computer version" is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming game console Xbox One is announced. The desktop versions are priced at 19.95 euros, which makes it affordable to a large audience.
 %TODO find out how to typeset €
 
 The game itself already has an enormous fanbase. It is (like most videogames) especially popular among teenagers. Minecraft being loved by so many people could benefit this project, in terms of leading to increased attention.
@@ -157,14 +156,14 @@ The Minecraft world with it's logic, semantic and functionalities offers possibi
 
 The semantics of the gameworld share characteristics with the real world. Moving through a Minecraft environment, one quickly realises that the game has generated different biomes (eg. forest or tundra). Also, trees, rivers, mountains and ore veins are neither hard-coded, nor appear completely randomly, but are generated procedurally and their structure appears to be (somewhat) fractal.
         
-Using Minecraft as a simulation environment will give Psi agents possibilities to show off, what kind of sophisticated behaviour it is capable of.
+Using Minecraft as a simulation environment will give Psi agents possibilities to show off, what kind of sophisticated behaviour they are capable of.
 
     \section{Minecraft Bots}
 There exist many projects , that could be considered Minecraft ``bots''. One has to differentiate in between two types. On the one hand there are those, that mimic an entire client software and facilitate communication with the server on the default client software's behalf. On the other hand there are bots which are modifications of the original client (or server) software and usually add non player characters --- like animals and other non-human creatures --- to the game. The code is usually injected through one of the popular ``modloaders'' (eg. Minecraft Forge).
 
-One example (and probably the most advanced one) for an entire bot framework that replaces the client is Mineflayer.~\cite{github_mineflayer} It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js. However, it has not been used for this project, because a python implementation was aimed for.
+One example (and probably the most advanced one), for an entire bot framework that replaces the client, is Mineflayer.~\cite{github_mineflayer} It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js. However, it has not been used for this project, because a Python implementation was aimed for.
 
-Opposed to Mineflayer, an example for ``game modification'' bots are the ``Cubebots'' --- fan-made non-player characters that aim to help Minecraft players with mundane tasks.\cite{mcforums_cubebots}
+Opposed to Mineflayer, an example for ``game modification'' bots are the ``Cubebots'' --- fan-made non-player characters that aim to help Minecraft players with mundane tasks.\cite{mcforums_cubebot}
 
     \subsection{Spock by Nick Gamberini}
 Developed by Nick Gamberini, Spock is an open-source bot framework (and as such also a Minecraft client) written in Python. It has been chosen to become an essential part of this project for two reasons: being written in Python it painlessly integrates in the existing MicroPsi code and the absence of dependencies (with one exception) leave the code understandable and easy to deploy.
@@ -207,7 +206,7 @@ The structures are used to parse each packet appropriately~(see figure \ref{snip
 
 		\begin{figure}[ht]
 			\centering
-			\begin{minipage}{11cm}
+			\begin{minipage}{13cm}
 				\begin{pseudocode}
 	def decode(self, bbuff):
 		#Ident
@@ -229,7 +228,7 @@ Minecraft's success inspired many other projects - including a number of Minecra
 
 Interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like browser-game based on WebGL.
 
-A particular project, that has the same name as the original game that inspired it, is ``Minecraft'' by Michael Fogleman~\ref{fogleman_mc_screen}. It is a simple Minecraft clone in under 600 lines of Python and gained some popularity on reddit~\cite{fogle-reddit} and Hacker News.~\cite{fogle_hn}
+A particular project, that has the same name as the original game that inspired it, is ``Minecraft'' by Michael Fogleman~(see figure~\ref{fogleman_mc_screen}). It is a simple Minecraft clone in under 600 lines of Python and gained some popularity on reddit~\cite{fogle-reddit} and Hacker News.~\cite{fogle_hn}
 
 It is comparably easy to understand and modify and has been used for the visualisation component of this project. It is based on the Python multimedia library Pyglet~\cite{pyglet}.
 
@@ -237,5 +236,5 @@ It is comparably easy to understand and modify and has been used for the visuali
   \centering
     \includegraphics[width=10cm]{graphics/fogleman_mc_screen}
   \caption{``Minecraft'' by Michael Fogleman}
-  \label{psi_screen}
+  \label{fogleman_mc_screen}
 \end{figure}
