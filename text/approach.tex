@@ -8,21 +8,23 @@ Looking at the Minecraft side, communication with a Minecraft Server typically r
 
 The contributions of this project are divided into the three modules \texttt{minecraftWorldadapter}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and constantly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D-Images that display the current state of the Minecraft environment, based on the data it receives from the \texttt{minecraftClient}. What ties it all together is the \texttt{minecraftWorldadapter}. It provides a step function that advances both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation} and is called itself by the world runner of the MicroPsi framework. Furthermore it defines and updates the \emph{data sources} and \emph{targets}.
 
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/UML_MicroPsi_mit_spock_und_rahmen}
+  \caption{The new architecture of MicroPsi with the Minecraft interface. New modules are framed orange.}
+  \label{uml_mc}
+\end{figure}
+
 The \texttt{minecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the webinterface, which does not effect the functionality of simulation. The \texttt{minecraftVisualisation} module itself depends on the data structures of the \texttt{minecraftClient} though. This means, exchanging the \texttt{minecraftClient} would require adjustments of the \texttt{minecraftVisualisation}, to still function as intended. The same holds for the \emph{data sources} and \emph{targets} in the \texttt{minecraftWorldadapter}.
 
     \section{Using \texttt{Spock} as the \texttt{minecraftClient}}
 The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} communicates with the Minecraft server via the Client-Server-Protocol and provides data that can be used as data sources for the world adapter and translates the data from the data targets to actions in the simulation environment. That way, to MicroPsi it looks like \texttt{Spock} is the simulation environment itself, where in fact it's the interface to the game world server.
 
-The original event loop of the bot framework had to be dissolved and rebuilt as a part of the world adapter's step function. The event-loop and handling of Spock had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough, so that Spock is able to send the necessary keep-alive-signals, to not get kicked from the server.
+The original event loop of the bot framework had to be dissolved and rebuilt as a \texttt{advanceClient} function that is called as a part of the world adapter's step function. The event-loop and -handling of Spock had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough, so that Spock is able to send the necessary keep-alive-signals, to not get kicked from the server.
 
-Eventually, useful data sources had to be picked and generated and a system of data targets and their translation to actual actions had to be implemented. In most cases, performing actions means to let spock send a specific set of packets to the Minecraft server.
+Eventually, useful data sources had to be picked and a system of data targets and their translation to actions had to be implemented. In most cases, performing actions means to let spock send a specific set of packets to the Minecraft server.
 
-\paragraph{Data Targets and sources}
-
-... diamonds ...
-
-
-    \section{The Visualisation component}
+    \section{Module \texttt{minecraftVisualisation}}
 That being said, the other important part of this project is the visualisation component. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
 
 The visualisation component reads from Spock's internal gameworld representation to generate the 3D model. This means, that from pure Minecraft world data a 3D-visualisation has to be generated from within the MicroPsi Python Code. It should contain a perspective that gives a good overview over the bots environment to forward to the web interface, as well as a the agent's first person perspective, to function as a data source in the future.  
@@ -40,14 +42,11 @@ Specifically, the representation of the chunk, the agent is located in, is fetch
 
 Similar to spock, ``Minecraft'' by Michael Fogleman implements it's own event-loop and -handling. Again, the event loop had to be disassembled and rebuilt as a part of the world adapter's step function, which advances the visualisation with every step.
 
-Viewing the resulting software as a whole, several modules have been added to the architecture: the Minecraft world adapter, the Spock bot (facilitating communication with the Minecraft Server) and the visualisation component. (see figure \ref{uml_mc})
+    \section{Module \texttt{minecraftWorldadapter}}
+    
+\paragraph{Data Targets and sources}
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=10cm]{graphics/UML_MicroPsi_mit_spock_und_rahmen}
-  \caption{The new architecture of MicroPsi with the Minecraft interface. New modules are framed orange.}
-  \label{uml_mc}
-\end{figure}
+... diamonds ...
 
 %TODO ... illustration of the event loop ...
 
