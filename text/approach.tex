@@ -71,10 +71,17 @@ The file mcdata.py provides dictionaries for the datatypes, blocktype codes, pac
 
 In the file nbt.py several classes for dealing with the NBT file format exist.
 
+The file timer.py contains the classes EventTimer, TickTimer and ThreadedTimer which provide Timing.
+
         \subsection{Extensions to the \texttt{minecraftClient}}
-Added: PsiDispatcher,
-        
-The class PsiDispatcher
+A reference to the new class PsiDispatcher has been added to the \texttt{minecraftClient}. It's purpose is to check the World adapters data targets frequently and invoke appropriate actions, if necessary. The following figure gives a simplified view of the resulting architecture.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/spock_overview}
+  \caption{An overview of the most import classes of the \texttt{minecraftClient} in respect to the communication with a Minecraft Server}
+  \label{spock_overview}
+\end{figure}
 
     \section{Module \texttt{minecraftVisualisation}}
 That being said, the other important part of this project is the visualisation component. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
