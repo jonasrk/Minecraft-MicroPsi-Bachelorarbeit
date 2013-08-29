@@ -73,8 +73,14 @@ In the file nbt.py several classes for dealing with the NBT file format exist.
 
 The file timer.py contains the classes EventTimer, TickTimer and ThreadedTimer which provide Timing.
 
+The client sets up a socket to the server, starts of with a handshake and then facilitates packet based communication with the server.
+
         \subsection{Extensions to the \texttt{minecraftClient}}
+It was aimed for to extend the original client in a way. That it would fit in nicely as a simulation world for MicroPsi.
+        
 A reference to the new class PsiDispatcher has been added to the \texttt{minecraftClient}. It's purpose is to check the World adapters data targets frequently and invoke appropriate actions, if necessary. The following figure gives a simplified view of the resulting architecture.
+
+The event loop has been replaced by the function \texttt{advanceClient} that is called for every simulation step. For example, one iteration could mean receiving and storing new block data from the Minecraft Server, sending default responses to the received packets, checking the MicroPsi data targets for moving and if necessary send a "Player Position" packet to the Minecraft server.
 
 \begin{figure}[h]
   \centering
@@ -84,7 +90,7 @@ A reference to the new class PsiDispatcher has been added to the \texttt{minecra
 \end{figure}
 
     \section{Module \texttt{minecraftVisualisation}}
-That being said, the other important part of this project is the visualisation component. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
+That being said, the other important part of this project is the visualisation component. It contains classes that provide an interface to the OpenGL context that is the visualisation. This sections gives an overview about what datasources the visualisation uses and how it could be replaced or extended. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
 
 The module \texttt{minecraftVisualisation} consists of two classes. The class \texttt{Window} inherits from pyglet.window.Window and therefore initialises the OpenGL context. For every call of the advanceVisualisation function it updates the 3D model according to world representation inside the minecraftClient and is rendered. A .png snapshot of the framebuffer is generated and displayed in the web interface.
 
@@ -105,13 +111,13 @@ Specifically, the representation of the chunk, the agent is located in, is fetch
 
 Similar to spock, ``Minecraft'' by Michael Fogleman implements it's own event-loop and -handling. Again, the event loop had to be disassembled and rebuilt as a part of the world adapter's step function, which advances the visualisation with every step.
 
-    \section{Module \texttt{minecraftWorldadapter}}
+    \section{Module \texttt{minecraftWorld}}
+The world adapter contains two classes. The class MinecraftWorld inherits from the MicroPsi class world and provides the the assets for the webinterface, an init function and the step function. The class Braitencraft is the name of the actual Worldadapter. In it, the \emph{data sources} and \emph{targets} are defined as dictionaries and an update function advances the life of the client.
     
 \paragraph{Data Targets and sources}
 
-... diamonds ...
+As a proof of concept, datasources have been defined, that symbolize sensors that detect if a block of diamond in the current section is either before, behind, left or right of the client. The data targets are filled as a part of the world adapter update function as follows:
 
-%TODO ... illustration of the event loop ...
 
 % TODO je nach Größe des Kapitels, das hier vielleicht eine Ebene höher ziehen (versuche dich hier erstmal nur auf die fertige Lösung zu konzentrieren und warum du dich dafür entschieden hast. Es ist nicht interessant, was du sonst alles ausprobiert hast, außer dass du konkret angibst, warum du dich für die jetztige Implementierung im Vergleich zu anderen entschieden hast)
 
