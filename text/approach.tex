@@ -18,18 +18,55 @@ The contributions of this project are divided into the three modules \texttt{min
 The \texttt{minecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the webinterface, which does not effect the functionality of simulation. The \texttt{minecraftVisualisation} module itself depends on the data structures of the \texttt{minecraftClient} though. This means, exchanging the \texttt{minecraftClient} would require adjustments of the \texttt{minecraftVisualisation}, to still function as intended. The same holds for the \emph{data sources} and \emph{targets} in the \texttt{minecraftWorldadapter}.
 
     \section{Using \texttt{Spock} as the \texttt{minecraftClient}}
-The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} communicates with the Minecraft server via the Client-Server-Protocol and provides data that can be used as data sources for the world adapter and translates the data from the data targets to actions in the simulation environment. That way, to MicroPsi it looks like \texttt{Spock} is the simulation environment itself, where in fact it's the interface to the game world server.
+
+As mentioned before, the purpose of the \texttt{minecraftClient} is to manage the communication with the Minecraft Server and to provide a representation of the agent's environment.
+
+The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} communicates with the Minecraft server via the Client-Server-Protocol and provides data that can be used as \emph{data sources} for the world adapter and translates the data from the \emph{data targets} to actions in the simulation environment. That way, to MicroPsi it looks like \texttt{Spock} is the simulation environment itself, where in fact it's the interface to the game world server.
 
 The original event loop of the bot framework had to be dissolved and rebuilt as a \texttt{advanceClient} function that is called as a part of the world adapter's step function. The event-loop and -handling of Spock had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough, so that Spock is able to send the necessary keep-alive-signals, to not get kicked from the server.
 
+For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action --- if necessary~(see figure~\ref{spock_loop}). Note, that the described event loop of the original \texttt{Spock} is not a loop anymore but each iteration is invoked as a part of the world adapters step function.
+
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{graphics/spock_eventloop}
+  \end{center}
+  \caption{The \texttt{minecraftClient}'s event loop}
+  \label{spock_loop}
+\end{wrapfigure}
+
 Eventually, useful data sources had to be picked and a system of data targets and their translation to actions had to be implemented. In most cases, performing actions means to let spock send a specific set of packets to the Minecraft server.
+
+        \subsection{Overview of the minecraftClient}
+The \texttt{minecraftClient} is heavily based on Spock, the Minecraft bot framework developed by Nick Gamberini as an educational project. It consists of several classes. The main class, \texttt{minecraftClient}, holds references to instances of the classes BoundBuffer,  World and Packet. Furthermore basic data structures are stored as cflags, mcdata.
+
+The class BoundBuffer is an implementation of a buffer that matches the particular needs of sending and receiving Minecraft packets.
+
+The class World holds the internal representation of the gameworld. It brings functions and datastructures/classes itself to represent chunks and to obtain information about which block sits where.
+
+The class Packet represents a Minecraft packet and brings functions to encode and decode a packet (read from a BoundBuffer) to get to it's payload or to be able to send it to the Server.
+
+The dictionary cflags provides the Socket codes.
+The file mcdata.py provides dictionaries for the datatypes, blocktype codes, packet names and structures of packets of the Minecraft protocol.
+
+In the file nbt.py several classes for dealing with the NBT file format exist.
+
+        \subsection{Extensions to the \texttt{minecraftClient}}
+Added: PsiDispatcher,
+        
+The class PsiDispatcher
 
     \section{Module \texttt{minecraftVisualisation}}
 That being said, the other important part of this project is the visualisation component. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
 
+The module \texttt{minecraftVisualisation} consists of two classes. The class \texttt{Window} inherits from pyglet.window.Window and therefore initialises the OpenGL context. For every call of the advanceVisualisation function it updates the 3D model according to world representation inside the minecraftClient and is rendered. A .png snapshot of the framebuffer is generated and displayed in the web interface.
+
+The class Model is also called as a part of the advanceVisualisation function. It contains functions for adding and removing blocks from the OpenGL canvas. The textures for the blocks are loaded from PNG images and stored as pyglet.graphics.TextureGroup and assigned to vertices when needed.
+
 The visualisation component reads from Spock's internal gameworld representation to generate the 3D model. This means, that from pure Minecraft world data a 3D-visualisation has to be generated from within the MicroPsi Python Code. It should contain a perspective that gives a good overview over the bots environment to forward to the web interface, as well as a the agent's first person perspective, to function as a data source in the future.  
 
-The visualisation is in it's heart based on ``Minecraft'' by Michael Fogleman.
+The visualisation is in it's core based on ``Minecraft'' by Michael Fogleman.
 
 \begin{figure}[h]
   \centering
