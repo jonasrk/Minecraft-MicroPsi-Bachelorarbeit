@@ -115,6 +115,8 @@ The mode of a Minecraft world does not effect the functionality of this project.
         \subsection{The Client Server Protocol}
 Minecraft's Client-Server-Protocol is not publicly documented by the developers themselves. However, the modding-community gathered full knowledge and understanding of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
+%TODO mention NBT file format
+
 Packets are either "server to client", "client to server" or "Two-Way" and begin with a "Packet ID" byte. The structure of the packet's payload depends on it's Packet ID.
  
 To give an example of one of the easier packets, the "Client Position"-Packet is fairly straight-forward~(see figure \ref{mc_packet}). It is exclusively send from clients to servers and starts with it's Packet ID (as every packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double, which is used to to modify the player's bounding box, another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}

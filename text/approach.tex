@@ -47,6 +47,25 @@ The class World holds the internal representation of the gameworld. It brings fu
 
 The class Packet represents a Minecraft packet and brings functions to encode and decode a packet (read from a BoundBuffer) to get to it's payload or to be able to send it to the Server.
 
+The file packet handlers.py provides a class for each packet that the client is supposed to deal with by default. The following listing gives an example. %TODO why does not _ Latex compile
+
+
+		\begin{figure}[ht]
+			\centering
+			\begin{minipage}{11cm}
+				\begin{pseudocode}
+#Chunk Data - Update client World state
+@phandle(0x33)
+class handle33(BaseHandle):
+	@classmethod
+	def ToClient(self, client, packet):
+		client.world.unpack_column(packet)
+					\end{pseudocode}
+				\caption{Handling a Chunk Data packet}
+				\label{packet_handling}
+			\end{minipage}
+		\end{figure}
+
 The dictionary cflags provides the Socket codes.
 The file mcdata.py provides dictionaries for the datatypes, blocktype codes, packet names and structures of packets of the Minecraft protocol.
 
