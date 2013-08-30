@@ -118,8 +118,25 @@ The world adapter contains two classes. The class MinecraftWorld inherits from t
 
 As a proof of concept, datasources have been defined, that symbolize sensors that detect if a block of diamond in the current section is either before, behind, left or right of the client. The data targets are filled as a part of the world adapter update function as follows:
 
+On the other hand, data targets have been defined for walking moving forwards, backwards, left and right.
 
 % TODO je nach Größe des Kapitels, das hier vielleicht eine Ebene höher ziehen (versuche dich hier erstmal nur auf die fertige Lösung zu konzentrieren und warum du dich dafür entschieden hast. Es ist nicht interessant, was du sonst alles ausprobiert hast, außer dass du konkret angibst, warum du dich für die jetztige Implementierung im Vergleich zu anderen entschieden hast)
 
     \section{Case Study}
-As a proof of concept, the functionality of this project has been tested with a simple Braitenberg-vehicle experiment.
+As a proof of concept, the Bot is placed in a chunk in which a diamond is placed. The node net has been set up, so that each diamond sensor is connected to the appropriate movement actor, as in figure\ref{nodenet_setup}.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/nodenet_setup}
+  \caption{A node net setup for a Diamond-finding experiment}
+  \label{nodenet_setup}
+\end{figure}
+
+If we start a simulation like this, the nodes of the sensors that point to the diamond light up green and their activation is forwarded to the actors. The bot move towards the diamond until it it closer than the threshold for the sensors to not detect the diamond anymore --- for this experiment the threshold was set to two blocks~(see figure \ref{diamond_screens})
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=10cm]{graphics/diamond_screens}
+  \caption{Three screenshots with a Minecraft bot walking towards the diamond}
+  \label{diamond_screens}
+\end{figure}

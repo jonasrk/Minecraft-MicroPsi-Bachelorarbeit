@@ -1,57 +1,4 @@
-\chapter{Foundations}
-This project is fundamentally about combining existing technologies. In particular, the two most important ones are MicroPsi 2, the most ambitious framework aiming to implement the ideas of the Psi theory, and Minecraft, the super-popular sandbox-videogame.
-
-To understand how and why they were chosen, a brief history of their creation as well as explanations of their basic ideas and relevant insights to their architecture are what this chapter is about.
-
-    \section{Psi Implementations}
-Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves~(see figure \ref{psi_screen}). They used Pascal and developed it for windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example.
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=10cm]{graphics/psi_screen1}
-  \caption{Dörner's Pascal Psi Implementation}
-  \label{psi_screen}
-\end{figure}
-
-The work on Dörner's team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi.
-
-From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included of a graphical editor and a 3D simulation-environment. Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again in 2012 --- using more lightweight Python code. What is remarkable about the new implementation called MicroPsi 2 (in the following MicroPsi), is that the simulation is deployed as a web application and the graphical interface is completely rendered inside a web browser --- using state-of-the-art internet- and webapplication-technologies. It is based upon HTML as well as Javascript and the communication in between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's Bootstrap library as well as the JavaScript graphics library PaperJS are used.~\cite{conf/agi/Bach12}
-
-According to the concepts of the Psi Theory, MicroPsi simulates agents as neuro-symbolic spreading activation networks. Agents can be placed and researched in simulation environments or physically embodied as robots.~\cite{conf/agi/Bach12}
-        
-Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new version of MicroPsi has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin~(see figure~\ref{mp2_berlin}). Instead of building another 3D-world, with this project we set out for something more experimental.
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=10cm]{graphics/mp2_berlin}
-  \caption{MicroPsi simulation environment Berlin}
-  \label{mp2_berlin}
-\end{figure}
-
-        \section{MicroPsi 2 Module Overview}
-MicroPsi's modular structure is fairly easy to understand~(see figure ~\ref{micropsi2_modules}). At first, one can differentiate between the server component (or the web-interface) and the actual simulation code (called "core").
-
-In a minimal setup MicroPsi runs three threads. One thread for the web server, one for the world simulation and one for every world-adapter (or agent). If more then one agent or more than one world are launched, they are instantiated as additional threads.
-
-Furthermore, the core consists of a runtime component, a user and a configuration manager. The runtime works independently of the server and can also by deployed for command line interaction or other GUIs. It manages the simulations worlds as well as the agents (node net embodiments) and the world-adapters.~\cite{conf/agi/Bach12}
-\\          
-          
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=10cm]{graphics/micropsi2_uml}
-  \caption{The MicroPsi 2 architecture~\cite{conf/agi/Bach12}}
-  \label{micropsi2_modules}
-\end{figure}
-            
-        \paragraph{Agents}
-MicroPsi defines agents as node nets or, to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. The assigned world-adapter provides data sources and data targets to manage the communication in between the node net and the simulation environment. They represent the agent's sensory input and motoric output. Sophisticated interconnection of those enables interaction with the environment.~\cite{conf/agi/Bach12}
-       
-        \paragraph{Worlds}
-The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter --- the interface in between a node net and the simulation. Data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. Node nets and environments may be updated asynchronously.~\cite{conf/agi/Bach12}
-
-The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
-
-    \section{Minecraft}
+\chapter{Minecraft}
 The story of Minecraft has many interesting aspects, but first and foremost it is a story of immense, unexpected success.
 
 When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became clear that his creation resonated with many people. The simple concept of a world entirely build out of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out it's possibilities and boundaries.
@@ -64,7 +11,7 @@ Minecraft is a complex, yet easily accessible virtual world. It is in constant d
 
 Another interesting aspect about Minecraft is the procedural semantic the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than those of many other videogames.
 
-        \subsection{What is a Minecraft world?}
+        \section{What is a Minecraft world?}
 
 \begin{wrapfigure}{r}{0.3\textwidth}
   \begin{center}
@@ -112,7 +59,7 @@ In "creative" mode, the player is not being attacked by monsters, has the abilit
 
 The mode of a Minecraft world does not effect the functionality of this project.
 
-        \subsection{The Client Server Protocol}
+        \section{The Client Server Protocol}
 Minecraft's Client-Server-Protocol is not publicly documented by the developers themselves. However, the modding-community gathered full knowledge and understanding of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
 %TODO mention NBT file format
@@ -144,7 +91,7 @@ Other than movement, packet structures are defined for every aspect of the game.
 
 This protocol is what a custom Minecraft client needs to speak.
 
-        \subsection{Suitability of Minecraft as a simulation environment}
+        \section{Suitability of Minecraft as a simulation environment}
 There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
 
 First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore, up to a certain extend ,platform independent. The "desktop computer version" is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming game console Xbox One is announced. The desktop versions are priced at 19.95 euros, which makes it affordable to a large audience.
