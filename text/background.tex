@@ -71,83 +71,51 @@ MicroPsi is written in Python with a minimum of dependencies. Therefore its  mod
           
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/micropsi2_uml}
-  \caption{The MicroPsi 2 architecture(taken from ~\cite{conf/agi/Bach12})}
+    \includegraphics[width=8cm]{graphics/micropsi2_uml}
+  \caption{The modular architecture of the MicroPsi framework make it easy to extend. (taken from~\cite{conf/agi/Bach12})}
   \label{micropsi2_modules}
 \end{figure}
 
-The following description is heavily based on \cite{conf/agi/Bach12}, where theoretical foundations can be found in more detail.
+The following description is heavily based on \cite{conf/agi/Bach12}, where the theoretical foundations can be found in detail.
 
-        \subsection{Module Server}
-        It is based upon HTML as well as Javascript and the communication in between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's Bootstrap library as well as the JavaScript graphics library PaperJS are used.
-        
-        A graphical Editor is the primary interface.
-        
-The Server module renders the GUI and deploys the agent simulation as a web application. It acts as a web server for remote or local access. Therefore simulations can be launched from anywhere without requiring any installation. It implements the lightweight Python web framework Bottle. The server communicates with its users through the server API. User sessions and access rights are managed by the user manager component. 
-    
-    Method Dispatcher
-    UI Rendering
-    User Manager / a user manager
-    
-A client for this application may be any computer with a reasonable up-to-date web browser - be it remote or local.
- 
-    
-        \subsection{Module Runtime}
-The server starts the runtime component, even though it may also work independently of the server. The runtime component communicates with the server through the MicroPsi API. It manages node nets and Worlds generates threads for each node net and World that has been started.
+        \subsection{Module \texttt{Server}}
+The \texttt{Server} renders the GUI and deploys the agent simulation as a web application. It acts as a \emph{web server} for remote or local access. A client for this application may be any computer with a reasonable up-to-date web browser. Therefore simulations can be launched from anywhere without requiring any installation. It rests upon the lightweight Python web framework \emph{Bottle}.
 
-        \subsubsection{Node Nets}
-A MicroPsi node net is defined as a set of states, a starting state, a network function," that determines how to advance to the next state" and a set of node types. "Data sources and data targets provide a connection to the environment; a data source represents a value that is determined by an environ- mental state, while the values of data targets can be changed to effect something in the environment."
-
-"Each node is characterized by its identifier, its type, an optional set of pa- rameters (which can make the node stateful), a set of gates and a set of slots. Gates are outlets for activation, while slots are inlets."
-
-"The types of slots and gates of a node are defined within the node type, next to ad- ditional functionality f ! performed by the node whenever it becomes active. In most cases, f ! is limited to transmitting activation within the node, from the standard slot ‘gen’ to the gates."
-
-"Nodes can store additional parameters and change them in the course of the node function, which makes them state machines:"
-
-"More generally, some nodes may contain arbitrary functions, such as the creation of new nodes and links, procedures for neural learning, planning modules etc. These functions take the form of a program in a native programming language (here, Py- thon), and hence, such nodes are also called native modules."
-
-
-
-        \subsubsection{Worlds}
-The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter --- the interface in between a node net and the simulation. Data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. Node nets and environments may be updated asynchronously.~\cite{conf/agi/Bach12}
-
-The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorized application was building a framework for knowledge representation.~\cite{conf/agi/Bach12}
-
-"Within the MicroPsi framework, agents may be embedded into an environment. The environment must provide a world adapter for each MicroPsi agent. The world adapter offers data sources, from which the agent’s node net may read environmental information, and data targets, which allow the agent to effect changes in the world. Since the environment only has write access to data sources, and read access to data targets, node net and environment may be updated asynchronously.
-The world adapter may interface a local multi-agent simulation, a robotic body, a computer game client or simulation server, dynamically updated stock data, etc. Here, we give a simple simulation world as an example."
-
-"Objects have a position (for instance ), a set of object states and an object function, that determines how the position and states of the object change from one state to the next, based on the previous state, the states and positions of oth- er objects and the terrain."
-
-"Agents are objects in the world like any other, but each agent object corresponds toa world adapter, which links it to a node net. Think of the agent object as the body ofthe MicroPsi agent, and the object states as its physiological states. The object func-tion of the agent f advances these physiological states, the position of the agentand the inputs to the node net.In each simulation step, the world function calls all object functions, and takes careof the creation of new objects and the removal of obsolete ones."
-
-        \paragraph{Agents}
-        
-According to the concepts of the Psi Theory, MicroPsi simulates agents as neuro-symbolic spreading activation networks. Agents can be placed and researched in simulation environments or physically embodied as robots.~\cite{conf/agi/Bach12}
-        
-MicroPsi defines agents as node nets or, to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. The assigned world-adapter provides data sources and data targets to manage the communication in between the node net and the simulation environment. They represent the agent's sensory input and motoric output. Sophisticated interconnection of those enables interaction with the environment.~\cite{conf/agi/Bach12}
-As node nets share the relevant characteristics with neural node nets, they may enable neural learning paradigms. To store information they can form semantic networks. Furthermore, nodes may contain state machines and other operations, which make it possible to build modularized architectures.
-
-        \paragraph{Objects}
-Objects can be things like lightsources.
- 
-    Method Dispatcher
-    Node Net Manager
-        Node Net / a set of node nets,
-    World Manager
-        World / a set of simulation worlds,
-            Agent
-            Object
-    (MicroPsi API)
-    
-
-
-
-(Data Targets / Data Sources)
-
+The web interface is naturally based on HTML as well as Javascript. The communication in between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's \emph{Bootstrap} library are in use. The graphic renderings (see figure~\ref{micropsi2_nodenet}) utilise the JavaScript graphics library \emph{PaperJS}. 
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/micropsi2_nodenet}
-  \caption{A MicroPsi 2 nodenet. (taken from ~\cite{conf/agi/Bach12})}
+    \includegraphics[width=8cm]{graphics/micropsi2_nodenet}
+  \caption{The graphical editor is the primary interface to node nets. (taken from~\cite{conf/agi/Bach12})}
   \label{micropsi2_nodenet}
 \end{figure}
+
+The \texttt{Server} communicates with its users through the server API. User sessions and access rights are managed by the \texttt{UserManager}.
+   
+        \subsection{Module \texttt{Runtime}}
+In this setup, the \texttt{Server} starts the \texttt{Runtime} --- even though it may also work independently of the \texttt{Server}. The \texttt{Runtime} component communicates with the \texttt{Server} through the MicroPsi API. It manages node nets and worlds.
+
+        \subsubsection{Node Nets}
+A MicroPsi node net is defined as a set of states, a starting state, a network function, ``that determines how to advance to the next state'' and a set of node types. Data sources and data targets serve as input and output towards a world, where a data source is filled with data from the world and data targets are linked to agent actions in the world.
+
+According to the Psi theory, nodes may have different types and parameters. They contain gates and slots that send and receive activation. In most cases, the activation is forwarded from a slot to a gate without further modulation.
+
+Nevertheless, nodes may contain functions that enable the creation of new nodes and links as well as procedures for learning and planning. They may be implemented as Python code.
+
+According to the concepts of the Psi Theory, MicroPsi defines agents as node nets or, to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
+
+As node nets share the relevant characteristics with neural node nets, they may enable neural learning paradigms. To store information they can form semantic networks. Furthermore, nodes may contain state machines and other operations, which make it possible to build modularised architectures.
+
+        \subsubsection{Worlds}
+The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter which functions as the interface in between a node net and the environment. Within the world adapter data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. They represent the agent's sensory input and motoric output. Sophisticated interconnection of those enables interaction with the environment.
+
+The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorised application was building a framework for knowledge representation.
+
+        \paragraph{Objects}$\;$ \\
+Worlds contain objects. Objects may be anything that could be interesting for a simulation and that needs some kind of integrated logic. Light sources or collectable resources are a common example. Objects may contain a set of functions and states, but at least one function that determines how the object advances and reacts to changes while moving through a simulation cycle. 
+
+A comprehensive world functions calls every object function for each simulation step of the world.
+
+        \paragraph{Agents}$\;$ \\
+Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agents body. The function that advances the object checks for input from the node net and outputs to it.
+        
