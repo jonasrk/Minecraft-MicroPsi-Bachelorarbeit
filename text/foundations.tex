@@ -76,14 +76,14 @@ The mode of a Minecraft world does not effect the functionality of this project.
 \begin{figure}[h]
   \centering
     \includegraphics[width=15cm]{graphics/minecraft_mechanics}
-  \caption{Minecraft Basic Mechanics  (CC-BY-3.0 Mojang AB)} %TODO find out copyright
+  \caption{Minecraft Basic Mechanics  (CC-BY-3.0 Mojang AB)}
   \label{mc_mechanics}
 \end{figure}
 
         \subsection{The Client Server Protocol}
 Minecraft's Client-Server-Protocol is not publicly documented by the developers themselves. However, the modding-community gathered full knowledge and understanding of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
 
-%TODO mention NBT file format
+The NBT (Named Binary Tag) is a data format that has been introduced by Persson to transfer chunks of binary data together with small amounts of additional data. Its main use is to store Minecraft worlds.
 
 Packets are either "server to client", "client to server" or "two-way" and begin with a "Packet ID" byte. The structure of the packet's payload depends on it's Packet ID.
  
@@ -120,8 +120,7 @@ As user-generated content has been an essential part in the development of Minec
     \section{Suitability of Minecraft as a Simulation Environment}
 There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
 
-First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore, up to a certain extend, platform independent. The desktop computer version is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming gaming console Xbox One is announced. The desktop versions are priced at 19.95 euros, which makes it affordable to a large audience.
-%TODO find out how to typeset €
+First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and therefore, up to a certain extend, platform independent. The desktop computer version is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming gaming console Xbox One is announced. The desktop versions are priced at 19.95 \euro, which makes it affordable to a large audience.
 
 The game itself already has an enormous fanbase. It is (like most videogames) especially popular among teenagers. Minecraft being loved by so many people could benefit this project, in terms of leading to increased attention.
 
