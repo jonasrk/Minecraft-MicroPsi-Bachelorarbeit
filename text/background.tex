@@ -1,11 +1,9 @@
 \chapter{Artificial General Intelligence}
-%TODO Die Introduction fängt gut an, aber MicroPsi fällt mir zu sehr vom Himmel. Du solltest in der Introduction wirklich nur motivierend bleiben, warum will man so was wie MicroPsi haben, warum braucht man Simulationsumgebungen, keine Details zur MicroPsi-Implementierung oder Minecraft. Das kommt erst im Kapitel Foundations (dort kannst du den Text wahrscheinlich ziemlich so bringen, wie er in der Motivation steht)!
-
 To provide the necessary context for this thesis, this chapter will provide a brief introduction to AI and it's subdivision AIG. In particular, Psi and it's implementations are described in detail.
 
 A widely accepted definition of the field of AI is that it is the study and design of intelligent agents, where an intelligent agent is a system that perceives its environment and takes actions that maximise its chances of success. It took many years for AI research to evolve from the early ideas of thinking machines over Deep Blue, the computer that could beat mankind's best chess players to Watson, the AI that beats the champions of Jeopardy, the game show, that is about asking the appropriate question to a given answer. There exist many applications for AI. Self-driving cars and online-shopping recommendation systems to name a few.
 
-\section{Strong AI}
+    \section{Strong AI}
 
 These examples have one thing in common. They are applications of technology that serves an immediate, or at least foreseeable purpose. For AI in scenarios of this kind, the term applied AI (or weak AI) has been coined. Strong AI, in contrast, is about researching the nature of intelligence itself. An actual (hypothetical) implementation of a strong AI would translate to building a machine, that is capable of acting like a human being---not just in a defined problem field, but in all of them. Putting it differently, weak AI considers computers to be an instrument to research cognitive processes. Strong AI considers simulated cognitive processes as actually being cognition.
 
@@ -21,27 +19,37 @@ The most famous indicator for whether a machine is intelligent or not, is the Tu
 
 But, would not what we believe is possible and what is not, become obsolete, once we would be able to build something, that cognition can not be denied from? As Dijkstra put it: ``The question of whether machines can think... is about as relevant as the question of whether submarines can swim.''
 
-\section{Psi Theory}
+    \section{Psi Theory}
 The Psi theory in its foundations was described by german psychologist Dietrich Dörner in his books ``Bauplan für eine Seele''~\cite{Doerner1998} and ``Die Mechanik des Seelenwagens''~\cite{dorner2002mechanik} from 1998 and 2002. Dörner's holistic approach goes beyond classic problem solving but develops a unified model for cognition that implements motivations and emotions. He is convinced, that artificial intelligence does not have to focus on different aspects of cognition that have to be looked at separately, but that a unified theory will eventually lead to a deeper understanding of cognition itself.
 
 It's main ideas are, that it thinks of the mind as a graph-like structure of relationships (e.g. node net) that strives to maintain homeostatic balance. Every form of representation of the agent's cognition---may it be percepts, plans or abstractions of space and objects---are represented as directed, hierarchic spreading-activation networks. A Psi agent's behaviour is determined through it's motivational system, that keeps a dynamic balance in between a number of predefined physiologic, social and cognitive demands. In doing so, it establishes, pursues and abandons goals and behavioural tendencies.\cite{Bach:2009:PSI:1611304}
 
-Basic components of the theory are representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness. %(wikipedia)
+Basic components of the theory are representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness.
 
 The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships.~\cite{Bach:2009:PSI:1611304}.
 
-%... Basics of Psi Theorie of Dörner ...
-
 Joscha Bach adapted that theory to bring it in a contemporary from with slight modifications in~\cite{Bach:2009:PSI:1611304}.
 
-%... explanation of Joschas Dissertation ...
-
-%\section{Summary}
 Even though building a conscious machine that thinks and acts like we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most important leaps.
+    
+    \section{Agents and Environmens}
+Before Psi archictures get explained, we define agents and environments according to Russel and Norvig.
 
-%... still a lot to do in AI ...
+An agent is defined as anything that can perceive its environment through sensors and conduct actions inside the environment via actuators. A software agent that may receive network packets as sensory inputs and outputs by writing files and sending network packets as acting on the environment serves as one example, which fits in nicely for this thesis.
 
-%TODO intelligent agents and environments from norvig
+They introduce the percept, as the agent's input and the percept sequence as the complete history of what the agent has perceived. Every choices an agent makes, are based on the percept sequence.
+
+Furthermore, they describe the agent function, as the function that maps the percept sequence to an action. The agent program is its concrete implementation.
+
+A rational agent is an agent that acts appropriately to any given percept sequence. To answer the question about what is appropriate and what is not, they introduce performance measures that evaluate the agents actions. These measures have to be defined by the designer of the experiment. Therefore, the rational agent tries to maximise its performance measure at any given point of time.
+
+A task environment is the combination of the performance measure, the environment and the agent's actuators and sensors.
+
+The environment have different properties. They can either be fully observable or partially observable. An environment is fully observable when the agent has access to the complete state of the environment or at least to to everything that is relevant regarding to the performance measure. As opposed to this, it is partially observable, if the beforementioned requirement is not given.
+
+An environment can furtherermore be single agent or multiagent. An environment is multiagent, when there is at least one other agent, that's behaviour is about maximising its performance measure that depends on the first agents behaviour. If the agents try to maximise the performance measure of all agents, the environment is called cooperative. If agents try to maximise their own and minimise the performance measure of the other agents, it is called competitive.
+
+An environment may furthermore be discrete or continuous. If an environment can be thought of as advancing in discrete state to the other (and even more so if there is a finite number of states).
 
     \section{Psi Implementations}
 Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves~(see figure \ref{psi_screen}). They used Pascal and developed it for Windows environments. This implementation can still be downloaded and runs on Windows 7 installations, for example. %TODO download source
@@ -127,10 +135,10 @@ The simulations worlds are the environments in which we can study our agent's be
 
 The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorised application was building a framework for knowledge representation.
 
-        \paragraph{Objects}$\;$ \\
+            \paragraph{Objects}$\;$ \\
 Worlds contain objects. Objects may be anything that could be interesting for a simulation and that needs some kind of integrated logic. Light sources or collectable resources are a common example. Objects may contain a set of functions and states, but at least one function that determines how the object advances and reacts to changes while moving through a simulation cycle. A comprehensive world function calls every object function for each simulation step of the world.
 
-        \paragraph{Agents}$\;$ \\
+            \paragraph{Agents}$\;$ \\
 Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agents body. The function that advances the object checks for input from the node net and outputs to it.
         
     \section{Summary}
