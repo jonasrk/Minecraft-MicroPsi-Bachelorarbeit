@@ -25,7 +25,7 @@ The calculation of the simulation environment, does not take place in MicroPsi i
 
 The original event loop of the bot framework had to be dissolved and rebuilt as an \texttt{advanceClient} function that is called as a part of the world adapter's step function. The event-loop and -handling of Spock had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough (about 10/s), so that Spock is able to send the necessary keep-alive-signals, to not get kicked from the server.
 
-For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action --- if necessary~(see figure~\ref{spock_loop}). Note, that the described event loop of the original \texttt{Spock} is not a loop anymore but each iteration is invoked as a part of the world adapters step function.
+For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action---if necessary~(see figure~\ref{spock_loop}). Note, that the described event loop of the original \texttt{Spock} is not a loop anymore but each iteration is invoked as a part of the world adapters step function.
 
 
 \begin{wrapfigure}{r}{0.3\textwidth}
@@ -51,7 +51,7 @@ The class World holds the internal representation of the gameworld. It brings fu
 
 The class Packet represents a Minecraft packet and brings functions to encode and decode a packet (read from a BoundBuffer) to get to it's payload or to be able to send it to the Server.
 
-The file packethandlers.py provides a class for each packet that the client is supposed to deal with by default. The following listing gives an example. %TODO why does not _ Latex compile
+The file packet\_handlers.py provides a class for each packet that the client is supposed to deal with by default. The following listing gives an example.
 
 
 		\begin{figure}[ht]
@@ -91,9 +91,9 @@ A reference to the new class PsiDispatcher has been added to the \texttt{minecra
 #check for MicroPsi input
 if self.client.move_x > 0:
     self.client.push(Packet(ident = 0x0B, data = {
-        'x': (self.client.position['x'] - 1),
-        'y': self.client.position['y'],
-        'z': self.client.position['z'],
+        'x': (self.client.position['x'] - 1) / 1,
+        'y': self.client.position['y'] / 1,
+        'z': self.client.position['z'] / 1,
         'on_ground': False,
         'stance': self.client.position['y'] + 0.11
         }))
@@ -102,8 +102,6 @@ if self.client.move_x > 0:
 				\label{listing_dispatch}
 			\end{minipage}
 		\end{figure}
-
-%TODO  // 1 again in listing does not latex compile
 
 The event loop has been replaced by the function \texttt{advanceClient} that is called for every simulation step. For example, one iteration could mean receiving and storing new block data from the Minecraft Server, sending default responses to the received packets, checking the MicroPsi data targets for moving and if necessary send a "Player Position" packet to the Minecraft server.
 
@@ -144,8 +142,6 @@ The world adapter contains two classes. The class MinecraftWorld inherits from t
 As a proof of concept, datasources have been defined, that symbolize sensors that detect if a block of diamond in the current section is either before, behind, left or right of the client. The data targets are filled as a part of the world adapter update function as follows:
 
 On the other hand, data targets have been defined for walking moving forwards, backwards, left and right.
-
-% TODO je nach Größe des Kapitels, das hier vielleicht eine Ebene höher ziehen (versuche dich hier erstmal nur auf die fertige Lösung zu konzentrieren und warum du dich dafür entschieden hast. Es ist nicht interessant, was du sonst alles ausprobiert hast, außer dass du konkret angibst, warum du dich für die jetztige Implementierung im Vergleich zu anderen entschieden hast)
 
     \section{Case Study}
 To explain the usage of this implementation, we conclude an example in the following. The agent placed in the Minecraft world shall consist of four sensors, that point to the positive and negative x- and y-axis. Theses sensors detect, if a diamond ore block has been placed in the current chunk in the direction they are pointing. The agent furthermore consists of 4 actuators, that represent moving towards each of the same four directions. Next, the sensors get connected to the according actuators, which will lead to an agent being attracted towards a placed diamond block.
