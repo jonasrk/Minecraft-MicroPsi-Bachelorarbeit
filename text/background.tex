@@ -32,14 +32,14 @@ It's main ideas are, that it thinks of the mind as a graph-like structure of rel
 
 Other basic components of the theory are concepts of representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness.
 
-Nodes in these networks have gates that send activation and slots that receive it, which can have four different types, that represent different kinds of relationships. The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships. Joscha Bach adapted that theory to bring it in a contemporary from with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}.
+Nodes in these networks have gates that send activation and slots that receive it, which can have four different types, that represent different kinds of relationships. The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships. Joscha Bach adapted the theory to bring it in a contemporary from with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}.
 
 Even though building a conscious machine that thinks and acts like we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most important leaps.
     
     \section{Agents and Environmens}
 Before we continue to describe concrete implementations and simulations, we define agents and environments according to Russel and Norvig.~\cite{russell2009artificial} 
 
-An \emph{agent} is defined as anything, that can perceive its environment through sensors and conduct actions inside the environment via actuators. The given example of a software agent that may receive network packets as sensory inputs and produces output by writing files and sending network packets fits in nicely within this thesis. However, agents can just as well be robots that have cameras as sensors and motors as actuators. Even humans can be thought of as agents, that perceive their environment through their senses and act upon it through their muscles
+An \emph{agent} is defined as anything, that can perceive its environment through sensors and conduct actions inside the environment through actuators. The given example of a software agent that may receive network packets as sensory inputs and produces output by writing files and sending network packets fits in nicely within this thesis. However, agents can just as well be robots that have cameras as sensors and motors as actuators. Even humans can be thought of as agents, that perceive their environment through their senses and act upon it through their muscles
 
 Russel and Norvig furthermore define the \emph{percept}, as the agent's input and the \emph{percept sequence} as the complete history of what the agent has perceived. Every choices an agent makes, are based on the percept sequence.
 
@@ -47,7 +47,7 @@ Additionally, they describe the \emph{agent function}, as the function that maps
 
 A \emph{rational agent} is an agent that acts appropriately to any given percept sequence. To answer the question about what is appropriate and what is not, they introduce \emph{performance measures} that evaluate the agent's actions. These measures have to be defined by the designer of an experiment. Summarizing, the rational agent tries to maximise its performance measure at any given point of time.
 
-\emph{Environments} have a number of different properties. They can either be \emph{fully observable} or \emph{partially observable}. An environment is fully observable when the agent has access to the complete state of the environment or at least to everything that is relevant, regarding to the performance measure. As opposed to this, it is partially observable, if the before mentioned requirement is not given.
+\emph{Environments} have a number of different properties. They can either be \emph{fully observable} or \emph{partially observable}. An environment is fully observable when the agent has access to the complete state of the environment---or at least to everything that is relevant, regarding to the performance measure. As opposed to this, it is partially observable, if the before mentioned requirement is not given.
 
 An environment can furthermore be \emph{single agent} or \emph{multiagent}. An environment is multiagent, when there is at least one other agent, whose behaviour is about maximising a performance measure that depends on the first agent's behaviour. If the agents try to maximise the performance measure of all agents, the environment is called \emph{cooperative}. If agents try to maximise their own and minimise the performance measure of the other agents, it is called \emph{competitive}.
 
@@ -61,44 +61,44 @@ Psi has been implemented by different groups at different times. The first imple
 \begin{figure}[h]
   \centering
     \includegraphics[width=10cm]{graphics/psi_screen1}
-  \caption{Dörner's Pascal Psi Implementation}
+  \caption{Dörner's Delphi Pascal Psi Implementation}
   \label{psi_screen}
 \end{figure}
 
 Subsequently, there has been a simple 3D implementation of Dörner's island simulation called Psi3D.
 
-The work on Dörner's team's implementation has not been continued, so Joscha Bach and his associates built new implementations of Psi. From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included a graphical editor and a broad experimentation framework. MicroPsi provided a complex and sophisticated simulation component which contained simulated objects in three dimensional worlds---even though most experiments took place on a plane. As a pragmatic approach, different ground types of the simulation world have been stored in bitmap files similar to heightmaps. The framework offered complex administrator interfaces and appealing DirectX rendered 3D-views of the scenery as well as a more general world view which interfaced the world by providing clickable objects. Predefined simulation environments included a classic Island and a Mars world (see figure~\ref{micropsi_3d_screen}). Objects in these worlds may be assembled recursively out of other objects and bring their own functionalities. As it has been the case in Dörner's implementation, a viewer for facial expressions is included---this time as well as a three-dimensional simulation.~\cite{Bach:2009:PSI:1611304}
+The work on Dörner's team's implementations has not been continued, so Joscha Bach and his associates developed new implementations of Psi. From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included a graphical editor and a broad experimentation framework. MicroPsi provided a complex and sophisticated simulation component which contained simulated objects in three dimensional worlds---even though most experiments took place on a plane. As a pragmatic approach, different ground types of the simulation world have been stored in bitmap files similar to heightmaps. The framework offered complex administrator interfaces and appealing DirectX rendered 3D-views of the scenery as well as a more general world view which interfaced the world by providing clickable objects. Predefined simulation environments included a classic Island and a Mars world (see figure~\ref{micropsi_3d_screen}). Objects in these worlds may be assembled recursively out of other objects and bring their own functionalities. As it has been the case in Dörner's implementation, a viewer for facial expressions has been included---this time as well as a three-dimensional simulation.~\cite{Bach:2009:PSI:1611304}
 
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/micropsi_3d_screen}
+    \includegraphics[width=14cm]{graphics/micropsi_3d_screen}
   \caption{Screenshot of the 3D visualisation of the island and Mars worlds in MicroPsi (taken from \cite{Bach:2009:PSI:1611304})}
   \label{micropsi_3d_screen}
 \end{figure}
 
-Simulated environments proved to especially serve well for the research of collaborative behaviour of multiple agents, of mapping and exploration, image processing as well as of memory and planning. Additionally, some scenarios are almost impossible to implement in the physical world, such as evolving agent populations, could easily be simulated. On the other hand, downsides of simulated worlds include being limited by computing power and the programmer's specifications.~\cite{Bach:2009:PSI:1611304}
+Simulated environments proved to especially serve well for the research of collaborative behaviour of multiple agents, for mapping and exploration, image processing as well as for memory and planning. Additionally, some scenarios, that are almost impossible to implement in the physical world (such as evolving agent populations) could easily be simulated. On the other hand, downsides of simulated worlds include being limited by computing power and the programmer's specifications.~\cite{Bach:2009:PSI:1611304}
 
     \section{MicroPsi 2}
-Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again in 2011 and 2012 using more lightweight Python code. What is remarkable about the new implementation called MicroPsi 2 (in the following MicroPsi), is that the simulation is deployed as a web application and the graphical interface is completely rendered inside a web browser using state-of-the-art internet- and webapplication technologies.~\cite{conf/agi/Bach12}
+Aiming at better understandability and to maintain platform independence, MicroPsi has been built ground up again in 2011 and 2012 using more lightweight Python code. What is remarkable about the new implementation called MicroPsi 2 (in the following MicroPsi), is that the simulation is deployed as a web application and the graphical interface is completely rendered inside a web browser, using state-of-the-art internet- and webapplication technologies.~\cite{conf/agi/Bach12}
         
-Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi-architectures, the relatively new version of MicroPsi so far has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin~(see figure~\ref{mp2_berlin}). Instead of building a new 3D-world, with this project we set out for something more experimental. More on this follows in chapters three and four.
+Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi architectures, the relatively new version of MicroPsi so far has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin~(see figure~\ref{mp2_berlin}). Instead of building a new 3D-world, with this project we set out for something more experimental. More on this follows in chapters three and four.
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/mp2_berlin}
+    \includegraphics[width=14cm]{graphics/mp2_berlin}
   \caption{MicroPsi simulation environment Berlin}
   \label{mp2_berlin}
 \end{figure}
 
         \subsection{Module Overview}
-MicroPsi is written in Python with a minimum of dependencies. Therefore its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate in between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulations environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independent of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager}.~\cite{conf/agi/Bach12}
+MicroPsi is written in Python with a minimum of dependencies. Therefore its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate in between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulation environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independent of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager}.~\cite{conf/agi/Bach12}
 \\          
           
 \begin{figure}[h]
   \centering
     \includegraphics[width=8cm]{graphics/micropsi2_uml}
-  \caption{The modular architecture of the MicroPsi framework make it easy to extend. (taken from~\cite{conf/agi/Bach12})}
+  \caption{The modular architecture of the MicroPsi framework makes it easy to extend. (taken from~\cite{conf/agi/Bach12})}
   \label{micropsi2_modules}
 \end{figure}
 
@@ -111,7 +111,7 @@ The web interface is naturally based on HTML as well as Javascript. The communic
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=8cm]{graphics/micropsi2_nodenet}
+    \includegraphics[width=13cm]{graphics/micropsi2_nodenet}
   \caption{The graphical editor is the primary interface to node nets. (taken from~\cite{conf/agi/Bach12})}
   \label{micropsi2_nodenet}
 \end{figure}
@@ -128,21 +128,21 @@ According to the Psi theory, nodes may have different types and parameters. They
 
 Nevertheless, nodes may contain functions that enable the creation of new nodes and links as well as procedures for learning and planning. They may be implemented as Python code.
 
-According to the concepts of the Psi Theory, MicroPsi defines agents as node nets or, to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
+According to the concepts of the Psi theory, MicroPsi defines agents as node nets or, to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
 
-As node nets share the relevant characteristics with neural node nets, they may enable neural learning paradigms. To store information they can form semantic networks. Furthermore, nodes may contain state machines and other operations, which make it possible to build modularised architectures.
+As node nets share the relevant characteristics with neural networks, they may enable neural learning paradigms. To store information they can form semantic networks. Furthermore, nodes may contain state machines and other operations, which make it possible to build modularised architectures.
 
         \subsubsection{Worlds}
-The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter which functions as the interface in between a node net and the environment. Within the world adapter data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. They represent the agent's sensory input and motoric output. Sophisticated interconnection of those enables interaction with the environment.
+The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter which functions as the interface in between a node net and the environment. Within the world adapter, data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. They represent the agent's sensory input and motoric output. Sophisticated interconnection of those enables interaction with the environment.
 
-The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the framework, the priorised application was building a framework for knowledge representation.
+The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds as well as exotic applications (eg. stock data). At the time of the original development of the MicroPsi, the priorised application was building a framework for knowledge representation.
 
             \paragraph{Objects}$\;$ \\
 Worlds contain objects. Objects may be anything that could be interesting for a simulation and that needs some kind of integrated logic. Light sources or collectable resources are a common example. Objects may contain a set of functions and states, but at least one function that determines how the object advances and reacts to changes while moving through a simulation cycle. A comprehensive world function calls every object function for each simulation step of the world.
 
             \paragraph{Agents}$\;$ \\
-Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agents body. The function that advances the object checks for input from the node net and outputs to it.
+Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object, that incarnates the agent, is best thought of as the agents body. The function, that advances the agent, checks for input from the node net and outputs to it.
         
     \section{Summary}
-This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subdivision of AI research and presented it's main ideas and goals, as well as regarding foundational philosophical questions.
-Then, the Psi theory by Dietrich Dörner has been described briefly. An overview of implementations of the Psi theory has been given. The latest framework dedicated to the Psi theory, MicroPsi 2, has been described and it's architecture outlined. Knowing about MicroPsi 2's modules is a necessary foundation for the additions to it described in chapter 4.
+This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subdivision of AI research and presented its main ideas and goals, as well as regarding foundational philosophical questions.
+Then, the Psi theory by Dietrich Dörner has been described briefly. An overview of implementations of the Psi theory has been given. The latest framework dedicated to the Psi theory, MicroPsi 2, has been described and it's architecture outlined. Knowing about MicroPsi 2's modules is a necessary foundation for the additions to it, that are described in chapter 4.
