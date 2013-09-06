@@ -1,10 +1,10 @@
 \chapter{Minecraft as a MicroPsi 2 World}
-The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft Clone by Michael Fogleman, have been chosen as a foundation. To make the new simulation environment monitorable, the latter has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
+The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as a foundation. To make the new simulation environment monitorable, the latter has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
 
 \section{Overview}
 The modular architecture of MicroPsi allows it to add new simulation environments (or worlds, as they are called in MicroPsi) fairly easily. To communicate with a MicroPsi node net, a world needs an interface, which is called \emph{world adapter}. The \emph{world adapter} has to define \emph{data sources} and \emph{targets}. It fills the sources with data from the world and writes the targets to the world. The node net does the opposite: it reads from the sources and writes into the targets. This enables a feedback loop in between the world and the node net. Furthermore, the \emph{world adapter} provides a step function, that advances the world and is called by the MicroPsi world runner frequently.
 
-Looking at the Minecraft side, communication with a Minecraft Server typically requires a constant flow of data packets going in and out. Most third party clients, including Bots, facilitate their own event loops. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
+Looking at the Minecraft side, communication with a Minecraft Server typically requires a constant flow of data packets going in and out. Most third party clients, including bots, facilitate their own event loops. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
 
 The contributions of this project are divided into the three modules \texttt{minecraftWorldadapter}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and constantly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D-Images that display the current state of the Minecraft environment, based on the data it receives from the \texttt{minecraftClient}. What ties it all together is the \texttt{minecraftWorldadapter}. It provides a step function that advances both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation} and is called itself by the world runner of the MicroPsi framework. Furthermore it defines and updates the \emph{data sources} and \emph{targets}.
 
@@ -15,22 +15,22 @@ The contributions of this project are divided into the three modules \texttt{min
   \label{uml_mc}
 \end{figure}
 
-The \texttt{minecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the webinterface, which does not effect the functionality of simulation. The \texttt{minecraftVisualisation} module itself depends on the data structures of the \texttt{minecraftClient} though. This means, exchanging the \texttt{minecraftClient} would require adjustments of the \texttt{minecraftVisualisation}, to still function as intended. The same holds for the \emph{data sources} and \emph{targets} in the \texttt{minecraftWorldadapter}.
+The \texttt{minecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the webinterface, which does not effect the functionality of the simulation. The \texttt{minecraftVisualisation} module itself depends on the data structures of the \texttt{minecraftClient}, though. This means, exchanging the \texttt{minecraftClient} would require adjustments of the \texttt{minecraftVisualisation}, to still function as intended. The same holds true for the \emph{data sources} and \emph{targets} in the \texttt{minecraftWorldadapter}.
 
     \section{Using \texttt{Spock} as the \texttt{minecraftClient}}
 
-As mentioned before, the purpose of the \texttt{minecraftClient} is to manage the communication with the Minecraft Server and to provide a representation of the agent's environment.
+As mentioned above, the purpose of the \texttt{minecraftClient} is to manage the communication with the Minecraft server and to provide a representation of the agent's environment.
 
-The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} (in the following the \texttt{minecraftClient}) communicates with the Minecraft server via the client-server-protocol and provides data that can be used as \emph{data sources} for the world adapter and translates the data from the \emph{data targets} to actions in the simulation environment. That way, to MicroPsi it looks like the \texttt{minecraftClient} is the simulation environment itself, where in fact it's the interface to the game world server.
+The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} (in the following the \texttt{minecraftClient}) communicates with the Minecraft server via the client server protocol and provides data that can be used as \emph{data sources} for the world adapter and translates the data from the \emph{data targets} to actions in the simulation environment. That way, to MicroPsi it looks like the \texttt{minecraftClient} is the simulation environment itself, where in fact it is the interface to the game world server.
 
-The original event loop of the bot framework had to be dissolved and rebuilt as an \texttt{advanceClient} function that is called as a part of the world adapter's step function. The event-loop and -handling of Spock had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough (about 10/s), so that Spock is able to send the necessary keep-alive-signals, to not get kicked from the server.
+The original event loop of the bot framework had to be dissolved and rebuilt as an \texttt{advanceClient} function that is called as a part of the world adapter's step function. The event-loop and -handling of the \texttt{minecraftClient} had to be slightly modified to work with MicroPsi. It should be noted, that the frequency, with which the framework steps the bot, has to be at least chosen high enough (about 10/s), so that Spock is able to regularly send the necessary keep-alive-signals, to not get kicked from the server.
 
 For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action---if necessary~(see figure~\ref{spock_loop}). Note, that the described event loop of the original \texttt{Spock} is not a loop anymore but each iteration is invoked as a part of the world adapters step function.
 
 
-\begin{wrapfigure}{r}{0.3\textwidth}
+\begin{wrapfigure}{r}{0.4\textwidth}
   \begin{center}
-    \includegraphics[width=0.3\textwidth]{graphics/spock_eventloop}
+    \includegraphics[width=0.4\textwidth]{graphics/spock_eventloop}
   \end{center}
   \caption{The \texttt{minecraftClient}'s event loop}
   \label{spock_loop}
@@ -39,19 +39,19 @@ For every iteration of the event loop, the \texttt{minecraftClient} reads incomi
 Eventually, useful data sources had to be picked and a system of data targets and their translation to actions had to be implemented. In most cases, performing actions means to let spock send a specific set of packets to the Minecraft server.
 
         \subsection{Overview of the minecraftClient}
-The \texttt{minecraftClient} is heavily based on \texttt{Spock}, that has been developed as an educational project. The scope of this project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: if one would like to connect the bot to an official Minecraft online server.  
+The \texttt{minecraftClient} is heavily based on \texttt{Spock}, that has been developed as an educational project. The scope of this project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: if one would like to connect the bot to an official Minecraft online server, the packets have to be encrypted using the Python cryptography library PyCrypto.
 
 The \texttt{minecraftClient} runs as a part of the world runner thread. It consists of several classes. 
 
-The main class, \texttt{minecraftClient}, holds references to instances of the classes BoundBuffer,  World and Packet. Furthermore basic data structures are stored as cflags, mcdata.
+The main class, \texttt{minecraftClient}, holds references to instances of the classes BoundBuffer,  World and Packet. Furthermore basic data structures are stored in the files cflags and mcdata.
 
-The class BoundBuffer is an implementation of a buffer that matches the particular needs of sending and receiving Minecraft packets.
+The class \texttt{BoundBuffer} is an implementation of a buffer that matches the particular needs of sending and receiving Minecraft packets.
 
-The class World holds the internal representation of the gameworld. It brings functions and data structures and classes itself to represent chunks and to obtain information about which block sits where. In its heart, it manages a dictionary, that stores chunks as binary data.
+The class \texttt{World} holds the internal representation of the gameworld. It brings functions, data structures and subclasses to represent chunks and to obtain information about which block sits where. In its heart, it manages a dictionary, that stores chunks as binary data.
 
-The class Packet represents a Minecraft packet and brings functions to encode and decode a packet (read from a BoundBuffer) to get to it's payload or to be able to send it to the Server.
+The class \texttt{Packet} represents a Minecraft packet and brings functions to encode and decode a it (being read from a BoundBuffer) to get to its payload or to be able to send it to the Server.
 
-The file packet\_handlers.py provides a class for each packet that the client is supposed to deal with by default. The following listing gives an example.
+The file \texttt{packet\_handlers.py} provides a class for each packet that the client is supposed to deal with by default. The following listing gives an example.
 
 
 		\begin{figure}[ht]
@@ -70,19 +70,19 @@ class handle33(BaseHandle):
 			\end{minipage}
 		\end{figure}
 
-The dictionary cflags provides the Socket codes.
-The file mcdata.py provides dictionaries for the datatypes, blocktype codes, packet names and structures of packets of the Minecraft protocol.
+The dictionary \texttt{cflags} provides the Socket codes.
+The file \texttt{mcdata.py} provides dictionaries for the datatypes, blocktype codes, packet names and structures of packets of the Minecraft protocol.
 
-In the file nbt.py several classes for dealing with the NBT file format exist.
+In the file \texttt{nbt.py} several classes for dealing with the NBT file format exist.
 
-The file timer.py contains the classes EventTimer, TickTimer and ThreadedTimer which provide Timing.
+The file \texttt{timer.py} contains the classes \texttt{EventTimer}, \texttt{TickTimer} and \texttt{ThreadedTimer} which provide measures for the timing of the Minecraft world.
 
-The client sets up a socket to the server, starts of with a handshake and then facilitates packet based communication with the server.
+The client sets up a socket to the server, starts of with a handshake to from then on facilitate packet based communication with the server.
 
         \subsection{Extensions to the \texttt{minecraftClient}}
 It was aimed for to extend the original client in a way, that it would fit in nicely as a simulation world for MicroPsi.
         
-A reference to the new class PsiDispatcher has been added to the \texttt{minecraftClient}. It's purpose is to check the World adapters data targets frequently and invoke appropriate actions, if necessary. The following figure gives a simplified view of the resulting architecture. The PsiDispatcher is called as a part of the \texttt{advanceClient} function. It checks each available data target and if necessary invokes an appropriate action (eg. sending a packet). Listing \ref{listing_dispatch} is an example for the data targets, that indicates that the agent is supposed to move one block towards the direction if the x-axis.
+A reference to the new class \texttt{PsiDispatcher} has been added to the \texttt{minecraftClient}. Its purpose is to check the \texttt{minecraftWorldadapter}'s data targets frequently and invoke appropriate actions, if necessary. The following figure provides a simplified example of the resulting architecture. The \texttt{PsiDispatcher} is called as a part of the \texttt{advanceClient} function. It checks each available data target and if necessary invokes an appropriate action (eg. sending a packet). Listing \ref{listing_dispatch} is an example for the data targets, that indicates that the agent is supposed to move one block towards the direction of the x-axis. %TODO show simplified example
 
 		\begin{figure}[ht]
 			\centering
@@ -98,7 +98,7 @@ if self.client.move_x > 0:
         'stance': self.client.position['y'] + 0.11
         }))
 					\end{pseudocode}
-				\caption{dispatching the events regarding to the move x data target}
+				\caption{Dispatching the events regarding to the move-x data target}
 				\label{listing_dispatch}
 			\end{minipage}
 		\end{figure}
@@ -113,7 +113,7 @@ The event loop has been replaced by the function \texttt{advanceClient} that is 
 \end{figure}
 
     \section{Module \texttt{minecraftVisualisation}}
-That being said, the other important part of this project is the visualisation component. It contains classes that provide an interface to the OpenGL context that is the visualisation. This sections gives an overview about what datasources the visualisation uses and how it could be replaced or extended. Inside the world adapter's step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface --- in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
+That being said, the other important part of this project is the visualisation component. It contains classes that provide an interface to the OpenGL context that is the visualisation. This sections gives an overview about what datasources the visualisation uses and how it could be replaced or extended. Inside the \texttt{minecraftWorldadapter}'s step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is, that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface---in a both effective and pleasurable manor. The second reason is, that the image data is supposed to be processed by the node net as a data source itself in the future.
 
 The module \texttt{minecraftVisualisation} consists of two classes. The class \texttt{Window} inherits from pyglet.window.Window and therefore initialises the OpenGL context. For every call of the advanceVisualisation function it updates the 3D model according to the world representation inside the minecraftClient and renders it. A .png snapshot of the frame buffer is generated and displayed in the web interface.
 
