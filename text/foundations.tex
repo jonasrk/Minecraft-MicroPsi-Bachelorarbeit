@@ -38,7 +38,7 @@ The structure of Minecraft worlds and the client-server-protocol are described i
   \begin{center}
     \includegraphics[width=0.15\textwidth]{graphics/block}
   \end{center}
-  \caption{A~"Grass"~Block~\cite{image_mob}}
+  \caption{A grass block (CC-BY-3.0 Mojang AB) \cite{image_mob}}
   \label{mc_block}
 \end{wrapfigure}
 
@@ -50,7 +50,7 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \begin{center}
     \includegraphics[width=0.16\textwidth]{graphics/chunk}
   \end{center}
-  \caption{A~Chunk~\cite{image_mob}}
+  \caption{A chunk (CC-BY-3.0 Mojang AB) \cite{image_mob}}
   \label{mc_chunk}
 \end{wrapfigure} 
 
@@ -61,7 +61,7 @@ Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting
   \begin{center}
     \includegraphics[width=0.06\textwidth]{graphics/player}
   \end{center}
-  \caption{"The~Player"~\cite{image_mob}}
+  \caption{The player (CC-BY-3.0 Mojang AB) \cite{image_mob}}
   \label{mc_player}
 \end{wrapfigure} 
 
@@ -76,7 +76,7 @@ The mode of a Minecraft world does not effect the functionality of this project.
 \begin{figure}[h]
   \centering
     \includegraphics[width=15cm]{graphics/minecraft_mechanics}
-  \caption{Minecraft Basic Mechanics  (CC-BY-3.0 Mojang AB)}
+  \caption{Screenshots of Minecraft's basic game mechanics}
   \label{mc_mechanics}
 \end{figure}
 
@@ -102,7 +102,7 @@ To give an example of one of the easier packets, the \emph{Client Position} pack
    On Ground & boolean & Derived from packet 0x0A \\ \hline
    
 \end{tabular}
-\caption{Structure of the packet ``Player Position (0x0B)''~\cite{protocol}}
+\caption{The structure of the packet ``Player Position (0x0B)''~\cite{protocol}}
 \label{mc_packet}
 \end{table}
 
@@ -175,7 +175,7 @@ structs = {
 			("ubyte", "max_players")),
 	...
 					\end{pseudocode}
-				\caption{data structures for the packet IDs and structures}
+				\caption{An excerpt of \texttt{Spock}'s data structures for packet-IDs and -structures}
 				\label{snippet_structures}
 			\end{minipage}
 		\end{figure}
@@ -194,7 +194,7 @@ def decode(self, bbuff):
 	for dtype, name in ta.structs[self.ident][self.direction]:
 		self.data[name] = utils.unpack(bbuff, dtype)
 					\end{pseudocode}
-				\caption{function for decoding packets}
+				\caption{\texttt{Spock}'s function for decoding packets}
 				\label{snippet_parse}
 			\end{minipage}
 		\end{figure}
@@ -209,7 +209,7 @@ It is comparably easy to understand and modify and has been used for the visuali
 \begin{figure}[h]
   \centering
     \includegraphics[width=10cm]{graphics/fogleman_mc_screen}
-  \caption{\texttt{Minecraft} by Michael Fogleman}
+  \caption{A screenshot of \texttt{Minecraft} by Michael Fogleman}
   \label{fogleman_mc_screen}
 \end{figure}
 
