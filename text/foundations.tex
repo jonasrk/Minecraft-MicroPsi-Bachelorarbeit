@@ -1,6 +1,6 @@
 \chapter{Minecraft}
 \label{chap:3}
-To understand how and why the video game Minecraft is expected to be an interesting simulation environment for artificial general intelligence, necessary background information, about what makes Minecraft different from many other games, has to be given first. To furthermore work with it, the essential components of the game's architecture have to be described. This chapter provides a roundup of Minecraft's history and a brief explanation of the basic game mechanics. They are followed by an overview of Minecraft uses that exceed the original game's purpose as well as an explanation, of why Minecraft is suitable as a simulation environment. Eventually, related software projects, that have been used for this thesis are introduced and described.
+To understand how and why the video game Minecraft~\cite{minecraft} is expected to be an interesting simulation environment for artificial general intelligence, necessary background information, about what makes Minecraft different from many other games, has to be given first. To furthermore work with it, the essential components of the game's architecture have to be described. This chapter provides a roundup of Minecraft's history and a brief explanation of the basic game mechanics. They are followed by an overview of Minecraft usages that exceed the original game's purpose as well as an explanation, of why Minecraft is suitable as a simulation environment. Eventually, related software projects, that have been used for this thesis are introduced and described.
 
     \section{Overview}
 The story of Minecraft has many interesting sides, but first and foremost it is a story of immense, unexpected success. To give an overview of it, this section delivers insights into its central ideas, as well as a general look upon the developer's practices. Moreover, the game's reception is considered, as the game has become unusually popular. The descriptions are based on Sean C. Duncan's article \emph{Minecraft, beyond construction and survival}~\cite{Duncan:2011:MBC:2207096.2207097}.
@@ -15,7 +15,7 @@ Another interesting aspect about Minecraft is the procedural semantics the game 
 Minecraft strives to be the opposite of a game with a strict game-flow. Instead, it enables the player's creativity and joy of creation.
 
         \subsection{Development Process}
-The development process of Minecraft is very different from those of most other well-known games. Instead of building the game over months or years to finally release a (more or less) finished version to the public, Minecraft is being designed iteratively. In fact, Persson released the first version only a week after he started working on the game. Ever since, new features have been added, and new versions of the game have been released frequently. Another defining aspect of Mojang's approach towards the development of Minecraft is the involvement of the game's players. Since the earliest stages, plans for the game's future have been discussed openly, and many times the players' voices have been heard. Persson himself locates his approach in the field of agile software development.
+The development process of Minecraft is very different from those of most other well-known games. Instead of building the game over months or years to finally release a (more or less) finished version to the public, Minecraft is being designed iteratively. In fact, Persson released the first version only a week after he started working on the game. Ever since, new features have been added, and new versions of the game have been released frequently. Another defining aspect of the game's developement studio Mojang's approach towards the development of Minecraft is the involvement of the game's players. Since the earliest stages, plans for the game's future have been discussed openly, and many times the players' voices have been heard. Persson himself locates his approach in the field of agile software development.~\cite{Duncan:2011:MBC:2207096.2207097}
 
         \subsection{Reception}
 The game has attracted great attention ever since its first release in 2009. Since copies of the game could be obtained commercially for the first time, its different versions sold more than 26 million times---with the PC version priced at 19.95\euro, for example. It should be noted that Minecraft's development studio Mojang is a so called \emph{indie game developer}, that is not associated with any classical game publisher, but distributes copies of their game exclusively via their own website.
@@ -27,13 +27,15 @@ Unlike any other game, Minecraft fosters the creativity of its players. Bringing
     \section{Game Mechanics}
 Now knowing about the game's background, in this section we will continue with descriptions of the basic concepts of the game, that regard to our AI interface. 
 
-Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped to a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, harder to reach resources and more complex to craft items  become available.~\cite{Duncan:2011:MBC:2207096.2207097}
+Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped to a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, resources harder to reach and items more complex to craft become available.~\cite{Duncan:2011:MBC:2207096.2207097}
 
 Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered client-server-protocol and therefore build artificial players that way.
 
 The structure of Minecraft worlds and the client-server-protocol are described in the following. The descriptions are based on the regarding articles of the \emph{Minecraft Wiki}~\cite{mcwiki}.
 
     \subsection{Minecraft Worlds}
+    
+%TODO Gibt es irgendwelche Optionen für dieses Paket, damit die Figure 3.1 linksbündig angezeigt wird?
 
 \begin{wrapfigure}{l}{0.3\textwidth}
   \begin{center}
@@ -56,7 +58,7 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
 \end{wrapfigure} 
 
 "The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed as a human.
-Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting to 14 minutes by default
+Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting to 14 minutes by default.
 
 \begin{wrapfigure}{l}{0.3\textwidth}
   \begin{center}
@@ -68,7 +70,7 @@ Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting
 
 The game itself has no predefined goals. Players can walk around, discover the created world (see figure \ref{mc_mechanics} 1) and collect resources by \emph{destroying} blocks, with the generated resources equaling the block type. They can combine several resources to \emph{craft} items. For example, a player can destroy the blocks that represent a tree~(see figure \ref{mc_mechanics} 2). The gained \emph{wood} resource could then be used to craft a wooden pickaxe~(see figure \ref{mc_mechanics} 3), which could then be used to dig into the ground more efficiently~(see figure \ref{mc_mechanics} 4) to then \emph{mine} more rare resources, like iron or gold.
 
-There exist different game modes. The original \emph{survival} mode adds monsters that attack the player at night. What solutions to survive the player comes up with (eg. building shelter or fighting the monsters) is left up to him or her.
+There exist different game modes. The original \emph{survival} mode adds monsters that attack the player at night. What solutions to survive the player comes up with (e.g. building shelter or fighting the monsters) is left up to him or her.
 
 In \emph{creative} mode, the player is not being attacked by monsters, has the ability to fly and is given instant access to unlimited resources.
 
@@ -114,7 +116,7 @@ Other than movement, packet structures are defined for every aspect of the game.
 This protocol is what a custom Minecraft client needs to speak.
 
     \section{Minecraft as a Gaming Platform}
-With more and more applications that move beyond the original gameplay of construction and survival, Minecraft seems to shift gradually towards being not only a game, but also a gaming platform, that many other people use to implement their own ideas. Inside Minecraft worlds, players have created games for educational purposes, for example. A group of students of the Miami University developed a game called Circuit Magic that is committed to teaching the players about logical circuits. The infamous Minecraft Teacher, who implements Minecraft in primary school classes, is another good example. Following in his footsteps, ``Massively Minecraft'' is a community of teachers who share their thoughts and experiences with doing the same. Just as well, games have been developed for the purpose of artistic expression. Chain World, the game that tried to simulate religion, is an exciting example. Not only do players implement their engagement inside Minecraft. The internet is full of Minecraft content, be it videos on Youtube, online tutorials or other community based knowledge resources, headquartered at the Minecraft Wiki (http://www.minecraftwiki.net/).~\cite{Duncan:2011:MBC:2207096.2207097}
+With more and more applications that move beyond the original gameplay of construction and survival, Minecraft seems to shift gradually towards being not only a game, but also a gaming platform, that many other people use to implement their own ideas. Inside Minecraft worlds, players have created games for educational purposes, for example. A group of students of the Miami University developed a game called Circuit Magic that is committed to teaching the players about logical circuits. The famous Minecraft Teacher, who implements Minecraft in primary school classes, is another good example. Following in his footsteps, ``Massively Minecraft'' is a community of teachers who share their thoughts and experiences with doing the same. Just as well, games have been developed for the purpose of artistic expression. Chain World, the game that tried to simulate religion, is an exciting example. Not only do players implement their engagement inside Minecraft. The internet is full of Minecraft content, be it videos on Youtube, online tutorials or other community based knowledge resources, headquartered at the Minecraft Wiki\footnote{\url{http://www.minecraftwiki.net/}}.~\cite{Duncan:2011:MBC:2207096.2207097}
 
 As user-generated content has been an essential part in the development of Minecraft, in a process that reminds one of a self-fulfilling prophecy, more and more people explore its possibilities to experiment with new applications. As of today, Persson and Mojang seem to favour and approve new uses of their creation.~\cite{Duncan:2011:MBC:2207096.2207097}
 
@@ -138,16 +140,19 @@ Minecraft's success inspired many other projects, including artificial players a
 
 
         \subsection{Minecraft Bots}
-There exist many projects that could be considered Minecraft \emph{bots}. One has to differentiate in between two types. On the one hand, there are those that mimic an entire client software and facilitate communication with the server on the default client software's behalf. On the other hand, there are bots which are modifications of the original client (or server) software and usually add non player characters---like animals and other non-human creatures---to the game. The code is usually injected through one of the popular \emph{modloaders} (eg. Minecraft Forge).
+There exist many projects that could be considered Minecraft \emph{bots}. One has to differentiate in between two types. On the one hand, there are those that mimic an entire client software and facilitate communication with the server on the default client software's behalf. On the other hand, there are bots which are modifications of the original client (or server) software and usually add non player characters---like animals and other non-human creatures---to the game. The code is usually injected through one of the popular \emph{modloaders} (e.g. Minecraft Forge).
 
-One example (and probably the most advanced one) for an entire bot framework that replaces the client, is \emph{Mineflayer}~\cite{github_mineflayer}. It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js. However, it has not been used for this project, because a Python implementation was aimed for.
+One example (and probably the most advanced one) for an entire bot framework that replaces the client, is \emph{Mineflayer}~\cite{github_mineflayer}. It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js. However, it has not been used for this project, because a Python implementation was aimed for, as it is explained in the next section.
 
 Opposed to Mineflayer, an example for game modification bots are the \emph{Cubebots}~\cite{mcforums_cubebot}---fan-made non-player characters that aim to help Minecraft players with mundane tasks.
 
     \subsubsection{\texttt{Spock} by Nick Gamberini}
-Developed by Nick Gamberini, \texttt{Spock} is an open-source bot framework (and as such also a Minecraft client) written in Python. It has been chosen to become an essential part of this project for two reasons: being written in Python it painlessly integrates in the existing MicroPsi code and the absence of dependencies (with one exception) leave the code understandable and easy to deploy.
+Developed by Nick Gamberini, \texttt{Spock}\footnote{\url{https://github.com/nickelpro/spock}} is an open-source bot framework (and as such also a Minecraft client) written in Python. It has been chosen to become an essential part of this project for two reasons: being written in Python it painlessly integrates in the existing MicroPsi code and the absence of dependencies (with one exception) leave the code understandable and easy to deploy.
     
     \subsubsection{Protocol Implementation in \texttt{Spock}}
+    
+%TODO zu kurz! Erklärung fehlt
+    
 The Minecraft protocol implementation in \texttt{Spock} is straightforward. The necessary data structures are stored separately and can be accessed globally (see figure~\ref{snippet_structures}).
 
 		
@@ -215,6 +220,8 @@ It is comparably easy to understand and modify and has been used for the visuali
 \end{figure}
 
     \section{Summary}
-An overview of Minecraft, its history and architecture, as well as other software in its periphery, have been presented in this chapter. Minecraft is a complex, yet easily accessible virtual world. It is in constant development and new features are added regularly. It has a massive fanbase and a huge community around all kinds of game modifications. The most important concepts of Minecraft for this thesis are blocks, chunks and also the client server protocol. They will all be used in the next chapter.
+An overview of Minecraft, its history and its basic concepts, as well as other software in its periphery, have been presented in this chapter. Minecraft is a complex, yet easily accessible virtual world. It is in constant development and new features are added regularly. It has a massive fanbase and a huge community around all kinds of game modifications. The most important concepts of Minecraft for this thesis are blocks, chunks and also the client server protocol. They will all be used in the next chapter.
 As a basis for the implementation of the Minecraft interface for MicroPsi, the bot framework \texttt{Spock} by Nick Gamberini has been chosen to extend MicroPsi.
 Furthermore, \texttt{Minecraft} by Michael Fogleman has been chosen to serve as a foundation for the visualisation component. Their implementations will be presented in detail in the next chapter.
+
+%TODO Warum hast du Minecraft ausgewählt? API öffentlich zugänglich, passende Erweiterungen vorhanden, eigenständig erweiterbar, Welt wird realitätsnah nachgebildet

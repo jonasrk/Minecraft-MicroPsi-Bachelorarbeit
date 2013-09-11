@@ -1,13 +1,15 @@
 
 %TODO Zuviele Kommas ;), im Englischen werden so gut wie keine Kommas verwendet!
 
+%TODO !!!! Sehr wichtig wäre die Überarbeitung der AIG Kapitels. Ich habe gar nicht verstanden, um was es in der Psi Theorie geht und deswegen natürlich auch nicht die Implementierung dazu. Das zieht sich dann auch durch in deine Implementierung und die Case study. Hier empfehle ich dir dringend eine ausführlichere Erklärung!
+
 \chapter{Artificial General Intelligence}
 \label{chap:2}
 To provide the necessary context for this thesis, this chapter will provide a brief introduction to the corresponding foundations on the AI side.
 
 %TODO !! was ist strong AI? Du kannst nicht davon ausgehen, dass der Leser das weiß
 
-First, we will introduce AIG as a subset of artificial intelligence. Based on this, the Psi theory, as a particular instance of strong AI theories, is described in detail. The description includes a brief history of its concrete implementations. Then, MicroPsi~2, the latest framework dedicated to the Psi theory, is described in detail 
+First, we will introduce AIG as a subset of artificial intelligence. Based on this, the Psi theory, as a particular instance of strong AI theories, is described in detail. The description includes a brief history of its concrete implementations. Then, MicroPsi~2, the latest framework dedicated to the Psi theory, is described in detail.
 
     \section{Strong AI}
     
@@ -60,7 +62,7 @@ His main ideas are that he sees the the mind as a graph-like structure of relati
 
 Other essential components of the theory are concepts of representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness.
 
-Nodes in these networks have gates that send activation and slots that receive it, which can have four different types, that represent different kinds of relationships. The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships. Joscha Bach adapted the theory to bring it in a contemporary from with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}.
+Nodes in these networks have gates that send activation and slots that receive it, which can have four different types, that represent different kinds of relationships. The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships. Joscha Bach adapted the theory to bring it in a contemporary form with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}.
 
 Even though building a conscious machine that thinks and acts as we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most significant leaps.
     
@@ -194,5 +196,7 @@ Worlds contain objects. Objects may be anything that could be interesting for a 
 Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agent's body. The function that advances the agent checks for input from the node net and outputs to it.
         
     \section{Summary}
-This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subdivision of AI research and presented its main ideas and goals, as well as regarding foundational philosophical questions.
+This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subSet of AI research and presented its main ideas and goals, as well as regarding foundational philosophical questions.
 Then, the Psi theory by Dietrich Dörner has been described briefly. An overview of implementations of the Psi theory has been given. The latest framework dedicated to the Psi theory, MicroPsi 2, has been described and it's architecture outlined. Knowing about MicroPsi 2's modules is a necessary foundation for the additions to it that are described in chapter 4.
+
+% !!! An diesem Punkt sollte komplett klar sein, was Psi ist und was von MicroPsi 2 zu erwarten ist. Für Psi reicht die Erklärung bei weitem nicht aus, für MicroPsi vermutlich schon, wenn du Psi Erklärung da ist und mit der Implementierung in Relation gesetzt ist!

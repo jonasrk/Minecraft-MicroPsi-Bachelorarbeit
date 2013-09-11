@@ -3,11 +3,20 @@
 The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as a foundation. To make the new simulation environment monitorable, the latter has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
 
 \section{Overview}
+
+%TODO !!! Herr Wirsing wird diesen Teil genau anschauen. Es braucht ein ordentliches UML Diagramm und eine gute Erklärung!
+
+%TODO !!!!! Zu deiner eigenen Arbeit vermisse ich echte UML Diagramme. Herr Wirsing wird dich sicher nach der Architektur fragen, deswegen bereite dich darauf vor. Außerdem passt dein Text im Moment nicht zu deinem “Architektur”-Diagramm. Kapitel 4.1 wird für Herrn Wirsing DAS Kapitel. Deswegen muss das wirklich gut sein, nicht zu implementierungsnah, sondern eher aus Sicht der Architektur. Der Zusammenhang zwischen MicroPSI und Minecraft muss klar werden, ebenso dein Beitrag und die generelle Idee der Implementierung.
+
 The modular architecture of MicroPsi allows it to add new simulation environments (or worlds, as they are called in MicroPsi) fairly easily. To communicate with a MicroPsi node net, a world needs an interface, which is called \emph{world adapter}. The \emph{world adapter} has to define \emph{data sources} and \emph{targets}. It fills the sources with data from the world and writes the targets to the world. The node net does the opposite: it reads from the sources and writes into the targets. This enables a feedback loop in between the world and the node net. Furthermore, the \emph{world adapter} provides a step function, that advances the world and is called by the MicroPsi world runner frequently.
 
 Looking at the Minecraft side, communication with a Minecraft Server typically requires a constant flow of data packets going in and out. Most third party clients, including bots, facilitate their own event loops. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
 
+%TODO So richtig verstehe ich nicht, wo MicroPsi reinspielt...
+
 The contributions of this project are divided into the three modules \texttt{minecraftWorld}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D-Images that display the current state of the Minecraft environment, based on the data it receives from the \texttt{minecraftClient}. What ties it all together is the \texttt{minecraftWorld}. It provides a step function that advances both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation} and is called itself by the world runner of the MicroPsi framework. Furthermore, it defines and updates the \emph{data sources} and \emph{targets}.
+
+%TODO Das ist kein UML
 
 \begin{figure}[h]
   \centering
@@ -28,6 +37,7 @@ The original event loop of the bot framework had to be dissolved and rebuilt as 
 
 For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action---if necessary~(see figure~\ref{spock_loop}). Note that the described event loop of the original \texttt{Spock} is not a loop anymore, but each iteration is invoked as a part of the world adapters step function.
 
+%TODO in UML? Wie wäre es später mit einem Sequenzdiagramm?
 
 \begin{wrapfigure}{r}{0.4\textwidth}
   \begin{center}
@@ -106,6 +116,8 @@ if self.client.move_x > 0:
 
 The event loop has been replaced by the function \texttt{advanceClient} that is called for every simulation step. For example, one iteration could mean receiving and storing new block data from the Minecraft Server, sending default responses to the received packets, checking the MicroPsi data targets for moving and if necessary send a "Player Position" packet to the Minecraft server.
 
+%TODO UML?????? das gefällt mir gar nicht!
+
 \begin{figure}[h]
   \centering
     \includegraphics[width=10cm]{graphics/spock_overview}
@@ -114,11 +126,18 @@ The event loop has been replaced by the function \texttt{advanceClient} that is 
 \end{figure}
 
     \section{Module \texttt{minecraftVisualisation}}
+
+%TODO Wo ist die zu sehen? (Minecraft world step function) 
+    
 That being said, the other important part of this project is the visualisation component. It contains classes that provide an interface to the OpenGL context that is the visualisation. This section gives an overview about what data sources the visualisation uses and how it could be replaced or extended. Inside the \texttt{minecraftWorld}'s step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. There are two main reasons for this. The first reason is that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface---in a both efficient and pleasurable manner. The second reason is that the image data is supposed to be processed by the node net as a data source itself in the future.
+
+%TODO verstehe ich nicht, warum from within MicroPsi?
 
 The visualisation component reads from the \texttt{minecraftClient}'s internal gameworld representation to generate the 3D model. This means that, from pure Minecraft world data, a 3D-visualisation has to be generated from within the MicroPsi Python code. It should contain a perspective that gives a good overview over the bots environment and forward it to the web interface. The visualisation is in it's core based on ``Minecraft'' by Michael Fogleman.
 
 Specifically, the representation of the chunk, the agent is located in, is fetched and for each solid cube in this chunk, a corresponding cube is rendered within the visualisation using Pyglet's OpenGL abstraction~(see figure~\ref{vis_screen}). Each block gets textures according to its type. The implemented format for the textures is compatible to the widely available Minecraft texture packs. That way, the visualisation's look can be changed completely within seconds. The resulting images are exported as JPEG files. Then, they are displayed in the web interface. A refresh rate of six or more images per second creates the impression of a video stream.
+
+%TODO Uml?
 
 The module \texttt{minecraftVisualisation} consists of two classes. The class \texttt{Window} inherits from \texttt{pyglet.window.Window} and therefore initialises the OpenGL context. For every call of the \texttt{advanceVisualisation} function, it updates the 3D model according to the world representation inside the minecraftClient and renders it. A PNG snapshot of the frame buffer is generated and displayed in the web interface.
 
@@ -138,6 +157,9 @@ The class \texttt{Model} is also used as a part of the \texttt{advanceVisualisat
 Similar to \texttt{Spock}, \texttt{Minecraft} by Michael Fogleman implements it's own event-loop and -handling. Again, the event loop had to be disassembled and rebuilt as a part of the world adapter's step function, which advances the visualisation with every step.
 
     \section{Module \texttt{minecraftWorld}}
+
+%TODO Wozu ist diese Klasse da? Ist das eine spezielle Implementierung?
+    
 The world adapter contains two classes. The class \texttt{MinecraftWorld} inherits from the MicroPsi class \texttt{world} and provides the assets for the web interface, an \texttt{init} function and the \texttt{step} function. The class \texttt{Braitencraft} holds of the actual world adapter. In it, the \emph{data sources} and \emph{targets} are defined as dictionaries and an update function advances the life of the client.
     
 \paragraph{Data Targets and sources}$\;$ \\
@@ -147,9 +169,18 @@ As a proof of concept, four data sources have been defined, that symbolise senso
 On the other hand, data targets have been defined, that represent actuators for moving forwards, backwards, left and right.
 
     \section{Case Study}
-To explain the usage of this implementation, an example is given in the following. An agent is placed in a Minecraft world. It shall contain the four previously mentioned sensors that point to the positive and negative x- and y-axes. Theses sensors detect if a diamond ore block has been placed in the current chunk, in the direction they are facing. The agent furthermore consists of four actuators that make the agent move towards each of the same four directions. Next, the sensors get connected to the corresponding actuators, which will lead to an agent being attracted towards a placed diamond block.
+    
+%TODO Das Ziel der Case Study hab ich leider auch sehr spät verstanden. Hier muss auch noch etwas Arbeit rein.
+
+%TODO beginne mit einer Szenario Beschreibung!
+
+%TODO connected? Wirklich verbunden?
+    
+To explain the usage of this implementation, an example is given in the following. An agent is placed in a Minecraft world. It shall contain the four previously mentioned sensors that detect if a block of diamond is around the agent and that point to the positive and negative x- and y-axes. Theses sensors detect if a diamond ore block has been placed in the current chunk, in the direction they are facing. The agent furthermore consists of four actuators that make the agent move towards each of the same four directions. Next, the sensors get connected to the corresponding actuators, which will lead to an agent being attracted towards a placed diamond block.
 
 To conclude the experiment, a chunk in a Minecraft world is set up that way, that it contains only a plane, without other obstacles, that the agent might move around on freely, as well as a diamond block that is placed at its center. 
+
+%TODO verstehe ich nicht
 
 Then, the agent is placed in one of the chunk`s corners. We furthermore define that the activation of the sensors equals the distance to the diamond block in the regarding direction. The data sources get filled through searching in the entire section, as figure~\ref{listing_sensors} displays.
 
@@ -175,13 +206,17 @@ for y in range(0, 16):
 	\end{minipage}
 \end{figure}
     
+%TODO ich habe node nets immer noch nicht verstanden. Das wäre hier sehr wichtig!
+
+%TODO Was ist hier die Aufgabe von MicroPsi? Warum braucht man es im Hintergrund überhaupt? Ist das hier nicht nur eine einfache Reaktion auf Semsorwerte?
+    
 In every step of the world, the client will check the data targets and therefore move towards the diamond. Once it gets to a distance towards the diamond, that is below a defined threshold, the sensors will stop sending activation, and the agent will stop moving towards it. Note that if the node net runner and the world runner run asynchronously, there might be a delay in the shift of behaviour of the agent. Hence, it is advised, to run them synchronously or at least with a timing close to each other.
 
 In the node net editor, we set up the corresponding node net, as it can be seen in figure~\ref{nodenet_setup}. Now, the world writes the activation from the sensors to the actuators in every iteration of the step function.
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/nodenet_setup}
+    \includegraphics[width=14cm]{graphics/nodenet_setup}
   \caption{The node net set up for this experiment}
   \label{nodenet_setup}
 \end{figure}
@@ -196,6 +231,9 @@ If we start a simulation like this, the nodes of the sensors that point to the d
 \end{figure}
 
         \subsection{Evaluation}
+        
+%TODO Für die Evaluation ist interssant, ob das Interface funktioniert, wie gut es funktioniert (Geschwindigkeiten etc.), ob es einfach zu bedienen ist....
+        
 Now, that a proof-of-concept experiment has been concluded, the implementation can be evaluated.
 The experiment obviously shows that an interface in between a Minecraft world and the MicroPsi framework has been implemented. In the experiment, the agent concludes the appropriate action, if a node net actuator node receives activation and stops doing so, when it stops receiving activation.
 
