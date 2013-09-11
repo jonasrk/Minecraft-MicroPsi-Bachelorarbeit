@@ -1,21 +1,41 @@
+
+%TODO Zuviele Kommas ;), im Englischen werden so gut wie keine Kommas verwendet!
+
 \chapter{Artificial General Intelligence}
+\label{chap:2}
 To provide the necessary context for this thesis, this chapter will provide a brief introduction to the corresponding foundations on the AI side.
 
-First, we will introduce AIG as a subdivision of artificial intelligence. Based on this, the Psi theory, as a particular instance of strong AI theories, is described in detail. The description includes a brief history of its concrete implementations. Then, MicroPsi~2, the latest framework dedicated to the Psi theory, is described in detail 
+%TODO !! was ist strong AI? Du kannst nicht davon ausgehen, dass der Leser das weiß
+
+First, we will introduce AIG as a subset of artificial intelligence. Based on this, the Psi theory, as a particular instance of strong AI theories, is described in detail. The description includes a brief history of its concrete implementations. Then, MicroPsi~2, the latest framework dedicated to the Psi theory, is described in detail 
 
     \section{Strong AI}
+    
+%TODO Den Satz versteh ich nicht    
+    
 It took many years for AI research to evolve from the early ideas of thinking machines over Deep Blue, the computer that could beat mankind's best chess players to Watson, the AI that beats the champions of Jeopardy, the game show, that is about asking the appropriate question to a given answer. There exist many applications for AI. Self-driving cars and online-shopping recommendation systems to name a few.
 
+%TODO Zitierung der Quelle der Definitionen?
 
-These examples have one thing in common. They are applications of technology that serves an immediate, or at least foreseeable purpose. For AI in scenarios of this kind, the term applied AI (or weak AI) has been coined. Strong AI, in contrast, is about researching the nature of intelligence itself. An actual (hypothetical) implementation of a strong AI would mean, one would have to build a machine, that is capable of acting like a human being---not just in a defined problem field, but in all of them. 
+These examples have one thing in common. They are applications of technology that serves an immediate, or at least foreseeable purpose. For AI in scenarios of this kind, the term \emph{applied AI} (or \emph{weak AI}) has been coined. \emph{Strong AI}, in contrast, is about researching the nature of intelligence itself. An actual (hypothetical) implementation of a strong AI would mean, one would have to build a machine, that is capable of acting like a human being---not just for a limited problem set, but in all of them. 
 
-Another term, that is being used more recently, is AIG, for Artificial General Intelligence. It delimits itself from what are called narrow AI applications, which chess computers and other expert systems would be an excellent example for. AIG sets out, to develop software that can solve and act appropriately in a wide variety of problem fields, without specialising on any particular problem whatsoever. A complete AIG system is supposed to control itself autonomously and to have it's own thoughts and feelings. This has been the original focus of the AI field, before many lost their enthusiasm about it, when it turned out being not as imminently as expected. Even though the advances in narrow AI contribute to it, AIG is more than just an assemblage of these. There is a huge number of different AIG projects being worked on, with most of them being in early stages.~\cite{goertzel2007artificial}
+%TODO feelings? really?
 
-Cognitive AI, in particular, can be thought of as architectures that implement findings and theories in the fields cognitive science and psychology, as well as the neurosciences, for the sake of proving, if the theories hold against what they promise. Many cognitive architectures share characteristics with or directly implement artificial neural node nets.
+Another term, that is being used more recently, is \emph{AIG}, for \emph{Artificial General Intelligence}. It it is in contrast to what are called \emph{narrow AI} applications, which chess computers and other expert systems would be an excellent example for. AIG sets out, to develop software that can solve and act appropriately in a wide variety of problem fields, without specialising on any particular problem whatsoever. A complete AIG system is supposed to control itself autonomously and to have it's own thoughts and feelings. This has been the original focus of the AI field, before many lost their enthusiasm about it, when it turned out being not as imminently as expected. Even though the advances in narrow AI contribute to it, AIG is more than just an assembly of these. There is a huge number of different AIG projects being worked on, with most of them being in early stages.~\cite{goertzel2007artificial}
 
-Looking upon the field of AI from a philosophical point of view, computers seem to deliver enormous potential for learning about how minds work. At the same time, new questions arise. If we would know, how cognition worked, and if we could build machines that simulate it, would these minds be real? And what would the ethical implications be? According to Russel's and Norvig's standard reference \emph{Artificial Intelligence: A Modern Approach}~\cite{russell2009artificial}, one can distinguish in between two fundamental assumptions. The assumption that computers are able to act \emph{as if} they were intelligent is called the weak AI hypothesis. Thinking that an intelligently acting machine ,in fact, \emph{is} performing cognition, is called strong AI hypothesis.
+%TODO Was ist der Unterschied zwischen strong AI und AIG?
+
+%TODO Versteh ich nicht
+
+Cognitive AI, in particular, can be thought of as architectures that implement findings and theories in the fields cognitive science and psychology, as well as the neurosciences, for the sake of proving, if the theories hold against what they promise. Many cognitive architectures share characteristics with or directly implement artificial neural networks.
+
+%TODO Sollte das nicht bei der Definition von weak und strong AI kommen? Warum erst jetzt? Wieso springst du immer zwischen den Bezeichnungen strong AI and AIG hin und her?
+
+Looking upon the field of AI from a philosophical point of view, computers seem to deliver enormous potential for learning about how minds work. At the same time, new questions arise. If we knew how cognition works and if we could build machines that simulate it, would these minds be real? And what would the ethical implications be? According to Russel's and Norvig's standard reference \emph{Artificial Intelligence: A Modern Approach}~\cite{russell2009artificial}, one can distinguish in between two fundamental assumptions. The assumption that computers are able to act \emph{as if} they were intelligent is called the weak AI hypothesis. Thinking that an intelligently acting machine ,in fact, \emph{is} performing cognition, is called strong AI hypothesis.
 
 Putting it differently, weak AI considers computers to be an instrument to research cognitive processes, whereas strong AI considers simulated cognitive processes as actually being cognition.
+
+%TODO Ab hier ist mir nicht ganz klar, warum du das alles schreibst. Ist schön zu lesen, aber ich erkenne den Beitrag zu deiner Arbeit nicht. Außerdem wirst du hier sehr emotional ;)
 
 Trying to figure out, if machines are able to achieve cognition, we often explain by enumerating things that computers can not to. They can not be kind, friendly or have a sense of humour. Neither can they tell right from wrong, fall in love or learn from experience. But what can they do? They are at least partly involved in almost every significant recent discovery in most sciences. They steer cars safer than we ever did. Where \emph{exactly} to draw the dividing line between intelligence and machinery?~\cite{russell2009artificial}
 
@@ -26,9 +46,17 @@ But, would not what we believe is possible and what is not, become obsolete, onc
 Eventually, this question, might not be as significant as it appears to be. Dijkstra tried to explain that whether something is able to think or not, is first and foremost a matter of language and the interpretation of the word \emph{think}, when he famously said: ``The question of whether machines can think... is about as relevant as the question of whether submarines can swim.''
 
     \section{Psi Theory}
-The Psi theory in its foundations was described by German psychologist Dietrich Dörner in his books ``Bauplan für eine Seele''~\cite{Doerner1998} and ``Die Mechanik des Seelenwagens''~\cite{dorner2002mechanik} from 1998 and 2002. Dörner's holistic approach goes beyond classic problem solving and develops a unified model for cognition that implements motivation and emotions. He is convinced that artificial intelligence does not have to focus on different aspects of cognition that have to be looked at separately but that a unified theory will ultimately lead to a deeper understanding of cognition itself.
 
-Its main ideas are that it thinks of the mind as a graph-like structure of relationships (e.g. node net) that strives to maintain a homeostatic balance. Every form of representation of the agent's cognition---may it be percepts, plans or abstractions of space and objects---are represented as directed, hierarchic spreading-activation networks. A Psi agent's behaviour is determined through its motivational system that keeps a dynamic balance in between a number of predefined physiologic, social and cognitive demands. In doing so, it establishes, pursues and abandons goals and behavioural tendencies.~\cite{Bach:2009:PSI:1611304}
+%TODO !!! Das ist deine Hauptgrundlage!!! Ich habe leider nicht verstanden,was die Grundgedanken sind. Du musst die Grundkonzepte der Theorie vorstellen und in Relation setzen. Was ist die Motivation für die Theorie, was erreicht man damit, wie erreicht man die Ziele? Abbildungen tragen sicherlich auch zum Verständnis bei!
+
+%TODO !! cite! Originalzitat sehr wichtig!
+
+The Psi theory in its foundations was first described by German psychologist Dietrich Dörner in his books ``Bauplan für eine Seele''~\cite{Doerner1998} and ``Die Mechanik des Seelenwagens''~\cite{dorner2002mechanik} from 1998 and 2002. Dörner's holistic approach goes beyond classic problem solving and develops a unified model for cognition that implements motivation and emotions. He is convinced that artificial intelligence does not have to focus on different aspects of cognition that have to be looked at separately but that a unified theory will ultimately lead to a deeper understanding of cognition itself.
+
+%TODO Was ist das? Verstehe ich nicht (Hierarchic spreading activation)
+%TODO Wie muss man sich das in dem Netzwerk vorstellen?
+
+His main ideas are that he sees the the mind as a graph-like structure of relationships (e.g. a network of nodes, in the following node net) that strives to maintain a homeostatic balance. Every form of representation of the agent's cognition---may it be percepts, plans or abstractions of space and objects---are represented as directed, hierarchic spreading-activation networks. A Psi agent's behaviour is determined through its motivational system that keeps a dynamic balance in between a number of predefined physiologic, social and cognitive demands. In doing so, it establishes, pursues and abandons goals and behavioural tendencies.~\cite{Bach:2009:PSI:1611304}
 
 Other essential components of the theory are concepts of representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness.
 
@@ -39,13 +67,17 @@ Even though building a conscious machine that thinks and acts as we do is still 
     \section{Agents and Environments}
 Before we continue to describe concrete implementations and simulations, we define agents and environments according to Russel and Norvig.~\cite{russell2009artificial} 
 
-An \emph{agent} is defined as anything that can perceive its environment through sensors and conduct actions inside the environment through actuators. The given example of a software agent that may receive network packets as sensory inputs and produces output by writing files and sending network packets fits in nicely within this thesis. However, agents can just as well be robots that have cameras as sensors and motors as actuators. Even humans can be thought of as agents that perceive their environment through their senses and act upon it through their muscles
+%TODO Ist das ein wörtliches Zitat? Ist besonders zu kennzeichnen!
+
+An \emph{agent} is defined as anything that can perceive its environment through sensors and conduct actions inside the environment through actuators. The examples given in \cite{russell2009artificial} include a software agent that may receive network packets as sensory inputs and produces output by writing files and sending network packets fits in nicely within this thesis. However, agents can just as well be robots that have cameras as sensors and motors as actuators. Even humans can be thought of as agents that perceive their environment through their senses and act upon it through their muscles.
 
 Russel and Norvig furthermore define the \emph{percept}, as the agent's input and the \emph{percept sequence} as the complete history of what the agent has perceived. Each decision an agent makes is based on the percept sequence.
 
-Additionally, they describe the \emph{agent function}, as the function that maps the percept sequence to an action. The \emph{agent program} is its concrete implementation.
+Additionally, they describe the \emph{agent function}, as the function that maps each percept sequence to an action. The \emph{agent program} is its concrete implementation.
 
 A \emph{rational agent} is an agent that acts appropriately to any given percept sequence. To answer the question about what is appropriate and what is not, they introduce \emph{performance measures} that evaluate the agent's actions. These measures have to be defined by the designer of an experiment. Summarising, the rational agent tries to maximise its performance measure at any given point of time.
+
+%TODO Ich frage mich, ob diese Definitionen alle nötig sind. Du solltest später dann darauf eingehen, wie deine konkrete Implementierung im Bezug auf diese Definitionen zu sehen ist.
 
 \emph{Environments} have a number of different properties. They can either be \emph{fully observable} or \emph{partially observable}. An environment is fully observable when the agent has access to the complete state of the environment---or at least to everything that is relevant, regarding to the performance measure. As opposed to this, it is partially observable, if the previously mentioned requirement is not given.
 
@@ -65,7 +97,11 @@ Psi has been implemented by different groups at different times. The first imple
   \label{psi_screen}
 \end{figure}
 
+%TODO Was ist das? Vorher nie erwähnt!
+
 Subsequently, there has been a simple 3D implementation of Dörner's island simulation called Psi3D.
+
+%TODO was bedeutet "interfacing the world"?
 
 The work on Dörner's team's implementations has not been continued, so Joscha Bach and his associates developed new implementations of Psi. From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included a graphical editor and a broad experimentation framework. MicroPsi provided a complex and sophisticated simulation component which contained simulated objects in three dimensional worlds---even though most experiments took place on a plane. As a pragmatic approach, different ground types of the simulation world have been stored in bitmap files similar to height-maps. The framework offered complex administrator interfaces and appealing DirectX rendered 3D-views of the scenery as well as a more general world view which interfaced the world by providing clickable objects. Predefined simulation environments included a classic Island and a Mars world (see figure~\ref{micropsi_3d_screen}). Objects in these worlds may be assembled recursively out of other objects and bring their own functionalities. As it has been the case in Dörner's implementation, a viewer for facial expressions has been included---this time as well as a three-dimensional simulation.~\cite{Bach:2009:PSI:1611304}
 
@@ -92,8 +128,15 @@ Even though there have been more complex simulation environments (e.g. 3D-worlds
 \end{figure}
 
         \subsection{Module Overview}
+    
+%TODO Was macht so ein node net? Sollte vorher klar werden!
+
+%TODO Wozu? Bitte nur das beschreiben, was du auch erklärst und brauchst (user & config manager)
+        
 MicroPsi is written in Python with a minimum of dependencies. Therefore, its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate in between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulation environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independently of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager}.~\cite{conf/agi/Bach12}
 \\          
+
+%TODO !! Das ist kein UML. An einem Lehrstuhl für Softwaretechnik sollte es das sein. Außerdem sind nicht alle Module erklärt, sowie die Assoziationen erwas unklar
           
 \begin{figure}[h]
   \centering
@@ -105,9 +148,9 @@ MicroPsi is written in Python with a minimum of dependencies. Therefore, its  mo
 The following description is heavily based on \cite{conf/agi/Bach12}, where the theoretical foundations can be found in detail.
 
         \subsection{Module \texttt{Server}}
-The \texttt{Server} renders the GUI and deploys the agent simulation as a web application. It acts as a web server for remote or local access. A client for this application may be any computer with a reasonable up-to-date web browser. Therefore, simulations can be launched from anywhere without requiring any installation. It rests upon the lightweight Python web framework \emph{Bottle}.
+The \texttt{Server} renders the GUI and deploys the agent simulation as a web application. It acts as a web server for remote or local access. A client for this application may be any computer with a reasonable up-to-date web browser. Therefore, simulations can be launched from anywhere without requiring any installation. It rests upon the lightweight Python web framework \emph{Bottle}~\cite{bottlepy}.
 
-The web interface is naturally based on HTML as well as Javascript. The communication in between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's \emph{Bootstrap} library are in use. The graphic renderings (see figure~\ref{micropsi2_nodenet}) utilise the JavaScript graphics library \emph{PaperJS}. 
+The web interface is based on HTML as well as Javascript. The communication in between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's \emph{Bootstrap} library are in use. The graphic renderings (see figure~\ref{micropsi2_nodenet}) utilise the JavaScript graphics library \emph{PaperJS}. 
 
 \begin{figure}[h]
   \centering
@@ -122,13 +165,20 @@ The \texttt{Server} communicates with its users through the server API. User ses
 In this setup, the \texttt{Server} starts the \texttt{Runtime}---even though it may also work independently of the \texttt{Server}. The \texttt{Runtime} component communicates with the \texttt{Server} through the MicroPsi API. It manages node nets and worlds.
 
         \subsubsection{Node Nets}
-A MicroPsi node net is defined as a set of states, a starting state, a network function, that defines how to advance to the next state, and a set of node types. Data sources and data targets serve nodes as input and output towards a world, where a data source is filled with data from the world and data targets are linked to agent actions in the world.
+
+%TODO Wozu knotentypen? wozu benutzt man node nets? Leider verstehe ich das gar nicht
+        
+A MicroPsi node net is defined as a set of states, a starting state, a network function, that defines how to advance to the next state, and a set of node types. Data sources and data targets serve as the input for nodes and output towards a world, where a data source is filled with data from the world and data targets are linked to agent actions in the world.
 
 According to the Psi theory, nodes may have different types and parameters. They contain gates and slots that send and receive an activation. In most cases, the activation is forwarded from a slot to a gate without further modulation.
 
 Nevertheless, nodes may include functions that enable the creation of new nodes and links as well as procedures for learning and planning. They may be implemented as Python code.
 
-According to the concepts of the Psi theory, MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an "abstraction of the information processing provided by brains"~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
+According to the concepts of the Psi theory, MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an ``abstraction of the information processing provided by brain''~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
+
+%TODO cite * 2
+
+%TODO Was willst du damit sagen? Zu kurz!
 
 As node nets share the relevant characteristics with neural networks, they may enable neural learning paradigms. To store information they can form semantic networks. Furthermore, nodes may contain state machines and other operations, which make it possible to build modularised architectures.
 
@@ -141,7 +191,7 @@ The kind of data the world adapter interfaces, is not specified any further, whi
 Worlds contain objects. Objects may be anything that could be interesting for a simulation, and that needs some kind of integrated logic. Light sources or collectable resources are a common example. Objects may contain a set of functions and states, but at least one function that determines how the object advances and reacts to changes while moving through a simulation cycle. A comprehensive world function calls every object function for each simulation step of the world.
 
             \paragraph{Agents}$\;$ \\
-Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agents body. The function that advances the agent checks for input from the node net and outputs to it.
+Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agent's body. The function that advances the agent checks for input from the node net and outputs to it.
         
     \section{Summary}
 This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subdivision of AI research and presented its main ideas and goals, as well as regarding foundational philosophical questions.
