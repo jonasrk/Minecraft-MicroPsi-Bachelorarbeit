@@ -1,6 +1,6 @@
 \chapter{Minecraft as a MicroPsi 2 World}
 \label{chap:4}
-The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as a foundation. To make the new simulation environment monitorable, the latter has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
+The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as foundations that have been implemented into the MicroPsi framework to facilitate communication with Minecraft servers. To make the new simulation environment monitorable, \texttt{Minecraft} by Michael Fogleman has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
 
 \section{Overview}
 
@@ -15,6 +15,8 @@ Looking at the Minecraft side, communication with a Minecraft Server typically r
 %TODO So richtig verstehe ich nicht, wo MicroPsi reinspielt...
 
 The contributions of this project are divided into the three modules \texttt{minecraftWorld}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D-Images that display the current state of the Minecraft environment, based on the data it receives from the \texttt{minecraftClient}. What ties it all together is the \texttt{minecraftWorld}. It provides a step function that advances both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation} and is called itself by the world runner of the MicroPsi framework. Furthermore, it defines and updates the \emph{data sources} and \emph{targets}.
+
+%TODO world und world adapter aufsplitten. Also: who has data sources and targets
 
 %TODO Das ist kein UML
 
