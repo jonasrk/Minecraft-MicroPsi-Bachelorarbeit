@@ -49,13 +49,15 @@ Eventually, this question, might not be as significant as it appears to be. Dijk
 
     \section{Psi Theory}
     
-Dörner's ``Bauplan für eine Seele''~\cite{Doerner1998} (``blueprint for a mind'') belongs in the interdisciplinary field Cognitive Science, as with his theory he tries to research psychological foundations with the methods of Computer Science. The theory is an attempt to explain the mind as a machine. It has a notable focus on the emotional system and addresses what is called symbolic and sub-symbolic reasoning.  The mind is looked at as a fuzzy and self-extending causal network structure.
+%TODO !! cite! Originalzitat sehr wichtig!
 
-The theory tries to model the human mind as an agent, that is controlled by a structure of relationships and dependencies, that strives to maintain homeostatic balance. This structure can be visualised as an artificial neural network, which we will call \emph{node net} in the following. The basic elements a node net consists of are called \emph{quads}. Quads themselves consist of one central neuron and four outer neurons that are called \emph{sub}, \emph{sur}, \emph{ret} and \emph{por}~(see figure~\ref{quad}). The outer neurons can be connected with the central neurons of other quads and thereby form networks. The four different kinds of outer neurons represent different kinds of relations. \emph{sub} stands for a ``has part'' relationship, \emph{sur} is the inverse to sub an represents an ``is part'' relationship, \emph{ret} stands for the ordering relationship of succession and \emph{por} represents predecession.
+This section gives an overview of the basic ideas of the Psi theory. The descriptions are based on \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304} by Joscha Bach.
 
-Furthermore each neuron has an activation value, that it receives from and forwards to other neurons. Links in between neurons can be modified to dynamically modulate the forwarded activation value.
+The theory in its foundations was first described by German psychologist Dietrich Dörner in his books ``Bauplan für eine Seele''~\cite{Doerner1998} and ``Die Mechanik des Seelenwagens''~\cite{dorner2002mechanik} from 1998 and 2002. Dörner's holistic approach goes beyond classic problem solving and develops a unified model for cognition that implements motivation and emotions. He is convinced that artificial intelligence does not have to focus on different aspects of cognition that have to be looked at separately but that a unified theory will ultimately lead to a deeper understanding of cognition itself.
+    
+Dörner's ``Bauplan für eine Seele''~\cite{Doerner1998} (``blueprint for a mind'') belongs in the interdisciplinary field Cognitive Science, as with his theory he tries to research psychological foundations with the methods of Computer Science. The theory is an attempt to explain the mind as a machine. It has a notable focus on the emotional system and addresses symbolic and sub-symbolic reasoning.  The mind is looked at as a fuzzy and self-extending causal network structure.
 
-There are specific kinds of neurons that are called \emph{sensors} and \emph{actuators}. They represent the in- and output to the outside world. Sensors receive activation if they are triggered by the environment and activated actuators lead to an action in the environment.
+The theory tries to model the human mind as an agent, that is controlled by a structure of relationships and dependencies, that strives to maintain homeostatic balance. Every form of representation of the agent's cognition---may it be percepts, plans or abstractions of space and objects---are represented as directed, hierarchic spreading-activation networks. This structure can be visualised as an artificial neural network, which we will call \emph{node net} in the following. Nodes in these networks have gates that may send activation and slots that may receive it. The basic elements a node net consists of are called \emph{quads}. Quads themselves consist of one central neuron and four outer neurons that are called \emph{sub}, \emph{sur}, \emph{ret} and \emph{por}~(see figure~\ref{quad}). The outer neurons can be connected with the central neurons of other quads and thereby form networks. The four different kinds of outer neurons represent different kinds of relations. \emph{sub} stands for a ``has part'' relationship, \emph{sur} is the inverse to sub an represents an ``is part'' relationship, \emph{ret} stands for the ordering relationship of succession and \emph{por} represents predecession.
 
 \begin{figure}[h]
   \centering
@@ -63,6 +65,10 @@ There are specific kinds of neurons that are called \emph{sensors} and \emph{act
   \caption{Quads like this are the basic representational unit of the Psi theory (taken from \cite{Bach:2009:PSI:1611304})}
   \label{quad}
 \end{figure}
+
+Furthermore each neuron has an activation value, that it receives from and forwards to other neurons. Links in between neurons can be modified to dynamically modulate the forwarded activation value. The modulation of the flow of activation is interpreted as emotions.
+
+There are specific kinds of neurons that are called \emph{sensors} and \emph{actuators}. They represent the in- and output to the outside world. Sensors receive activation if they are triggered by the environment and activated actuators lead to an action in the environment.
 
 The motivation of Psi agents comes from a set of predefined drives. They are divided into physiological (e.g. physical integrity), social (e.g. affiliation) and cognitive drives (e.g. reduction of uncertainty). These drives may signal a specific demand. If the value of a demand changes, pleasure or displeasure signals are sent to the agent. By reinforcement learning agents learn what behaviour leads to the fulfilment of demands. 
 
@@ -81,32 +87,23 @@ Through the combination of partonomies and order relations, all basic types of r
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/partonomy}
+    \includegraphics[width=9cm]{graphics/partonomy}
   \caption{The partonomic representation of a Cartoon face (taken from \cite{Bach:2009:PSI:1611304})}
   \label{partonomy}
 \end{figure}
 
 Psi agents' basic approach to problem solving works by going through a set of subsequent stages. The agent first tries to approach a problem with behavioural routines. If these do not solve the problem, the agent tries to construct a plan, by trying to find a chain of causal relationships that ultimately lead to a state, that solves the problem. If no plan is found, the agent starts to explore its environment to gather more knowledge.
 
+The goal of implementing the theory to computer software is to find potential inconsistencies and moreover to find out if Psi agents show similar behaviour to that of humans. If they do, the Psi theory could possibly serve as an explanation about how human minds work. For this purpose, a number of experiments---similar to video games---have been concluded, in which both Psi agents and human players had to perform specific tasks. Later on, their behaviours have been compared and searched fir similarities and differences.
  
 %TODO !!! Das ist deine Hauptgrundlage!!! Ich habe leider nicht verstanden,was die Grundgedanken sind. Du musst die Grundkonzepte der Theorie vorstellen und in Relation setzen. Was ist die Motivation für die Theorie, was erreicht man damit, wie erreicht man die Ziele? Abbildungen tragen sicherlich auch zum Verständnis bei!
 
-%TODO !! cite! Originalzitat sehr wichtig!
-
-The Psi theory in its foundations was first described by German psychologist Dietrich Dörner in his books ``Bauplan für eine Seele''~\cite{Doerner1998} and ``Die Mechanik des Seelenwagens''~\cite{dorner2002mechanik} from 1998 and 2002. Dörner's holistic approach goes beyond classic problem solving and develops a unified model for cognition that implements motivation and emotions. He is convinced that artificial intelligence does not have to focus on different aspects of cognition that have to be looked at separately but that a unified theory will ultimately lead to a deeper understanding of cognition itself.
-
-%TODO Was ist das? Verstehe ich nicht (Hierarchic spreading activation)
-%TODO Wie muss man sich das in dem Netzwerk vorstellen?
-
-His main ideas are that he sees the the mind as a graph-like structure of relationships (e.g. a network of nodes, in the following node net) that strives to maintain a homeostatic balance. Every form of representation of the agent's cognition---may it be percepts, plans or abstractions of space and objects---are represented as directed, hierarchic spreading-activation networks. A Psi agent's behaviour is determined through its motivational system that keeps a dynamic balance in between a number of predefined physiologic, social and cognitive demands. In doing so, it establishes, pursues and abandons goals and behavioural tendencies.~\cite{Bach:2009:PSI:1611304}
-
-Other essential components of the theory are concepts of representation, memory, perception, drives, cognitive modulation and emotion, motivation, learning and problem solving as well as language and consciousness.
-
-Nodes in these networks have gates that send activation and slots that receive it, which can have four different types, that represent different kinds of relationships. The basic element of Dörner's theory is the quad. It consists of a \emph{gen} gate as well as the four slots \emph{por}, \emph{ret}, \emph{sub} and \emph{sur} that express order and hierarchy relationships. Joscha Bach adapted the theory to bring it in a contemporary form with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}.
-
-Even though building a conscious machine that thinks and acts as we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most significant leaps.
+Joscha Bach adapted the theory to bring it in a contemporary form with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}. Even though building a conscious machine that thinks and acts as we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most significant leaps.
     
     \section{Agents and Environments}
+
+%also define symbolic and subsymbolic    
+
 Before we continue to describe concrete implementations and simulations, we define agents and environments according to Russel and Norvig.~\cite{russell2009artificial} 
 
 %TODO Ist das ein wörtliches Zitat? Ist besonders zu kennzeichnen!
