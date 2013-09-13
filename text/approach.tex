@@ -1,6 +1,6 @@
 \chapter{Minecraft as a MicroPsi 2 World}
 \label{chap:4}
-The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as foundations that have been implemented into the MicroPsi framework to facilitate communication with Minecraft servers. To make the new simulation environment monitorable, \texttt{Minecraft} by Michael Fogleman has been used to implement a visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
+The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as foundations that have been implemented into the MicroPsi framework. \texttt{Spock} facilitates communication with Minecraft servers. To make the new simulation environment monitorable, \texttt{Minecraft} by Fogleman has been used to implement a 3D visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
 
 \section{Overview}
 
@@ -8,21 +8,19 @@ The objective of this project is to build and test an interface in between Micro
 
 %TODO !!!!! Zu deiner eigenen Arbeit vermisse ich echte UML Diagramme. Herr Wirsing wird dich sicher nach der Architektur fragen, deswegen bereite dich darauf vor. Außerdem passt dein Text im Moment nicht zu deinem “Architektur”-Diagramm. Kapitel 4.1 wird für Herrn Wirsing DAS Kapitel. Deswegen muss das wirklich gut sein, nicht zu implementierungsnah, sondern eher aus Sicht der Architektur. Der Zusammenhang zwischen MicroPSI und Minecraft muss klar werden, ebenso dein Beitrag und die generelle Idee der Implementierung.
 
-The modular architecture of MicroPsi allows it to add new simulation environments (or worlds, as they are called in MicroPsi) fairly easily. To communicate with a MicroPsi node net, a world needs an interface, which is called \emph{world adapter}. The \emph{world adapter} has to define \emph{data sources} and \emph{targets}. It fills the sources with data from the world and writes the targets to the world. The node net does the opposite: it reads from the sources and writes into the targets. This enables a feedback loop in between the world and the node net. Furthermore, the \emph{world adapter} provides a step function, that advances the world and is called by the MicroPsi world runner frequently.
-
-Looking at the Minecraft side, communication with a Minecraft Server typically requires a constant flow of data packets going in and out. Most third party clients, including bots, facilitate their own event loops. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
+The modular architecture of MicroPsi allows it to add new simulation environments (or worlds, as they are called in MicroPsi) fairly easily. To communicate with a MicroPsi node net, a world needs an interface, which is called \emph{world adapter}, as it is described in section~\ref{sec:2:MicroPsi}. Looking at the Minecraft side, communication with a Minecraft Server typically requires a constant flow of data packets going in and out, as it is described in section~\ref{sec:3:relatedprojects}. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
 
 %TODO So richtig verstehe ich nicht, wo MicroPsi reinspielt...
 
 The contributions of this project are divided into the three modules \texttt{minecraftWorld}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D-Images that display the current state of the Minecraft environment, based on the data it receives from the \texttt{minecraftClient}. What ties it all together is the \texttt{minecraftWorld}. It provides a step function that advances both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation} and is called itself by the world runner of the MicroPsi framework. Furthermore, it defines and updates the \emph{data sources} and \emph{targets}.
 
-%TODO world und world adapter aufsplitten. Also: who has data sources and targets
+%TODO world und world adapter aufsplitten. Also: who has data sources and targets. check multiplizitäten
 
 %TODO Das ist kein UML
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=10cm]{graphics/UML_MicroPsi_mit_spock_v12}
+    \includegraphics[width=10cm]{graphics/UML_MicroPsi_mit_spock_v13}
   \caption{The new architecture of MicroPsi with the Minecraft interface}
   \label{uml_mc}
 \end{figure}
@@ -39,15 +37,12 @@ The original event loop of the bot framework had to be dissolved and rebuilt as 
 
 For every iteration of the event loop, the \texttt{minecraftClient} reads incoming data from the socket, dispatches the read packages appropriately and eventually checks the MicroPsi \emph{data targets} to perform an action---if necessary~(see figure~\ref{spock_loop}). Note that the described event loop of the original \texttt{Spock} is not a loop anymore, but each iteration is invoked as a part of the world adapters step function.
 
-%TODO in UML? Wie wäre es später mit einem Sequenzdiagramm?
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \begin{center}
-    \includegraphics[width=0.4\textwidth]{graphics/spock_eventloop}
-  \end{center}
-  \caption{The \texttt{minecraftClient}'s event loop}
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=12cm]{graphics/sequencediagram}
+  \caption{A simplified sequence diagram of the flow of data in between the web browser, MicroPsi and a Minecraft server}
   \label{spock_loop}
-\end{wrapfigure}
+\end{figure}
 
 Eventually, useful data sources had to be picked and a system of data targets and their translation to actions had to be implemented. In most cases, performing actions means to let Spock send a particular set of packets to the Minecraft server.
 

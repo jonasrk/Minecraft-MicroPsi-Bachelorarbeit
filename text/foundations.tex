@@ -136,6 +136,7 @@ The semantics of the gameworld share characteristics with the real world. Moving
 Using Minecraft as a simulation environment will give Psi agents possibilities to show off, what kind of sophisticated behaviour they are capable of.
 
     \section{Related Projects}
+    \label{sec:3:relatedprojects}
 Minecraft's success inspired many other projects, including artificial players and a number of Minecraft-like games in a wide variety of programming languages and environments.
 
 
@@ -145,6 +146,8 @@ There exist many projects that could be considered Minecraft \emph{bots}. One ha
 One example (and probably the most advanced one) for an entire bot framework that replaces the client, is \emph{Mineflayer}~\cite{github_mineflayer}. It has a high-level abstraction of the environment (eg. entity knowledge and tracking) and is written in JavaScript using node.js. However, it has not been used for this project, because a Python implementation was aimed for, as it is explained in the next section.
 
 Opposed to Mineflayer, an example for game modification bots are the \emph{Cubebots}~\cite{mcforums_cubebot}---fan-made non-player characters that aim to help Minecraft players with mundane tasks.
+
+Most third party clients, including bots, facilitate their own event loops. 
 
     \subsubsection{\texttt{Spock} by Nick Gamberini}
 Developed by Nick Gamberini, \texttt{Spock}\footnote{\url{https://github.com/nickelpro/spock}} is an open-source bot framework (and as such also a Minecraft client) written in Python. It has been chosen to become an essential part of this project for two reasons: being written in Python it painlessly integrates in the existing MicroPsi code and the absence of dependencies (with one exception) leave the code understandable and easy to deploy.

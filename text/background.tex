@@ -155,6 +155,7 @@ The work on Dörner's team's implementations has not been continued, so Joscha B
 Simulated environments proved especially to serve well for the research of collaborative behaviour of multiple agents, for mapping and exploration, image processing as well as for memory and planning. Additionally, some scenarios, that are almost impossible to implement in the physical world (such as evolving agent populations) could easily be simulated. On the other hand, downsides of simulated worlds include being limited by computing power and the programmer's specifications.~\cite{Bach:2009:PSI:1611304}
 
     \section{MicroPsi 2}
+    \label{sec:2:MicroPsi}
 To ensure broad understandability and to maintain platform independence, MicroPsi has been built ground up again in 2011 and 2012 using more lightweight Python code. What is remarkable about the new implementation called MicroPsi 2 (in the following MicroPsi), is that the simulation is deployed as a web application and the graphical interface is completely rendered inside a web browser, using state-of-the-art internet- and web application technologies.~\cite{conf/agi/Bach12}
         
 Even though there have been more complex simulation environments (e.g. 3D-worlds) for previous implementations of Psi architectures, the relatively new version of MicroPsi so far has only two fairly simple ones: a 2D-Island and a map of the public transportation system of Berlin~(see figure~\ref{mp2_berlin}). Instead of building a new 3D-world, with this project we set out for something more experimental. More on this follows in chapters three and four.
@@ -167,6 +168,8 @@ Even though there have been more complex simulation environments (e.g. 3D-worlds
 \end{figure}
 
         \subsection{Module Overview}
+        
+%TODO world adapter inherit from world object in UML
     
 %TODO Was macht so ein node net? Sollte vorher klar werden!
 
@@ -223,6 +226,9 @@ As node nets share the relevant characteristics with neural networks, they may e
 
         \subsubsection{Worlds}
 The simulations worlds are the environments in which we can study our agent's behaviour. Worlds need to provide a world adapter which functions as the interface in between a node net and the environment. Within the world adapter, data sources and data targets have to be defined carefully, to get a functional and meaningful experiment going. They represent the agent's sensory input and the motoric output. Sophisticated interconnection of those enables interaction with the environment.
+
+The \emph{world adapter} has to define \emph{data sources} and \emph{targets}. It fills the sources with data from the world and writes the targets to the world. The node net does the opposite: it reads from the sources and writes into the targets. This enables a feedback loop in between the world and the node net. Furthermore, the \emph{world adapter} provides a step function, that advances the world and is called by the MicroPsi world runner frequently.
+
 
 The kind of data the world adapter interfaces, is not specified any further, which gives developers the opportunity to experiment with classic simulation worlds, as well as exotic applications (eg. stock data). At the time of the original development of the MicroPsi, the prioritised application was building a framework for knowledge representation.
 
