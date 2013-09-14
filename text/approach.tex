@@ -12,26 +12,26 @@ The modular architecture of MicroPsi allows it to add new simulation environment
 
 %TODO So richtig verstehe ich nicht, wo MicroPsi reinspielt...
 
-The contributions of this project are divided into the four modules \texttt{minecraftWorld}, \texttt{minecraftWorldadapter}, \texttt{minecraftClient} and \texttt{minecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{minecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{minecraftVisualisation} module generates 3D images that display the current state of the Minecraft environment, based on the world data it receives from the \texttt{minecraftClient}. The \texttt{minecraftWorldadapter} represents the interface towards the MicroPsi node net. It defines the \emph{data sources} that are filled with data from the \texttt{minecraftClient} and accessed by the node net. It furthermore defines the \emph{data targets} that, conversely, are filled by the node net and translated to actions that the \texttt{minecraftClient} executes. What ties it all together is the \texttt{minecraftWorld} module. It provides a step function that is called frequently by the world runner and which advances the \texttt{minecraftClient}, the \texttt{minecraftWorldadapter} and the \texttt{minecraftVisualisation}.
+The contributions of this project are divided into the four modules \texttt{MinecraftWorld}, \texttt{MinecraftWorldadapter}, \texttt{MinecraftClient} and \texttt{MinecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{MinecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{MinecraftVisualisation} module generates 3D images that display the current state of the Minecraft environment, based on the world data it receives from the \texttt{MinecraftClient}. The \texttt{MinecraftWorldadapter} represents the interface towards the MicroPsi node net. It defines the \emph{data sources} that are filled with data from the \texttt{MinecraftClient} and accessed by the node net. It furthermore defines the \emph{data targets} that, conversely, are filled by the node net and translated to actions that the \texttt{MinecraftClient} executes. What ties it all together is the \texttt{MinecraftWorld} module. It provides a step function that is called frequently by the world runner and that advances the \texttt{MinecraftClient}, the \texttt{MinecraftWorldadapter} and the \texttt{MinecraftVisualisation}.
 
 %TODO Das ist kein UML
 
 \begin{figure}[h]
   \centering
     \includegraphics[width=11cm]{graphics/UML_MicroPsi_mit_spock_v14}
-  \caption{The new architecture of MicroPsi with the Minecraft interface}
+  \caption{The architecture of MicroPsi with the new Minecraft interface}
   \label{uml_mc}
 \end{figure}
 
-The \texttt{minecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the web interface, which does not effect the functionality of the simulation. The \texttt{minecraftVisualisation} module itself depends on the data structures of the \texttt{minecraftClient}, though. This means, exchanging the \texttt{minecraftClient} would require adjustments of the \texttt{minecraftVisualisation}, to still function as intended. The same holds true for the \emph{data sources} and \emph{targets} in the \texttt{minecraftWorldadapter}.
+The \texttt{MinecraftVisualisation} module can be exchanged or cut off completely very easily, as no other modules depend on it. Instead of the visualisation, a placeholder image can be displayed in the web interface, which does not effect the functionality of the simulation. The \texttt{MinecraftVisualisation} module itself depends on the data structures of the \texttt{MinecraftClient}, though. This means, exchanging the \texttt{MinecraftClient} would require adjustments of the \texttt{MinecraftVisualisation}, to still function as intended. The same holds true for the \emph{data sources} and \emph{targets} in the \texttt{MinecraftWorldadapter}.
 
-    \section{Using \texttt{Spock} as the \texttt{minecraftClient}}
+    \section{Using \texttt{Spock} as the \texttt{MinecraftClient}}
 
-As mentioned above, the purpose of the \texttt{minecraftClient} is to manage the communication with the Minecraft server and to provide a representation of the agent's environment. The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} (in the following the \texttt{minecraftClient}) communicates with the Minecraft server via the client server protocol and provides data that can be used as \emph{data sources} for the world adapter and translates the data from the \emph{data targets} to actions in the simulation environment. That way, to MicroPsi it looks like the \texttt{minecraftClient} is the simulation environment itself, where, in fact, it is the interface to the game world server.
+As mentioned above, the purpose of the \texttt{MinecraftClient} is to manage the communication with the Minecraft server and to provide a representation of the agent's environment. The calculation of the simulation environment, does not take place in MicroPsi itself, but on a regular Minecraft Server. Instead, \texttt{Spock} is integrated into MicroPsi and represents the simulation world towards it. \texttt{Spock} (in the following the \texttt{MinecraftClient}) communicates with the Minecraft server via the \emph{client server protocol} and provides data that can be used as \emph{data sources} for the world adapter and translates the data from the \emph{data targets} to actions in the simulation environment. That way, to MicroPsi it looks like the \texttt{MinecraftClient} is the simulation environment itself, where, in fact, it is the interface to the game world server.
 
 %%TODO event loop handling frequency bs
 
-The original event loop of the bot framework had to be dissolved and rebuilt as an \texttt{advanceClient} function that is called as a part of the \texttt{minecraftWorld}'s step function. For every invocation of the \texttt{advanceClient()} function the \texttt{minecraftClient} sends its packet queue to the server through a TCP socket, receives incoming packets from the server, dispatches the received packages appropriately and, if necessary, prepares the necessary actions that it is instructed to by the \texttt{minecraftWorldadapter}'s \emph{data targets}~(see figure~\ref{spock_loop}). Note that the above mentioned event loop of the original \texttt{Spock} is not a loop anymore, but each iteration is invoked as a part of the \texttt{minecraftWorld}'s step function.
+The original event loop of the bot framework had to be dissolved and rebuilt as an \texttt{advanceClient} function that is called as a part of the \texttt{MinecraftWorld}'s step function. For every invocation of the \texttt{advanceClient()} function the \texttt{MinecraftClient} sends its packet queue to the server through a TCP socket, receives incoming packets from the server, dispatches the received packages appropriately and, if necessary, prepares the necessary actions that it is instructed to by the \texttt{MinecraftWorldadapter}'s \emph{data targets}~(see figure~\ref{spock_loop}).
 
 \begin{figure}[h]
   \centering
@@ -40,18 +40,18 @@ The original event loop of the bot framework had to be dissolved and rebuilt as 
   \label{spock_loop}
 \end{figure}
 
-Subsequently, a system for translating \emph{data targets} to actions had to be implemented. In most cases, performing actions means to let the \texttt{minecraftClient} send a particular set of packets to the Minecraft server. For this purpose, the class \texttt{PsiDispatcher} has been added to the \texttt{minecraftClient}, which is described in section~\ref{extensions_client}.
+Subsequently, a system for translating \emph{data targets} to actions had to be implemented. In most cases, performing actions means to let the \texttt{MinecraftClient} send a particular set of packets to the Minecraft server. For this purpose, the class \texttt{PsiDispatcher} has been added to the \texttt{MinecraftClient}, which is described in section~\ref{extensions_client}.
 
 
-        \subsection{Overview of the \texttt{minecraftClient}}
-The \texttt{minecraftClient} holds all the functionalities that enable it to act as an artificial Minecraft player. It implements the packet based \emph{client server protocol} and uses it to communicate with Minecraft servers. It provides data structures that reflect the concepts of a Minecraft world and uses these to store the data it receives from the server. It is heavily based on \texttt{Spock}, which has been developed as an educational project. The scope of the original project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: if one would like to connect the bot to an official Minecraft online server, the packets have to be encrypted using the Python cryptography library PyCrypto. It consists of several classes, which are outlined in figure~\ref{spock_UML}.
+        \subsection{Overview of the \texttt{MinecraftClient}}
+The \texttt{MinecraftClient} holds all the functionalities that enable it to act as an artificial Minecraft player. It implements the packet based \emph{client server protocol} and uses it to communicate with Minecraft servers. It provides data structures that reflect the concepts of a Minecraft world and uses these to store the data it receives from the server. It is heavily based on \texttt{Spock}, which has been developed as an educational project. The scope of the original project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: if one would like to connect the bot to an official Minecraft online server, the packets have to be encrypted using the Python cryptography library PyCrypto. It consists of several classes, which are outlined in figure~\ref{spock_UML}.
 
 %TODO remove world from variables. in uml
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=12cm]{graphics/spockUML_v13_2}
-  \caption{The most important classes of the \texttt{minecraftClient}}
+    \includegraphics[width=12cm]{graphics/spockUML_v14}
+  \caption{The most important classes of the \texttt{MinecraftClient}}
   \label{spock_UML}
 \end{figure}
 
@@ -60,9 +60,9 @@ The main class \texttt{Client} provides the internal logic that is necessary to 
 
 The class \texttt{Client} furthermore holds a reference to an instance of the class \texttt{World} and uses instances of the classes \texttt{Packet} to implement the \emph{client server protocol}. The class \texttt{World} holds the internal representation of the gameworld. It brings functions, data structures and classes that represent single sections of the environment (such as \texttt{ChunkColumn}s) to represent the gameworld and to obtain information about what block sits where. \texttt{ChunkColumn}s manage dictionaries that store chunk data as integers.
 
-\texttt{Packet}s represent packets of the \emph{client server protocol} as they are described in section~\ref{client_server_protocol}. They bring functions to encode and decode packet data to get to the payload or to be able to send packets to the Server.
+Instances of the class \texttt{Packet} represent single packets of the \emph{client server protocol} as they are described in section~\ref{client_server_protocol}. They bring functions to encode and decode packet data to get to the payload or to be able to send packets to the Server.
 
-The collection of classes \texttt{PacketHandlers} registers one handler class for each packet type that the client is supposed to deal with by default. For every iteration of the \texttt{advanceClient()} function incoming packets are dispatched to these handlers. The following listing gives an example.
+The collection of classes \texttt{PacketHandlers} registers one handler class for each packet type that the client is supposed to deal with by default. For every iteration of the \texttt{advanceClient()} function incoming packets are dispatched to these handlers. Figure~\ref{packet_handling} gives an example.
 
 
 		\begin{figure}[ht]
@@ -81,9 +81,9 @@ class handle33(BaseHandle):
 			\end{minipage}
 		\end{figure}
 
-        \subsection{Extensions to the \texttt{minecraftClient}}
+        \subsection{Extensions to the \texttt{MinecraftClient}}
         \label{extensions_client}
-To function as a simulation world for MicroPsi, the \texttt{minecraftClient} has to translate activation of the \emph{data targets} in the \texttt{minecraftWorldadapter} to actions. Therefore, a reference to the new class \texttt{PsiDispatcher} has been added to the \texttt{minecraftClient} that holds a single function \texttt{dispatchPsiCommands}. Its purpose is to check the values of the \emph{data targets} frequently and invoke appropriate actions, if necessary. The \texttt{PsiDispatcher} is called as a part of the \texttt{advanceClient} function. It checks each available data target, and if necessary invokes an appropriate action (eg. sending a packet). The following listing gives an example for a data targets that has been specified to indicate that the agent is supposed to move one block towards the direction of the x-axis.
+To function as a simulation world for MicroPsi, the \texttt{MinecraftClient} has to translate activation of the \emph{data targets} in the \texttt{MinecraftWorldadapter} to actions. Therefore, a reference to the new class \texttt{PsiDispatcher} has been added to the \texttt{MinecraftClient} that holds a single function \texttt{dispatchPsiCommands()}. Its purpose is to check the values of the \emph{data targets} frequently and invoke appropriate actions, if necessary. The \texttt{PsiDispatcher} is called as a part of the \texttt{advanceClient} function. It checks each available data target, and if necessary invokes an appropriate action (eg. sending a packet). The following listing gives an example for a data target that has been specified to indicate that the agent is supposed to move one block towards the direction of the x-axis.
 
 		\begin{figure}[ht]
 			\centering
@@ -92,42 +92,36 @@ To function as a simulation world for MicroPsi, the \texttt{minecraftClient} has
 #check for MicroPsi input
 if self.client.move_x > 0:
     self.client.push(Packet(ident = 0x0B, data = {
-        'x': (self.client.position['x'] - 1) / 1,
-        'y': self.client.position['y'] / 1,
-        'z': self.client.position['z'] / 1,
+        'x': self.client.position['x'] + 1,
+        'y': self.client.position['y'],
+        'z': self.client.position['z']
         'on_ground': False,
         'stance': self.client.position['y'] + 0.11
         }))
 					\end{pseudocode}
-				\caption{Checking for activation of the move-x data target and invoking the according action.}
+				\caption{The \texttt{PsiDispatcher} checking for activation of the move-x data target and invoking the according action by sending a ``Player Position'' packet}
 				\label{listing_dispatch}
 			\end{minipage}
 		\end{figure}
 
-    \section{Module \texttt{minecraftVisualisation}}
+    \section{Module \texttt{MinecraftVisualisation}}
 
 %TODO Wo ist die zu sehen? (Minecraft world step function) 
     
-Another important part of this project is the visualisation component. There are two main reasons for this. The first reason is that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface---in a both efficient and pleasurable manner. The second reason is that the image data is supposed to be processed by the node net as a data source itself in the future.
+Another important part of this project is the visualisation component. There are two main reasons for its realisation. The first reason is that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface---in a both efficient and pleasurable manner. The second reason is that the image data is supposed to be processed by the node net as a data source itself in the future. The module contains classes and functions that provide an interface to the OpenGL context that generates the 3D graphics. This section gives an overview about what data the visualisation uses to generate images of the environment. 
 
-The module contains classes and functions that provide an interface to the OpenGL context that generates the 3D graphics. This section gives an overview about what data the visualisation uses to generate images of the environment. 
-
-Inside the \texttt{minecraftWorld}'s step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. 
-
-%TODO verstehe ich nicht, warum from within MicroPsi?
-
-The visualisation component reads from the \texttt{minecraftClient}'s internal gameworld representation to generate the 3D model. This means that, from pure Minecraft world data, a 3D visualisation is generated. It is supposed to display a bird's-eye view of the current chunk to give a good overview of the bots environment and forward it to the web interface.
+Inside the \texttt{MinecraftWorld}'s step function, the visualisation module is called to generate a 3D model of the Minecraft world and the agent within. The visualisation component reads from the \texttt{MinecraftClient}'s internal gameworld representation to generate the 3D model. This means that, from pure Minecraft world data, a 3D visualisation is generated. It is supposed to display a bird's-eye view of the current chunk to give a good overview of the bots environment and forward it to the web interface.
 
 \begin{figure}[h]
   \centering
     \includegraphics[width=10cm]{graphics/visualisation_screen}
-  \caption{An image generated by the \texttt{minecraftVisualisation} component}
+  \caption{An image generated by the \texttt{MinecraftVisualisation} component}
   \label{vis_screen}
 \end{figure}
 
-Specifically, the representation of the chunk, the agent is located in, is fetched and for each solid cube in this chunk, a corresponding cube is rendered within the visualisation using Pyglet's OpenGL abstraction~(see figure~\ref{vis_screen}). Each block has textures matching its type. The implemented format for the textures is compatible to the widely available Minecraft texture packs. That way, the visualisation's look can be changed completely within seconds. The resulting images are exported as PNG files which are stored in the memory and are delivered to the web interface which is requesting them frequently. A refresh rate of six or more images per second creates the impression of a video stream.
+Specifically, the representation of the chunk, the agent is located in, is fetched and for each solid cube in this chunk, a corresponding cube is rendered within the visualisation using Pyglet's OpenGL abstraction~(see figure~\ref{vis_screen}). Each block has textures matching its type. The implemented format for the textures is compatible to the widely available Minecraft texture packs. That way, the visualisation's look can be changed completely within seconds. The resulting images are exported as PNG files which are stored in memory and which are delivered to the web interface which is requesting them frequently. A refresh rate of six or more images per second creates the impression of a video stream.
 
-The resulting architecture can be described as an implementation of a model-view-controller pattern. Therefore the \texttt{minecraftWorld} acts as the controller that iterates through the life cycles of both the \texttt{minecraftClient} and the \texttt{minecraftVisualisation}. Everytime the visualisation component updates the 3D view, it fetches the required world data from the \texttt{minecraftClient}.
+The resulting architecture can be described as an implementation of a \emph{model-view-controller} pattern (see figure~\ref{mvc}). Therefore the \texttt{MinecraftWorld} acts as the \emph{controller} that iterates through the life cycles of both the \texttt{MinecraftClient} and the \texttt{MinecraftVisualisation}. Everytime the visualisation component that resembles the \emph{view} updates the 3D view, it fetches the required world data from the \texttt{MinecraftClient}, which acts as the \emph{model}.
 
 \begin{figure}[h]
   \centering
@@ -136,11 +130,11 @@ The resulting architecture can be described as an implementation of a model-view
   \label{mvc}
 \end{figure}
 
-    \section{Module \texttt{minecraftWorldadapter}}
+    \section{Module \texttt{MinecraftWorldadapter}}
 
 %TODO Wozu ist diese Klasse da? Ist das eine spezielle Implementierung?
 
-The \texttt{minecraftWorldadapter} provides the necessary interfaces that let a \texttt{minecraftClient} be controlled by a MicroPsi node net. Most importantly, these are the before mentioned \emph{data sources} and \emph{targets}. It inherits mutator methods for these from its parent class \texttt{WorldAdapter}, which itself inherits from \texttt{WorldObject}, which is the superclass of all agents and world objects, as it is described in section~\ref{microPsiWorld}. As it holds a reference to the according \texttt{minecraftClient}, it has full access to the environment data and other properties of the client. This allows it, to easily implement simple ``sensors'' by developing algorithms that utilise and search the provided data structures. A brief example is given in section~\ref{case_study}.
+The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a \texttt{MinecraftClient} be controlled by a MicroPsi node net. Most importantly, these are the before mentioned \emph{data sources} and \emph{targets}. It inherits mutator methods for these from its parent class \texttt{WorldAdapter}, which itself inherits from \texttt{WorldObject}, which is the superclass of all agents and world objects, as they are described in section~\ref{microPsiWorld}. As it holds a reference to the according \texttt{MinecraftClient}, it has full access to the environment data and other properties of the client. This allows it, to easily implement simple ``sensors'' by developing algorithms that utilise and search the provided data structures. An example is given in the following section.
     
     \section{Case Study}
     \label{case_study}
@@ -150,8 +144,23 @@ The \texttt{minecraftWorldadapter} provides the necessary interfaces that let a 
 %TODO beginne mit einer Szenario Beschreibung!
 
 %TODO connected? Wirklich verbunden?
+
+To explain, how the new interface can be utilised, we will construct a simple case study in the following. As it only consists of a primitive wiring between sensors and actuators, the scientific value in terms of AI research is low. However, it shall suffice as a proof of concept that the interface is functional and may serve as a foundation for future experiments.
+
+The scenario consists of a single agent that is placed in a Minecraft world. It is standing on a flat surface that is made out of \emph{grass} blocks. Next, a block of \emph{diamond} is placed in the same chunk. The agent is supposed to automatically approach this block, depending on where it has been placed. Therefore it is controlled by a MicroPsi node net. That is been set up as described in the following.
+
+\paragraph{Node net}$\;$ \\
+
+In the node net editor, we set up the corresponding node net, as it can be seen in figure~\ref{nodenet_setup}. Now, the world writes the activation from the sensors to the actuators in every iteration of the step function.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=14cm]{graphics/nodenet_setup}
+  \caption{The node net set up for this experiment}
+  \label{nodenet_setup}
+\end{figure}
     
-To explain the usage of this implementation, an example is given in the following. An agent is placed in a Minecraft world. It shall contain the four previously mentioned sensors that detect if a block of diamond is around the agent and that point to the positive and negative x- and y-axes. Theses sensors detect if a diamond ore block has been placed in the current chunk, in the direction they are facing. The agent furthermore consists of four actuators that make the agent move towards each of the same four directions. Next, the sensors get connected to the corresponding actuators, which will lead to an agent being attracted towards a placed diamond block.
+An agent is placed in a Minecraft world. It shall contain the four previously mentioned sensors that detect if a block of diamond is around the agent and that point to the positive and negative x- and y-axes. Theses sensors detect if a diamond ore block has been placed in the current chunk, in the direction they are facing. The agent furthermore consists of four actuators that make the agent move towards each of the same four directions. Next, the sensors get connected to the corresponding actuators, which will lead to an agent being attracted towards a placed diamond block.
 
 \paragraph{Data Targets and sources}$\;$ \\
 
@@ -193,14 +202,7 @@ for y in range(0, 16):
     
 In every step of the world, the client will check the data targets and therefore move towards the diamond. Once it gets to a distance towards the diamond, that is below a defined threshold, the sensors will stop sending activation, and the agent will stop moving towards it. Note that if the node net runner and the world runner run asynchronously, there might be a delay in the shift of behaviour of the agent. Hence, it is advised, to run them synchronously or at least with a timing close to each other.
 
-In the node net editor, we set up the corresponding node net, as it can be seen in figure~\ref{nodenet_setup}. Now, the world writes the activation from the sensors to the actuators in every iteration of the step function.
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=14cm]{graphics/nodenet_setup}
-  \caption{The node net set up for this experiment}
-  \label{nodenet_setup}
-\end{figure}
 
 If we start a simulation like this, the nodes of the sensors that point to the diamond light up green and their activation is forwarded to the actuators. The bot moves towards the diamond until it is closer than the sensor's threshold, to not detect the diamond anymore---for this experiment the threshold has been set to two blocks. Then it stops moving~(see figure \ref{diamond_screens}).
 
@@ -225,6 +227,6 @@ An issue that remains concerning is that the reaction time in between changes in
 This issue could be resolved, by making the bot faster---for example, by sending the visualisation image data directly to the web interface, without writing it to the hard disk first.
 
     \section{Summary}
-This chapter presented the implementation of the Minecraft interface for MicroPsi, which consists of the modules \texttt{minecraftClient}, \texttt{minecraftVisualisation} and \texttt{minecraftWorld}. The \texttt{minecraftClient} facilitates the communication with the Minecraft server; the \texttt{minecraftVisualisation} delivers OpenGL rendered image data of the environment and the \texttt{minecraftWorld} serves as the actual world adapter in between the \texttt{minecraftClient} and MicroPsi.
+This chapter presented the implementation of the Minecraft interface for MicroPsi, which consists of the modules \texttt{MinecraftClient}, \texttt{MinecraftVisualisation} and \texttt{MinecraftWorld}. The \texttt{MinecraftClient} facilitates the communication with the Minecraft server; the \texttt{MinecraftVisualisation} delivers OpenGL rendered image data of the environment and the \texttt{MinecraftWorld} serves as the actual world adapter in between the \texttt{MinecraftClient} and MicroPsi.
 Next, a case study has been performed and evaluated. A MicroPsi client had to move towards a block of a particular type. It showed that the interface is functional and ready for more sophisticated experiments.
 With the implementation of the interface and the following proof-of-concept case study the scope of this thesis has been completed. The last chapter contains a summary and an outlook towards future applications.
