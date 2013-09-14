@@ -178,9 +178,6 @@ Even though there have been more complex simulation environments (e.g. 3D-worlds
 %TODO Wozu? Bitte nur das beschreiben, was du auch erklärst und brauchst (user & config manager)
         
 MicroPsi is written in Python with a minimum of dependencies. Therefore, its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate in between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulation environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independently of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager}.~\cite{conf/agi/Bach12}
-\\          
-
-%TODO !! Das ist kein UML. An einem Lehrstuhl für Softwaretechnik sollte es das sein. Außerdem sind nicht alle Module erklärt, sowie die Assoziationen erwas unklar
           
 \begin{figure}[h]
   \centering
