@@ -147,11 +147,11 @@ The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a 
 
 To explain, how the new interface can be utilised, we will construct a simple case study in the following. As it only consists of a primitive wiring between sensors and actuators, the scientific value in terms of AI research is low. However, it shall suffice as a proof of concept that the interface is functional and may serve as a foundation for future experiments.
 
-The scenario consists of a single agent that is placed in a Minecraft world. It is standing on a flat surface that is made out of \emph{grass} blocks. Next, a block of \emph{diamond} is placed in the same chunk. The agent is supposed to automatically approach this block, depending on where it has been placed. Therefore it is controlled by a MicroPsi node net. That is been set up as described in the following.
+The scenario consists of a single agent that is placed in a Minecraft world. It is standing on a flat surface that is made out of \emph{grass} blocks. Next, a block of \emph{diamond} is placed in the same chunk. The agent is supposed to automatically approach this block, depending on where it has been placed. Therefore it is controlled by a MicroPsi node net, which is set up as described in the following.
 
 \paragraph{Node net}$\;$ \\
 
-In the node net editor, we set up the corresponding node net, as it can be seen in figure~\ref{nodenet_setup}. Now, the world writes the activation from the sensors to the actuators in every iteration of the step function.
+After the web interface has been started, a new node net is generated. Inside it, four sensor nodes have been created. These nodes shall represent sensors, that can detect if a block of diamond can be located in a particular cardinal direction. Furthermore, four actuator nodes are created, that represent the agent's movements towards each of the same four directions. Next, four links are generated that in the following forward activation from the sensor nodes to the actuator nodes that make the agent move towards the according direction. Finally, an activator node is added, that defines the general ability of links in this particular node net to forward activity. The resulting node net is displayed in figure~\ref{nodenet_setup}.
 
 \begin{figure}[h]
   \centering
@@ -159,42 +159,47 @@ In the node net editor, we set up the corresponding node net, as it can be seen 
   \caption{The node net set up for this experiment}
   \label{nodenet_setup}
 \end{figure}
-    
-An agent is placed in a Minecraft world. It shall contain the four previously mentioned sensors that detect if a block of diamond is around the agent and that point to the positive and negative x- and y-axes. Theses sensors detect if a diamond ore block has been placed in the current chunk, in the direction they are facing. The agent furthermore consists of four actuators that make the agent move towards each of the same four directions. Next, the sensors get connected to the corresponding actuators, which will lead to an agent being attracted towards a placed diamond block.
 
-\paragraph{Data Targets and sources}$\;$ \\
+\paragraph{Data sources}$\;$ \\
 
-As a proof of concept, four data sources have been defined, that symbolise sensors, that detect, if a block of diamond in the current section is either before, behind, left or right of the client. The data targets are filled, as it is outlined in figure~\ref{listing_sensors}.
+To implement the before mentioned sensors, suitable algorithms have to be integrated into the \texttt{MinecraftWorldadapter}. For sensors that detect \emph{diamond} blocks in the current chunk, this could be realised by fetching the chunk data and examine it for the according block type. If a block is found, its coordinates are modified it respect of the agent's own position to express the sensor values. A possible implementation is outlined in figure~\ref{listing_sensors}. 
 
-On the other hand, data targets have been defined, that represent actuators for moving forwards, backwards, left and right.
-
-To conclude the experiment, a chunk in a Minecraft world is set up that way, that it contains only a plane, without other obstacles, that the agent might move around on freely, as well as a diamond block that is placed at its center. 
-
-%TODO verstehe ich nicht
-
-Then, the agent is placed in one of the chunk`s corners. We furthermore define that the activation of the sensors equals the distance to the diamond block in the regarding direction. The data sources get filled through searching in the entire section, as figure~\ref{listing_sensors} displays.
 
 		\begin{figure}[ht]
 			\centering
-			\begin{minipage}{18cm}
+			\begin{minipage}{17cm}
 				\begin{pseudocode}
 for y in range(0, 16):
  current_section = current_column.chunks[int((bot_block[1] + y -  2) / 16)]
  if current_section != None:
   for x in range(0, 16):
    for z in range(0, 16):
-    current_block = current_section['block_data'].get(x, _block[1] + y - 10 / 2) \% 16), z)
+    current_block = current_section['block_data'].get(x, _block[1] + y - 10 / 2)), z)
     if current_block == 56: #Diamond Ore
      diamond_coords = (x + x_chunk * 16,y,z + z_chunk * 16)
-      self.datasources['diamond_offset_x'] = bot_block[0] - coords[0] - 2
-      self.datasources['diamond_offset_z'] = bot_block[2] - coords[2] - 2
-      self.datasources['diamond_offset_x_'] = ((bot_block[0] - coords[0]) * -1) - 2
-      self.datasources['diamond_offset_z_'] = ((bot_block[2] - coords[2]) * -1) - 2
+     self.datasources['diamond_offset_x'] = bot_block[0] - coords[0] - 2
+     self.datasources['diamond_offset_z'] = bot_block[2] - coords[2] - 2
+     self.datasources['diamond_offset_x_'] = (bot_block[0] - coords[0]) * -1 - 2
+     self.datasources['diamond_offset_z_'] = (bot_block[2] - coords[2]) * -1 - 2
 			\end{pseudocode}
 		\caption{Searching the current section for a diamond block and, if it is found, filling the concerning data sources with the distance towards it.}
 		\label{listing_sensors}
 	\end{minipage}
 \end{figure}
+
+Next, in the node net editor the four sensor node are edited in such way, that they are associated with the new \emph{data sources}. For every iteration, the node net now will update the sensor values with the values calculated for the \emph{data sources} of the \texttt{MinecraftWorldadapter}.
+
+\paragraph{Data targets}$\;$ \\
+
+Subsequently, data targets have to be defined, that represent the actuators for moving forwards, backwards, left and right. Moreover, suitable methods have to be integrated into the \texttt{PsiDispatcher}. The example from section~\ref{extensions_client} illustrates just this. Equally, in the node net editor the actuator nodes have to be associated with the new \emph{data targets}.
+
+\paragraph{Execution}$\;$ \\
+
+To conclude the experiment, a chunk in a Minecraft world is set up that way, that it contains only a plane, without other obstacles, that the agent might move around on freely, as well as a diamond block that is placed at its center. 
+
+%TODO verstehe ich nicht
+
+Then, the agent is placed in one of the chunk`s corners. We furthermore define that the activation of the sensors equals the distance to the diamond block in the regarding direction. The data sources get filled through searching in the entire section, as figure~\ref{listing_sensors} displays.
     
 %TODO ich habe node nets immer noch nicht verstanden. Das wäre hier sehr wichtig!
 
