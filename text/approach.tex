@@ -4,19 +4,13 @@ The objective of this project is to build and test an interface in between Micro
 
 \section{Overview}
 
-%TODO !!! Herr Wirsing wird diesen Teil genau anschauen. Es braucht ein ordentliches UML Diagramm und eine gute Erklärung!
-
-%TODO !!!!! Zu deiner eigenen Arbeit vermisse ich echte UML Diagramme. Herr Wirsing wird dich sicher nach der Architektur fragen, deswegen bereite dich darauf vor. Außerdem passt dein Text im Moment nicht zu deinem “Architektur”-Diagramm. Kapitel 4.1 wird für Herrn Wirsing DAS Kapitel. Deswegen muss das wirklich gut sein, nicht zu implementierungsnah, sondern eher aus Sicht der Architektur. Der Zusammenhang zwischen MicroPSI und Minecraft muss klar werden, ebenso dein Beitrag und die generelle Idee der Implementierung.
-
 The modular architecture of MicroPsi allows it to add new simulation environments (or worlds, as they are called in MicroPsi) fairly easily. To communicate with a MicroPsi node net, a world needs an interface, which is called \emph{world adapter}, as it is described in section~\ref{sec:2:MicroPsi}. Looking at the Minecraft side, communication with a Minecraft server typically requires a constant flow of data packets going in and out, as it is described in section~\ref{sec:3:relatedprojects}. To add a Minecraft world to MicroPsi, the demands of both sides have to be met.
-
-%TODO So richtig verstehe ich nicht, wo MicroPsi reinspielt...
 
 The contributions of this project are divided into the four modules \texttt{MinecraftWorld}, \texttt{MinecraftWorldadapter}, \texttt{MinecraftClient} and \texttt{MinecraftVisualisation}. The resulting architecture is displayed in figure~\ref{uml_mc}. The \texttt{MinecraftClient} manages the communication with the Minecraft server, provides convenient functions and data structures for sending and responding to packets and stores and regularly updates a simple representation of the environment data it receives from the server. The \texttt{MinecraftVisualisation} module generates 3D images that display the current state of the Minecraft environment, based on the world data it receives from the \texttt{MinecraftClient}. The \texttt{MinecraftWorldadapter} represents the interface towards the MicroPsi node net. It defines the \emph{data sources} that are filled with data from the \texttt{MinecraftClient} and accessed by the node net. It furthermore defines the \emph{data targets} that, conversely, are filled by the node net and translated to actions that the \texttt{MinecraftClient} executes. What ties it all together is the \texttt{MinecraftWorld} module. It provides a step function that is called frequently by the world runner and that advances the \texttt{MinecraftClient}, the \texttt{MinecraftWorldadapter} and the \texttt{MinecraftVisualisation}.
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=11cm]{graphics/UML_MicroPsi_mit_spock_v14}
+    \includegraphics[width=11cm]{graphics/UML_MicroPsi_mit_spock_v15}
   \caption{The architecture of MicroPsi with the new Minecraft interface}
   \label{uml_mc}
 \end{figure}
