@@ -125,6 +125,8 @@ The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a 
 
 To explain, how the new interface can be utilised, we will construct a simple case study in the following. As it only consists of a primitive wiring between sensors and actuators, the scientific value in terms of AI research is low. However, it shall suffice as a proof of concept that the interface is functional and may serve as a foundation for future experiments.
 
+        \subsection{Implementation}
+
 The scenario consists of a single agent that is placed in a Minecraft world. It is standing on a flat surface that is made out of \emph{grass} blocks. Next, a block of \emph{diamond} is placed in the same chunk. The agent is supposed to automatically approach this block, depending on where it has been placed. Therefore it is controlled by a MicroPsi node net, which is set up as described in the following.
 
 \paragraph{Node net}$\;$ \\
