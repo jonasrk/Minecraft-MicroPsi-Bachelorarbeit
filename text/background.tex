@@ -143,15 +143,11 @@ The \texttt{Server} communicates with its users through the server API. User ses
 In this setup, the \texttt{Server} starts the \texttt{Runtime}---even though it may also work independently of the \texttt{Server}. The \texttt{Runtime} component communicates with the \texttt{Server} through the MicroPsi API. It manages node nets and worlds.
 
         \subsubsection{Node Nets}
+MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an ``abstraction of the information processing provided by brain''~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots. 
   
 A MicroPsi node net is defined as a set of states, a starting state, a network function, that defines how to advance to the next state, and a set of node types. Data sources and data targets serve as the input for nodes and output towards a world, where a data source is filled with data from the world and data targets are linked to agent actions in the world.
 
-According to the Psi theory, nodes may have different types and parameters. They contain gates and slots that send and receive an activation. In most cases, the activation is forwarded from a slot to a gate without further modulation.
-
-Nevertheless, nodes may include functions that enable the creation of new nodes and links as well as procedures for learning and planning. They may be implemented as Python code.
-
-According to the concepts of the Psi theory, MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an ``abstraction of the information processing provided by brain''~\cite{conf/agi/Bach12}. Agents can be placed and researched in simulation environments or physically embodied as robots.
-
+According to the Psi theory, nodes may have different types and parameters. They contain gates and slots that send and receive activation. In most cases, the activation is forwarded from a slot to a gate without further modulation. However, nodes may include functions that enable the creation of new nodes and links as well as procedures for learning and planning. They may be implemented as Python code.
 
         \subsubsection{Worlds}
         \label{microPsiWorld}
@@ -166,10 +162,7 @@ The kind of data the world adapter interfaces, is not specified any further, whi
 Worlds contain objects. Objects may be anything that could be interesting for a simulation, and that needs some kind of integrated logic. Light sources or collectable resources are a common example. Objects may contain a set of functions and states, but at least one function that determines how the object advances and reacts to changes while moving through a simulation cycle. A comprehensive world function calls every object function for each simulation step of the world.
 
             \paragraph{Agents}$\;$ \\
-Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agent's body. The function that advances the agent checks for input from the node net and outputs to it.
+Agents are objects that are connected to a world adapter which makes them controllable by a node net. The object that incarnates the agent is best thought of as the agent's body. The function that advances the agent checks for input from the node net and sends its output to it.
         
     \section{Summary}
-This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subSet of AI research and presented its main ideas and goals, as well as regarding foundational philosophical questions.
-Then, the Psi theory by Dietrich Dörner has been described briefly. An overview of implementations of the Psi theory has been given. The latest framework dedicated to the Psi theory, MicroPsi 2, has been described and it's architecture outlined. Knowing about MicroPsi 2's modules is a necessary foundation for the additions to it that are described in chapter 4.
-
-% !!! An diesem Punkt sollte komplett klar sein, was Psi ist und was von MicroPsi 2 zu erwarten ist. Für Psi reicht die Erklärung bei weitem nicht aus, für MicroPsi vermutlich schon, wenn du Psi Erklärung da ist und mit der Implementierung in Relation gesetzt ist!
+This chapter provided the necessary foundations regarding AI for this Thesis. It introduced Artificial General Intelligence as a subset of AI research and presented its main ideas and goals. Then, the Psi theory by Dietrich Dörner has been described briefly. An overview of implementations of the Psi theory has been given. The latest framework dedicated to the Psi theory, MicroPsi 2, has been described and its architecture outlined. Knowing about MicroPsi's modules is a necessary foundation for the additions to it that are described in chapter~\ref{chap:4}.

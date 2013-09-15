@@ -1,12 +1,12 @@
 \chapter{Minecraft}
 \label{chap:3}
-To understand how and why the video game Minecraft~\cite{minecraft} is expected to be an interesting simulation environment for artificial general intelligence, necessary background information, about what makes Minecraft different from many other games, has to be given first. To furthermore work with it, the essential components of the game's architecture have to be described. This chapter provides a roundup of Minecraft's history and a brief explanation of the basic game mechanics. They are followed by an overview of Minecraft usages that exceed the original game's purpose as well as an explanation, of why Minecraft is suitable as a simulation environment. Eventually, related software projects, that have been used for this thesis are introduced and described.
+To understand how and why the video game Minecraft\footnote{\url{https://minecraft.net/}} is expected to be an interesting simulation environment for artificial general intelligence, necessary background information, about what makes Minecraft different from many other games, has to be given first. To furthermore work with it, the essential components of the game's architecture have to be described. This chapter provides a roundup of Minecraft's history and a brief explanation of the basic game mechanics. They are followed by an overview of Minecraft usages that exceed the original game's purpose as well as an explanation, of why Minecraft is suitable as a simulation environment. Eventually, related software projects, that have been used for this thesis are introduced and described.
 
     \section{Overview}
 The story of Minecraft has many interesting sides, but first and foremost it is a story of immense, unexpected success. To give an overview of it, this section delivers insights into its central ideas, as well as a general look upon the developer's practices. Moreover, the game's reception is considered, as the game has become unusually popular. The descriptions are based on Sean C. Duncan's article \emph{Minecraft, beyond construction and survival}~\cite{Duncan:2011:MBC:2207096.2207097}.
     
         \subsection{Main Ideas}
-When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became apparent that his creation resonated with many people. The simple concept of a world entirely consisting out of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out its possibilities and boundaries.
+When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became apparent that his creation resonated with many people. The simple concept of a world entirely consisting of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out its possibilities and boundaries.
 
 Looking at the game for the first time, it is impossible to oversee the primitive appearance of its graphics engine. Everything in the game is made out of blocks. May it be the leaves of a tree, dirt, people or the clouds. Even the sun does not appear round, but as a cubic object. One can assume that the obvious connotation to Lego\texttrademark~is more than a coincidence, as it immediately gives the player a clue, about what kind of possibilities for building and creating the game might deliver.
 
@@ -27,11 +27,11 @@ Unlike any other game, Minecraft fosters the creativity of its players. Bringing
     \section{Game Mechanics}
 Now knowing about the game's background, in this section we will continue with descriptions of the basic concepts of the game, that regard to our AI interface. 
 
-Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped to a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, resources harder to reach and items more complex to craft become available.~\cite{Duncan:2011:MBC:2207096.2207097}
+Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped at a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, resources harder to reach and items more complex to craft become available.~\cite{Duncan:2011:MBC:2207096.2207097}
 
 Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered client-server-protocol and therefore build artificial players that way.
 
-The structure of Minecraft worlds and the client-server-protocol are described in the following. The descriptions are based on the regarding articles of the \emph{Minecraft Wiki}~\cite{mcwiki}.
+The structure of Minecraft worlds and the client-server-protocol are described in the following. The descriptions are based on the regarding articles of the \emph{Minecraft Wiki}\footnote{\url{www.minecraftwiki.net}}.
 
     \subsection{Minecraft Worlds}
     
@@ -45,7 +45,7 @@ The structure of Minecraft worlds and the client-server-protocol are described i
   \label{mc_block}
 \end{wrapfigure}
 
-The most significant concept in Minecraft is the block~(see figure ~\ref{mc_block}). A block is a cube which sides are, compared to the player, roughly one meter long. Every Minecraft world is built up entirely out of them. Therefore, worlds can be thought of as three dimensional spaces filled with voxels.~\cite{baloghcodemetropolis} There are many different types of blocks (or materials, they consist of) and they share their single size, which converts to the basic distance unit of Minecraft.
+The most significant concept in Minecraft is the block~(see figure ~\ref{mc_block}). A block is a cube which sides are, compared to the player, roughly one meter long. Every Minecraft world is built up entirely out of them. Therefore, worlds can be thought of as three dimensional spaces filled with voxels.~\cite{baloghcodemetropolis} There are many different types of blocks (or materials they consist of) and they share their single size, which converts to the basic distance unit of Minecraft.
 
 A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}
 
@@ -68,13 +68,10 @@ Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting
   \label{mc_player}
 \end{wrapfigure} 
 
-The game itself has no predefined goals. Players can walk around, discover the created world (see figure \ref{mc_mechanics} 1) and collect resources by \emph{destroying} blocks, with the generated resources equaling the block type. They can combine several resources to \emph{craft} items. For example, a player can destroy the blocks that represent a tree~(see figure \ref{mc_mechanics} 2). The gained \emph{wood} resource could then be used to craft a wooden pickaxe~(see figure \ref{mc_mechanics} 3), which could then be used to dig into the ground more efficiently~(see figure \ref{mc_mechanics} 4) to then \emph{mine} more rare resources, like iron or gold.
+The game itself has no predefined goals. Players can walk around, discover the created world (see figure \ref{mc_mechanics} \textcircled{1}) and collect resources by \emph{destroying} blocks, with the generated resources equaling the block type. They can combine several resources to \emph{craft} items. For example, a player can destroy the blocks that represent a tree~(see figure \ref{mc_mechanics} \textcircled{2}). The gained \emph{wood} resource could then be used to craft a wooden pickaxe~(see figure \ref{mc_mechanics} \textcircled{1}), which could then be used to dig into the ground more efficiently~(see figure \ref{mc_mechanics} \textcircled{4}) to then \emph{mine} more rare resources, like iron or gold.
 
 There exist different game modes. The original \emph{survival} mode adds monsters that attack the player at night. What solutions to survive the player comes up with (e.g. building shelter or fighting the monsters) is left up to him or her.
-
-In \emph{creative} mode, the player is not being attacked by monsters, has the ability to fly and is given instant access to unlimited resources.
-
-The mode of a Minecraft world does not effect the functionality of this project.
+In \emph{creative} mode, the player is not being attacked by monsters, has the ability to fly and is given instant access to unlimited resources. The mode of a Minecraft world does not effect the functionality of this project.
 
 \begin{figure}[h]
   \centering
