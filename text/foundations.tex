@@ -35,8 +35,6 @@ The structure of Minecraft worlds and the client-server-protocol are described i
 
     \subsection{Minecraft Worlds}
     
-%TODO Gibt es irgendwelche Optionen für dieses Paket, damit die Figure 3.1 linksbündig angezeigt wird?
-
 \begin{wrapfigure}{l}{0.3\textwidth}
   \begin{center}
     \includegraphics[width=0.15\textwidth]{graphics/block}
@@ -83,9 +81,6 @@ In \emph{creative} mode, the player is not being attacked by monsters, has the a
         \subsection{The Client Server Protocol}
         \label{client_server_protocol}
 Minecraft's client server protocol is not publicly documented by the developers themselves. However, the modding community gathered comprehensive knowledge and understanding of its structure (probably by using reverse engineering techniques). The protocol is based on packets. 
-
-The NBT (Named Binary Tag) is a data format that has been introduced by Persson to transfer chunks of binary data together with small amounts of additional data. Its main use is to store Minecraft worlds.
-
 Packets are either \emph{server to client}, \emph{client to server} or \emph{two-way} and begin with a \emph{packet ID} byte. The structure of the packet's payload depends on it's packet ID.
  
 To give an example of one of the easier packets, the \emph{Client Position} packet is fairly straightforward~(see table~\ref{mc_packet}). It is exclusively send from clients to servers and starts with its packet ID (as every packet does), followed by the X- and Y-coordinates as doubles, the stance value as a double (which is used to modify the player's bounding box), another double for the Z-coordinate and eventually a boolean that describes if the player is on the ground or not.~\cite{protocol}
@@ -119,9 +114,7 @@ With more and more applications that move beyond the original gameplay of constr
 As user-generated content has been an essential part in the development of Minecraft, in a process that reminds one of a self-fulfilling prophecy, more and more people explore its possibilities to experiment with new applications. As of today, Persson and Mojang seem to favour and approve new uses of their creation.~\cite{Duncan:2011:MBC:2207096.2207097}
 
     \section{Suitability of Minecraft as a Simulation Environment}
-There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results.
-
-First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and, therefore, up to a certain extend, platform independent. The desktop computer version is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming gaming console Xbox One is announced. The desktop versions are priced at 19.95 \euro, which make it affordable to a large audience.
+There are a number of reasons why using Minecraft as a simulation environment could be useful and lead to interesting results. First, the game itself is easily accessible. It is developed using Java (for both the client and the server software) and, therefore, up to a certain extend, platform independent. The desktop computer version is being sold for Windows, Mac OS X and Linux devices. There are official ports for Android, iOS, Xbox 360, the Raspberry Pi and a version for the upcoming gaming console Xbox One is announced. The desktop versions are priced at 19.95 \euro, which make it affordable to a large audience.
 
 The game itself already has an enormous fanbase. It is (like most videogames) especially popular among teenagers. Minecraft being loved by so many people could benefit this project, in terms of leading to increased attention.
 
@@ -151,8 +144,6 @@ Most third party clients, including bots, facilitate their own event loops.
 Developed by Nick Gamberini, \texttt{Spock}\footnote{\url{https://github.com/nickelpro/spock}} is an open-source bot framework (and as such also a Minecraft client) written in Python. It has been chosen to become an essential part of this project for two reasons: being written in Python it painlessly integrates in the existing MicroPsi code and the absence of dependencies (with one exception) leave the code understandable and easy to deploy.
     
     \subsubsection{Protocol Implementation in \texttt{Spock}}
-    
-%TODO zu kurz! Erklärung fehlt
     
 The Minecraft protocol implementation in \texttt{Spock} is straightforward. The necessary data structures are stored separately and can be accessed globally (see figure~\ref{snippet_structures}).
 
@@ -187,8 +178,7 @@ structs = {
 			\end{minipage}
 		\end{figure}
 		
-These structures are used to parse each packet appropriately (see figure~\ref{snippet_parse}).
-
+These structures are used to parse each packet appropriately (see figure~\ref{snippet_parse}). All data that is received from the server through the established TCP connection is first checked for a packet ID. Then, according to the ID the decoder can look up the appropriate data structure and may then parse the remaining fields of the packet until it reaches its end and the next packet ID is to be expected to arrive through the socket.
 		\begin{figure}[ht]
 			\centering
 			\begin{minipage}{13cm}
@@ -217,8 +207,7 @@ Other interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like br
 \end{figure}
 
     \section{Summary}
-An overview of Minecraft, its history and its basic concepts, as well as other software in its periphery, have been presented in this chapter. Minecraft is a complex, yet easily accessible virtual world. It is in constant development and new features are added regularly. It has a massive fanbase and a huge community around all kinds of game modifications. The most important concepts of Minecraft for this thesis are blocks, chunks and also the client server protocol. They will all be used in the next chapter.
-As a basis for the implementation of the Minecraft interface for MicroPsi, the bot framework \texttt{Spock} by Nick Gamberini has been chosen to extend MicroPsi.
-Furthermore, \texttt{Minecraft} by Michael Fogleman has been chosen to serve as a foundation for the visualisation component. Their implementations will be presented in detail in the next chapter.
+An overview of Minecraft, its history and its basic concepts, as well as other software in its periphery, have been presented in this chapter. Minecraft has been chosen to become a simulation environment for MicroPsi because it is comparably easy to build custom client software that can perform all the actions on a Minecraft server that a human player could. Minecraft is a complex, yet easily accessible virtual world, that shows characteristics of real environments. It is in constant development and new features are added regularly. It has a massive fanbase and a huge community around all kinds of game modifications. The most important concepts of Minecraft in respect to this thesis are blocks, chunks and also the client server protocol. They will be used for the implementations described in the chapter \ref{chap:4}.
 
-%TODO Warum hast du Minecraft ausgewählt? API öffentlich zugänglich, passende Erweiterungen vorhanden, eigenständig erweiterbar, Welt wird realitätsnah nachgebildet
+As a basis for the implementation of the Minecraft interface for MicroPsi, the bot framework \texttt{Spock} by Nick Gamberini has been chosen to extend MicroPsi.
+Furthermore, \texttt{Minecraft} by Michael Fogleman has been chosen to serve as a foundation for the visualisation component. Their implementations will be presented in detail in the following chapter as well.
