@@ -93,8 +93,6 @@ if self.client.move_x > 0:
 		\end{figure}
 
     \section{Module \texttt{MinecraftVisualisation}}
-
-%TODO Wo ist die zu sehen? (Minecraft world step function) 
     
 Another important part of this project is the visualisation component. There are two main reasons for its realisation. The first reason is that the agent's behaviour within the simulation environment is supposed to be visually monitored from the MicroPsi web interface---in a both efficient and pleasurable manner. The second reason is that the image data is supposed to be processed by the node net as a data source itself in the future. The module contains classes and functions that provide an interface to the OpenGL context that generates the 3D graphics. This section gives an overview about what data the visualisation uses to generate images of the environment. 
 
@@ -120,14 +118,10 @@ The resulting architecture can be described as an implementation of a \emph{mode
 
     \section{Module \texttt{MinecraftWorldadapter}}
 
-%TODO Wozu ist diese Klasse da? Ist das eine spezielle Implementierung?
-
 The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a \texttt{MinecraftClient} be controlled by a MicroPsi node net. Most importantly, these are the before mentioned \emph{data sources} and \emph{targets}. It inherits mutator methods for these from its parent class \texttt{WorldAdapter}, which itself inherits from \texttt{WorldObject}, which is the superclass of all agents and world objects, as they are described in section~\ref{microPsiWorld}. As it holds a reference to the according \texttt{MinecraftClient}, it has full access to the environment data and other properties of the client. This allows it, to easily implement simple ``sensors'' by developing algorithms that utilise and search the provided data structures. An example is given in the following section.
     
     \section{Case Study}
     \label{case_study}
-    
-%TODO Das Ziel der Case Study hab ich leider auch sehr spät verstanden. Hier muss auch noch etwas Arbeit rein.
 
 To explain, how the new interface can be utilised, we will construct a simple case study in the following. As it only consists of a primitive wiring between sensors and actuators, the scientific value in terms of AI research is low. However, it shall suffice as a proof of concept that the interface is functional and may serve as a foundation for future experiments.
 
@@ -191,14 +185,10 @@ Then the both the \emph{world runner} and the \emph{node net runner} are started
 
         \subsection{Evaluation}
         
-%TODO Für die Evaluation ist interssant, ob das Interface funktioniert, wie gut es funktioniert (Geschwindigkeiten etc.), ob es einfach zu bedienen ist....
-        
 Now, that a test run has been concluded, the implementation can be evaluated.
 The experiment shows that a functional interface in between a Minecraft world and the MicroPsi framework has been implemented. In the experiment, the agent concludes the appropriate action, if a node net actuator node receives activation and stops doing so, when it stops receiving activation.
 
-Surprisingly, even on the reasonably up-to-date computer\footnote{2.26 GHz Intel Core 2 Duo, 8GB DDR3 RAM, NVIDIA GeForce 9400M 256 MB, OS X 10.8.3 , Chrome Version 29.0.1547.65}, the simulation runs comparably slow, whenever the visualisation component is activated. Where without it, 15 to 30 iterations of the simulation per second can easily be performed, with an active visualisation component, hardly 4 to 6 iterations can be achieved.
-
-%TODO An issue that remains concerning is that the reaction time in between changes in the node net and the according changes of the agent's behaviour seems to be too long, for differing timing of the node net runner and the world runner.
+Surprisingly, even on the reasonably up-to-date computer\footnote{2.26 GHz Intel Core 2 Duo, 8GB DDR3 RAM, NVIDIA GeForce 9400M 256 MB, OS X 10.8.3 , Chrome Version 29.0.1547.65}, the simulation runs comparably slow, whenever the visualisation component is activated. Where without it, 15 to 30 iterations of the simulation per second can easily be performed, with an active visualisation component, hardly 4 to 6 iterations can be achieved. The bottleneck presumably is that with the current implementation each image has to be transferred via its own HTTP request. The simulation should assumedly speed up if the image data would be transported through a web socket, for example.
 
 With MicroPsi node nets in the back, more complex experiments can now be thought of and implemented, that lead to more complex behaviour of the agent. Therefore, a basic understanding of Python and the code at hand as well as the \emph{client server protocol} is required to implement new data sources and targets. An alternative could be that along with the MicroPsi framework, a set of predefined \emph{data sources} and \emph{targets} that represent the most common forms of interaction with the game world could be delivered. This would make it possible, to develop more sophisticated experiments without touching the Python code. Instead, only the graphical editor would be used to assemble node nets that lead to behaviour more interesting to study.
 
