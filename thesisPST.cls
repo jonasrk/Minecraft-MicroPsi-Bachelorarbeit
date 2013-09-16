@@ -133,7 +133,7 @@ Ich versichere hiermit eidesstattlich, dass ich die vorliegende Arbeit selbstst\
 \vspace{2cm}
 
 \noindent
-M\"unchen, den \@handInDate
+Berlin, den 17. September 2013
 
 \hspace*{5cm}%
 \dotfill\\
