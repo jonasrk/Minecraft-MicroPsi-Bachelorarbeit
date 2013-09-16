@@ -39,7 +39,7 @@ The structure of Minecraft worlds and the client server protocol are described i
   \begin{center}
     \includegraphics[width=0.15\textwidth]{graphics/block}
   \end{center}
-  \caption{A grass block (CC-BY-3.0 Mojang AB) \cite{image_mob}}
+  \caption[A grass block]{A grass block (CC-BY-3.0 Mojang AB) \cite{image_block}}
   \label{mc_block}
 \end{wrapfigure}
 
@@ -51,7 +51,7 @@ A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is
   \begin{center}
     \includegraphics[width=0.16\textwidth]{graphics/chunk}
   \end{center}
-  \caption{A chunk (CC-BY-3.0 Mojang AB) \cite{image_mob}}
+  \caption[A chunk]{A chunk (CC-BY-3.0 Mojang AB) \cite{image_chunk}}
   \label{mc_chunk}
 \end{wrapfigure} 
 
@@ -62,7 +62,7 @@ Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting
   \begin{center}
     \includegraphics[width=0.06\textwidth]{graphics/player}
   \end{center}
-  \caption{The player (CC-BY-3.0 Mojang AB) \cite{image_mob}}
+  \caption[The player]{The player (CC-BY-3.0 Mojang AB) \cite{image_mob}}
   \label{mc_player}
 \end{wrapfigure} 
 
@@ -169,7 +169,7 @@ structs = {
 			("ubyte", "max_players")),
 	...
 					\end{pseudocode}
-				\caption{An excerpt of \texttt{Spock}'s data structures for packet-IDs and -structures}
+				\caption[An excerpt of \texttt{Spock}'s data structures]{An excerpt of \texttt{Spock}'s data structures for packet-IDs and -structures}
 				\label{snippet_structures}
 			\end{minipage}
 		\end{figure}
@@ -193,7 +193,7 @@ def decode(self, bbuff):
 		\end{figure}
 		
 		\subsection{Minecraft Clones}
-Other interesting projects include Skycraft~\cite{skycraft}, a Minecraft-like browser game based on WebGL. Another particular project that has the same name as the original game that inspired it is \texttt{Minecraft} by Michael Fogleman~(see figure~\ref{fogleman_mc_screen}). It is a simple Minecraft clone in under 600 lines of Python and has gained some popularity on reddit\footnote{\url{http://www.reddit.com/r/programming/comments/1b8a6z/simple_minecraft_clone_in_580_lines_of_python/}} and Hacker News\footnote{\url{https://news.ycombinator.com/item?id=5458986}}. It is comparably easy to understand and modify and has been used for the visualisation component of this project. It is based on the Python multimedia library \emph{Pyglet}\footnote{\url{http://www.pyglet.org/}}.
+Other interesting projects include Skycraft\footnote{\url{http://skycraft.io/}}, a Minecraft-like browser game based on WebGL. Another particular project that has the same name as the original game that inspired it is \texttt{Minecraft} by Michael Fogleman~(see figure~\ref{fogleman_mc_screen}). It is a simple Minecraft clone in under 600 lines of Python and has gained some popularity on reddit\footnote{\url{http://www.reddit.com/r/programming/comments/1b8a6z/simple_minecraft_clone_in_580_lines_of_python/}} and Hacker News\footnote{\url{https://news.ycombinator.com/item?id=5458986}}. It is comparably easy to understand and modify and has been used for the visualisation component of this project. It is based on the Python multimedia library \emph{Pyglet}\footnote{\url{http://www.pyglet.org/}}.
 
 \begin{figure}[h]
   \centering

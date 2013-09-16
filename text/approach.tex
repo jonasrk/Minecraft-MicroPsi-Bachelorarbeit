@@ -26,7 +26,7 @@ The original event loop of the bot framework had to be dissolved and rebuilt as 
 \begin{figure}[h]
   \centering
     \includegraphics[width=15cm]{graphics/sequencediagram_v14}
-  \caption{A simplified sequence diagram of the flow of data between the web browser, MicroPsi and a Minecraft server in respect to the contributions of this thesis}
+  \caption[A simplified sequence diagram of the flow of data]{A simplified sequence diagram of the flow of data between the web browser, MicroPsi and a Minecraft server in respect to the contributions of this thesis}
   \label{spock_loop}
 \end{figure}
 
@@ -64,7 +64,7 @@ class handle33(BaseHandle):
 	def ToClient(self, client, packet):
 		client.world.unpack_column(packet)
 					\end{pseudocode}
-				\caption{By default, this function handles "Chunk Data (0x33) packets.}
+				\caption{By default, this function handles `Chunk Data (0x33)'' packets.}
 				\label{packet_handling}
 			\end{minipage}
 		\end{figure}
@@ -87,7 +87,7 @@ if self.client.move_x > 0:
         'stance': self.client.position['y'] + 0.11
         }))
 					\end{pseudocode}
-				\caption{The \texttt{PsiDispatcher} checking for activation of the move-x data target and invoking the according action by sending a ``Player Position'' packet}
+				\caption[The \texttt{PsiDispatcher} checking for activation of a data target]{The \texttt{PsiDispatcher} checking for activation of the move-x data target and invoking the according action by sending a ``Player Position'' packet}
 				\label{listing_dispatch}
 			\end{minipage}
 		\end{figure}
@@ -161,7 +161,7 @@ for y in range(0, 16):
      self.datasources['diamond_offset_x_'] = (bot_block[0] - coords[0]) * -1 - 2
      self.datasources['diamond_offset_z_'] = (bot_block[2] - coords[2]) * -1 - 2
 			\end{pseudocode}
-		\caption{Searching the current section for a diamond block and, if it is found, filling the concerning data sources with the distance towards it.}
+		\caption[Searching the for a diamond block]{Searching the current section for a diamond block and, if it is found, filling the concerning data sources with the distance towards it.}
 		\label{listing_sensors}
 	\end{minipage}
 \end{figure}
@@ -181,7 +181,7 @@ Next, the \emph{world runner} and the \emph{node net runner} are started through
 \begin{figure}[h]
   \centering
     \includegraphics[width=12cm]{graphics/diamond_screens}
-  \caption{1. Neither node net, nor agent show any activity, as the experiment did not start yet.  2. The sensors that indicate a diamond towards the negative x- and z-axes light up green---so do the according actuators. The agent starts moving.  3. The agent arrived close enough to the diamond that the sensors stop forwarding activation. The agent stops moving.}
+  \caption[Screenshots of the experiment]{\textcircled{1} Neither node net, nor agent show any activity, as the experiment did not start yet.  \textcircled{2} The sensors that indicate a diamond towards the negative x- and z-axes light up green---so do the according actuators. The agent starts moving.  \textcircled{3} The agent arrived close enough to the diamond that the sensors stop forwarding activation. The agent stops moving.}
   \label{diamond_screens}
 \end{figure}
 
