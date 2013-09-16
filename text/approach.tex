@@ -1,6 +1,6 @@
 \chapter{Minecraft as a MicroPsi 2 World}
 \label{chap:4}
-The objective of this project is to build and test an interface in between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as foundations that have been implemented into the MicroPsi framework. \texttt{Spock} facilitates communication with Minecraft servers. To make the new simulation environment monitorable, \texttt{Minecraft} by Fogleman has been used to implement a 3D visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
+The objective of this project is to build and test an interface between MicroPsi and Minecraft, so that a Minecraft world can be used as a simulation environment for experiments within the MicroPsi framework, which will act as an artificial player. Since there exist open source projects that perform many of the tasks required for this goal, \texttt{Spock}, the Python Minecraft bot framework by Nick Gamberini, and \texttt{Minecraft}, the Python Minecraft clone by Michael Fogleman, have been chosen as foundations that have been implemented into the MicroPsi framework. \texttt{Spock} facilitates communication with Minecraft servers. To make the new simulation environment monitorable, \texttt{Minecraft} by Fogleman has been used to implement a 3D visualisation of the Minecraft world in the web interface. The following section gives an overview of the implemented modules.
 
 \section{Overview}
 
@@ -26,7 +26,7 @@ The original event loop of the bot framework had to be dissolved and rebuilt as 
 \begin{figure}[h]
   \centering
     \includegraphics[width=15cm]{graphics/sequencediagram_v14}
-  \caption{A simplified sequence diagram of the flow of data in between the web browser, MicroPsi and a Minecraft server in respect to the contributions of this thesis}
+  \caption{A simplified sequence diagram of the flow of data between the web browser, MicroPsi and a Minecraft server in respect to the contributions of this thesis}
   \label{spock_loop}
 \end{figure}
 
@@ -34,7 +34,7 @@ Subsequently, a system for translating \emph{data targets} to actions had to be 
 
 
         \subsection{Overview of the \texttt{MinecraftClient}}
-The \texttt{MinecraftClient} holds all the functionalities that enable it to act as an artificial Minecraft player. It implements the packet based \emph{client server protocol} and uses it to communicate with Minecraft servers. It provides data structures that reflect the concepts of a Minecraft world and uses these to store the data it receives from the server. It is heavily based on \texttt{Spock}, which has been developed as an educational project. The scope of the original project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: if one would like to connect the bot to an official Minecraft online server, the packets have to be encrypted using the Python cryptography library PyCrypto. It consists of several classes, which are outlined in figure~\ref{spock_UML}.
+The \texttt{MinecraftClient} holds all the functionalities that enable it to act as an artificial Minecraft player. It implements the packet based \emph{client server protocol} and uses it to communicate with Minecraft servers. It provides data structures that reflect the concepts of a Minecraft world and uses these to store the data it receives from the server. It is heavily based on \texttt{Spock}, which has been developed as an educational project. The scope of the original project was to build a pure Python Minecraft bot framework without dependencies. This has been achieved with one minor exception: If one wanted to connect the bot to an official Minecraft online server, the packets have to be encrypted using the Python cryptography library PyCrypto. It consists of several classes, which are outlined in figure~\ref{spock_UML}.
 
 \begin{figure}[h]
   \centering
@@ -71,7 +71,7 @@ class handle33(BaseHandle):
 
         \subsection{Extensions to the \texttt{MinecraftClient}}
         \label{extensions_client}
-To function as a simulation world for MicroPsi, the \texttt{MinecraftClient} has to translate activation of the \emph{data targets} in the \texttt{MinecraftWorldadapter} to actions. Therefore, a reference to the new class \texttt{PsiDispatcher} has been added to the \texttt{MinecraftClient} that holds a single function \texttt{dispatchPsiCommands()}. Its purpose is to check the values of the \emph{data targets} frequently and invoke appropriate actions, if necessary. The \texttt{PsiDispatcher} is called as a part of the \texttt{advanceClient} function. It checks each available data target, and if necessary invokes an appropriate action (eg. sending a packet). The following listing gives an example for a data target that has been specified to indicate that the agent is supposed to move one block towards the direction of the x-axis.
+To function as a simulation world for MicroPsi, the \texttt{MinecraftClient} has to translate activation of the \emph{data targets} in the \texttt{MinecraftWorldadapter} to actions. Therefore, a reference to the new class \texttt{PsiDispatcher} has been added to the \texttt{MinecraftClient} that holds a single function \texttt{dispatchPsiCommands()}. Its purpose is to check the values of the \emph{data targets} frequently and invoke appropriate actions, if necessary. The \texttt{PsiDispatcher} is called as a part of the \texttt{advanceClient} function. It checks each available data target, and if necessary invokes an appropriate action (e.g. sending a packet). Figure \ref{listing_dispatch} gives an example for a data target that has been specified to indicate that the agent is supposed to move one block towards the direction of the x-axis.
 
 		\begin{figure}[ht]
 			\centering
@@ -118,7 +118,7 @@ The resulting architecture can be described as an implementation of a \emph{mode
 
     \section{Module \texttt{MinecraftWorldadapter}}
 
-The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a \texttt{MinecraftClient} be controlled by a MicroPsi node net. Most importantly, these are the before mentioned \emph{data sources} and \emph{targets}. It inherits mutator methods for these from its parent class \texttt{WorldAdapter}, which itself inherits from \texttt{WorldObject}, which is the superclass of all agents and world objects, as they are described in section~\ref{microPsiWorld}. As it holds a reference to the according \texttt{MinecraftClient}, it has full access to the environment data and other properties of the client. This allows it, to easily implement simple ``sensors'' by developing algorithms that utilise and search the provided data structures. An example is given in the following section.
+The \texttt{MinecraftWorldadapter} provides the necessary interfaces that let a \texttt{MinecraftClient} be controlled by a MicroPsi node net. Most importantly, these are the aforementioned \emph{data sources} and \emph{targets}. It inherits mutator methods for these from its parent class \texttt{WorldAdapter}, which itself inherits from \texttt{WorldObject}, which is the superclass of all agents and world objects, as they are described in section~\ref{microPsiWorld}. As it holds a reference to the according \texttt{MinecraftClient}, it has full access to the environment data and other properties of the client. This allows it, to easily implement simple ``sensors'' by developing algorithms that utilise and search the provided data structures. An example is given in the following section.
     
     \section{Case Study}
     \label{case_study}
@@ -166,7 +166,7 @@ for y in range(0, 16):
 	\end{minipage}
 \end{figure}
 
-Next, in the node net editor the four sensor nodes are edited in such way, that they are associated with the new \emph{data sources}. For every iteration, the node net will now update the sensor values with the values calculated for the \emph{data sources} of the \texttt{MinecraftWorldadapter}.
+Next, in the node net editor the four sensor nodes are edited in a way that they are associated with the new \emph{data sources}. For every iteration, the node net will now update the sensor values with the values calculated for the \emph{data sources} of the \texttt{MinecraftWorldadapter}.
 
 \paragraph{Data targets}$\;$ \\
 
@@ -188,13 +188,13 @@ Next, the \emph{world runner} and the \emph{node net runner} are started through
         \subsection{Evaluation}
         
 Now, that a test run has been concluded, the implementation can be evaluated.
-The experiment shows that a functional interface in between a Minecraft world and the MicroPsi framework has been implemented. In the experiment, the agent concludes the appropriate action, if a node net actuator node receives activation and stops doing so, when it stops receiving activation.
+The experiment shows that a functional interface between a Minecraft world and the MicroPsi framework has been implemented. In the experiment, the agent concludes the appropriate action, if a node net actuator node receives activation and stops doing so, when it stops receiving activation.
 
 Surprisingly, even on a reasonably up-to-date computer\footnote{2.26 GHz Intel Core 2 Duo, 8GB DDR3 RAM, NVIDIA GeForce 9400M 256 MB, OS X 10.8.3 , Chrome Version 29.0.1547.65}, the simulation runs comparably slow, whenever the visualisation component is activated. Where without it, 15 to 30 iterations of the simulation per second can easily be performed, with an active visualisation component, hardly 4 to 6 iterations can be achieved. The bottleneck presumably is that with the current implementation each image has to be transferred via its own HTTP request. The simulation should assumedly speed up if the image data would be transported through a web socket, for example.
 
 With MicroPsi node nets in the back, more complex experiments can now be thought of and implemented, that lead to more complex behaviour of the agent. Therefore, a basic understanding of Python and the code at hand as well as the \emph{client server protocol} is required to implement new data sources and targets. An alternative could be that along with the MicroPsi framework, a set of predefined \emph{data sources} and \emph{targets} that represent the most common forms of interaction with the game world could be delivered. This would make it possible, to develop more sophisticated experiments without touching the Python code. Instead, only the graphical editor would be used to assemble node nets that lead to behaviour more interesting to study.
 
     \section{Summary}
-This chapter presented the implementation of the Minecraft interface for MicroPsi, which consists of the modules \texttt{MinecraftClient}, \texttt{MinecraftVisualisation} and \texttt{MinecraftWorldadapter}. The \texttt{MinecraftClient} facilitates the communication with the Minecraft server; the \texttt{MinecraftVisualisation} delivers OpenGL rendered image data of the environment and the \texttt{MinecraftWorldadapter} serves as the actual interface in between the \texttt{MinecraftClient} and a MicroPsi node net.
+This chapter presented the implementation of the Minecraft interface for MicroPsi, which consists of the modules \texttt{MinecraftClient}, \texttt{MinecraftVisualisation} and \texttt{MinecraftWorldadapter}. The \texttt{MinecraftClient} facilitates the communication with the Minecraft server; the \texttt{MinecraftVisualisation} delivers OpenGL rendered image data of the environment and the \texttt{MinecraftWorldadapter} serves as the actual interface between the \texttt{MinecraftClient} and a MicroPsi node net.
 Next, a case study has been performed and evaluated. A MicroPsi client had to move towards a block of a particular type. It showed that the interface is functional and ready for more sophisticated experiments.
 With the implementation of the interface and the following proof-of-concept case study the scope of this thesis has been completed. The last chapter contains a summary and an outlook towards future applications.
