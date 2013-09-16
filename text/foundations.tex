@@ -6,63 +6,45 @@ To understand how and why the video game Minecraft\footnote{\url{https://minecra
 The story of Minecraft has many interesting sides, but first and foremost it is a story of immense, unexpected success. To give an overview of it, this section delivers insights into its central ideas, as well as a general look upon the developer's practices. Moreover, the game's reception is considered, as the game has become unusually popular. The descriptions are based on Sean C. Duncan's article \emph{Minecraft, beyond construction and survival}~\cite{Duncan:2011:MBC:2207096.2207097}.
     
         \subsection{Main Ideas}
-When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became apparent that his creation resonated with many people. The simple concept of a world entirely consisting of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out its possibilities and boundaries.
-
-Looking at the game for the first time, it is impossible to oversee the primitive appearance of its graphics engine. Everything in the game is made out of blocks. May it be the leaves of a tree, dirt, people or the clouds. Even the sun does not appear round, but as a cubic object. One can assume that the obvious connotation to Lego\texttrademark~is more than a coincidence, as it immediately gives the player a clue, about what kind of possibilities for building and creating the game might deliver.
-
-Another interesting aspect about Minecraft is the procedural semantics the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than those of many other videogames.
-
-Minecraft strives to be the opposite of a game with a strict game-flow. Instead, it enables the player's creativity and joy of creation.
+When Markus (``Notch'') Persson built and released the first public version of Minecraft, it soon became apparent that his creation resonated with many people. The simple concept of a world entirely consisting of standard sized building blocks, which the player can create, destroy and relocate one-by-one, enabled many gamers to employ their creativity, explore the Minecraft world and test out its possibilities and boundaries. Looking at the game for the first time, it is impossible to oversee the primitive appearance of its graphics engine. Everything in the game is made out of blocks. May it be the leaves of a tree, dirt, people or the clouds. Even the sun does not appear round, but as a cubic object. One can assume that the obvious connotation to Lego\texttrademark~is more than a coincidence, as it immediately gives the player a clue, about what kind of possibilities for building and creating the game might deliver. Another interesting aspect about Minecraft is the procedural semantics the game world is generated with. Trees in Minecraft, for example, may share a similar structure that consists of a trunk and leave-covered branches spreading out fractally, but the particular characteristics of each tree are generated randomly. This makes a Minecraft world somewhat more realistic than those of many other videogames. Minecraft strives to be the opposite of a game with a strict game-flow. Instead, it enables the player's creativity and joy of creation.
 
         \subsection{Development Process}
 The development process of Minecraft is very different from those of most other well-known games. Instead of building the game over months or years to finally release a (more or less) finished version to the public, Minecraft is being designed iteratively. In fact, Persson released the first version only a week after he started working on the game. Ever since, new features have been added, and new versions of the game have been released frequently. Another defining aspect of the approach of the game's developement studio Mojang approach towards the development of Minecraft is the involvement of the game's players. Since the earliest stages, plans for the game's future have been discussed openly, and many times the players' voices have been heard. Persson himself locates his approach in the field of agile software development.~\cite{Duncan:2011:MBC:2207096.2207097}
 
         \subsection{Reception}
-The game has attracted great attention ever since its first release in 2009. Since copies of the game could be obtained commercially for the first time, its different versions sold more than 26 million times---with the PC version priced at 19.95\euro, for example. It should be noted that Minecraft's development studio Mojang is a so called \emph{indie game developer}, that is not associated with any classical game publisher, but distributes copies of their game exclusively through their own website.
-
-Minecraft can certainly be called a world wide phenomenon. The game's developers received a number of prizes for their creation---not to mention the millions of dollars that have been earned in Minecraft sales. With its huge success, Minecraft has proven clearly that it compelled to many players.
-
-Unlike any other game, Minecraft fosters the creativity of its players. Bringing the construction component to one extreme after the other, well publicised player creations include a life-size model of the USS Enterprise-D as well as a fully functional arithmetic unit. Videos of roller coaster rides through complex constructions increasingly show characteristics of an art form themselves---regarding to the amount of views on youtube, not less than other, well established formats.
+The game has attracted great attention ever since its first release in 2009. Since copies of the game could be obtained commercially for the first time, its different versions sold more than 26 million times---with the PC version priced at 19.95\euro, for example. It should be noted that Minecraft's development studio Mojang is a so called \emph{indie game developer}, that is not associated with any classical game publisher, but distributes copies of their game exclusively through their own website. Minecraft can certainly be called a world wide phenomenon. The game's developers received a number of prizes for their creation---not to mention the millions of dollars that have been earned in Minecraft sales. With its huge success, Minecraft has proven clearly that it compelled to many players. Unlike any other game, Minecraft fosters the creativity of its players. Bringing the construction component to one extreme after the other, well publicised player creations include a life-size model of the USS Enterprise-D as well as a fully functional arithmetic unit. Videos of roller coaster rides through complex constructions increasingly show characteristics of an art form themselves---regarding to the amount of views on youtube, not less than other, well established formats.
 
     \section{Game Mechanics}
-Now knowing about the game's background, in this section we will continue with descriptions of the basic concepts of the game, that regard to our AI interface. 
-
-Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped at a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, resources harder to reach and items more complex to craft become available.~\cite{Duncan:2011:MBC:2207096.2207097}
-
-Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered client server protocol and therefore build artificial players that way.
-
-The structure of Minecraft worlds and the client server protocol are described in the following. The descriptions are based on the regarding articles of the \emph{Minecraft Wiki}\footnote{\url{www.minecraftwiki.net}}.
+Now knowing about the game's background, in this section we will continue with descriptions of the basic concepts of the game, that regard to our AI interface.  Before a new Minecraft game begins, it procedurally generates a three-dimensional world. The player is then dropped at a spawn point and is now facing a scenario and a minimal game interface, lacking any kind of instruction or advise about what to do next. Soon, the procedurally generated world drives most players to explore the highest mountains and deepest caverns. As the player collects resources and crafts items, resources harder to reach and items more complex to craft become available.~\cite{Duncan:2011:MBC:2207096.2207097} Although the game can be downloaded and played as a single packet of software, many scenarios of playing the game consist of running a Minecraft server software, as well as one copy of the client software for each player. It is possible to mimic the official client by implementing the reverse-engineered client server protocol and therefore build artificial players that way. The structure of Minecraft worlds and the client server protocol are described in the following. The descriptions are based on the regarding articles of the \emph{Minecraft Wiki}\footnote{\url{www.minecraftwiki.net}}.
 
     \subsection{Minecraft Worlds}
     
-\begin{wrapfigure}{l}{0.3\textwidth}
+\begin{wrapfigure}{l}{0.45\textwidth}
   \begin{center}
-    \includegraphics[width=0.15\textwidth]{graphics/block}
+    \includegraphics[width=0.1\textwidth]{graphics/block}
   \end{center}
-  \caption[A grass block]{A grass block (CC-BY-3.0 Mojang AB) \cite{image_block}}
+  \caption[A grass block]{A grass block \cite{image_block}}
   \label{mc_block}
 \end{wrapfigure}
 
-The most significant concept in Minecraft is the block~(see figure ~\ref{mc_block}). A block is a cube which sides are, compared to the player, roughly one meter long. Every Minecraft world is built up entirely out of them. Therefore, worlds can be thought of as three dimensional spaces filled with voxels.~\cite{baloghcodemetropolis} There are many different types of blocks (or materials they consist of) and they share their single size, which converts to the basic distance unit of Minecraft.
+The most significant concept in Minecraft is the block~(see figure~\ref{mc_block}). A block is a cube which sides are, compared to the player, roughly one meter long. Every Minecraft world is built up entirely out of them. Therefore, worlds can be thought of as three dimensional spaces filled with voxels.~\cite{baloghcodemetropolis} There are many different types of blocks (or materials they consist of) and they share their single size, which converts to the basic distance unit of Minecraft. A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}
 
-A chunk~(see figure ~\ref{mc_chunk}) is a segment of the Minecraft world that is 16 blocks long, 16 blocks wide and 256 blocks high (or deep) and therefore consists of up to 65,536 blocks.~\cite{mcwiki_chunks}
-
-\begin{wrapfigure}{r}{0.15\textwidth}
+\begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
-    \includegraphics[width=0.16\textwidth]{graphics/chunk}
+    \includegraphics[width=0.10\textwidth]{graphics/chunk}
   \end{center}
-  \caption[A chunk]{A chunk (CC-BY-3.0 Mojang AB) \cite{image_chunk}}
+  \caption[A chunk]{A chunk \cite{image_chunk}}
   \label{mc_chunk}
 \end{wrapfigure} 
 
 "The player"~(see figure ~\ref{mc_player}) is what the playable game-character in Minecraft is called. It is usually displayed as a human.
 Also, a Minecraft world has a day-night-cycle with 24 Minecraft hours converting to 14 minutes by default.
 
-\begin{wrapfigure}{l}{0.3\textwidth}
+\begin{wrapfigure}{l}{0.5\textwidth}
   \begin{center}
-    \includegraphics[width=0.06\textwidth]{graphics/player}
+    \includegraphics[width=0.072\textwidth]{graphics/player}
   \end{center}
-  \caption[The player]{The player (CC-BY-3.0 Mojang AB) \cite{image_mob}}
+  \caption[The player]{The player \cite{image_mob}}
   \label{mc_player}
 \end{wrapfigure} 
 
