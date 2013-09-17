@@ -35,7 +35,7 @@ Psi agents are controlled by an agent function that is determined through a stru
 \begin{figure}[h]
   \centering
     \includegraphics[width=6cm]{graphics/quad}
-  \caption[A quad]{Quads like this are the basic representational unit of the Psi theory (taken from \cite{Bach:2009:PSI:1611304})}
+  \caption[A quad]{Quads like this are the basic representational unit of the Psi theory. (taken from \cite{Bach:2009:PSI:1611304})}
   \label{quad}
 \end{figure}
 
@@ -67,7 +67,7 @@ Psi agents' basic approach to problem solving works by going through a set of su
 
 The goal of implementing the theory to computer software is to find potential inconsistencies and moreover to find out if Psi agents show similar behaviour to that of humans. If they do, the Psi theory could possibly serve as an explanation about how human minds work. For this purpose, a number of experiments---similar to video games---have been concluded, in which both Psi agents and human players had to perform specific tasks. Later on, their behaviours have been compared and searched for similarities and differences.
 
-Joscha Bach adapted the theory to bring it in a contemporary form with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}. Even though building a conscious machine that thinks and acts as we do is still mere science-fiction, it is this kind of foundational research, that leads us to new ways of thinking about the world, that give us our most significant leaps.
+Joscha Bach adapted the theory to bring it in a contemporary form with slight modifications in his dissertation \emph{Principles of Synthetic Intelligence PSI: An Architecture of Motivated Cognition}~\cite{Bach:2009:PSI:1611304}. Even though building a conscious machine that thinks and acts as we do is still mere science-fiction, it is foundational research, that leads us to new ways of thinking about the world, that can deliver significant leaps towards the future.
     
     \section{Psi Implementations}
 Psi has been implemented by different groups at different times. The first implementations are by Dörner and his associates themselves~(see figure \ref{psi_screen}). They used Delphi Pascal and developed it for Windows environments. This implementation can still be downloaded\footnote{\url{http://www.uni-bamberg.de/psychologie/theoretische-psychologie/leistungen/forschung/downloads/} [accessed 16-September-2013]} and runs on Windows 7 installations, for example. 
@@ -79,7 +79,7 @@ Psi has been implemented by different groups at different times. The first imple
   \label{psi_screen}
 \end{figure}
 
-The work on Dörner's team's software has not been continued, so Joscha Bach and his associates developed new implementations of Psi. From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included a graphical editor and a broad experimentation framework. MicroPsi provided a complex and sophisticated simulation component which contained simulated objects in three dimensional worlds---even though most experiments took place on a flat surface. The framework offered complex administrator interfaces and appealing DirectX rendered 3D-views of the scenery as well as a more general world view which provided a graphical user interface to the world by managing clickable objects. Predefined simulation environments included a classic Island and a Mars world (see figure~\ref{micropsi_3d_screen}). Objects in these worlds may be assembled recursively out of other objects and bring their own functionalities. As it has been the case in Dörner's implementation, a viewer for facial expressions has been included---this time as a three-dimensional simulation, too.~\cite{Bach:2009:PSI:1611304}
+The work on Dörner's team's software has not been continued, so Joscha Bach and his associates developed new implementations of Psi. From 2003 to 2009 they built an implementation in Java as a set of plugins for the Eclipse IDE called MicroPsi. It included a graphical editor and a broad experimentation framework. MicroPsi provided a complex and sophisticated simulation component which contained simulated objects in three dimensional worlds---even though most experiments took place on a flat surface. The framework offered comprehensive administrator interfaces and appealing DirectX rendered 3D-views of the scenery as well as a more general world view which provided a graphical user interface to the world by managing clickable objects. Predefined simulation environments included a classic Island and a Mars world (see figure~\ref{micropsi_3d_screen}). Objects in these worlds may be assembled recursively out of other objects and bring their own functionalities. As it has been the case in Dörner's implementation, a viewer for facial expressions has been included---this time as a three-dimensional simulation, too.~\cite{Bach:2009:PSI:1611304}
 
 
 \begin{figure}[h]
@@ -106,7 +106,7 @@ Even though there have been more complex simulation environments (e.g. 3D-worlds
 
         \subsection{Module Overview}
                 
-MicroPsi is written in Python with a minimum of dependencies. Therefore, its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulation environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independent of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager} that provide functionalities for multiple users to create accounts and individually create, run and store simulation setups.~\cite{conf/agi/Bach12}
+MicroPsi is written in Python with a minimum of dependencies. Therefore, its  modular structure is comparably easy to understand. It is illustrated in figure~\ref{micropsi2_modules}. First, one can differentiate between the \texttt{Server} module (or the web interface) and the actual simulation \texttt{Runtime} module (also called \emph{core}). In a simple simulation experiment setup, MicroPsi runs three threads: one for the \texttt{Server} and, invoked by the \texttt{Runtime}, one \emph{world runner} that runs a simulation world as well as one \emph{node net runner} that runs a node net. As these names suggest, the \texttt{Runtime} manages both the simulation environments as well as the inhabitant agents (or node net embodiments). They may by design run asynchronously. In fact, the \texttt{Runtime} works entirely independent of the \texttt{Server} and therefore may just as well be deployed for command line interaction or other GUIs. Furthermore, the \texttt{Server} contains a \texttt{UserManager} and the \texttt{Runtime} a \texttt{ConfigurationManager} that provide functionalities for multiple users to create accounts and individually create, run and store simulation setups. The following descriptions are heavily based on \emph{Micropsi 2: The next generation of the micropsi framework} by Joscha Bach~\cite{conf/agi/Bach12} where the theoretical foundations can be found in detail.
           
 \begin{figure}[h]
   \centering
@@ -115,12 +115,10 @@ MicroPsi is written in Python with a minimum of dependencies. Therefore, its  mo
   \label{micropsi2_modules}
 \end{figure}
 
-The following descriptions are heavily based on \cite{conf/agi/Bach12} where the theoretical foundations can be found in detail.
-
         \subsection{Module \texttt{Server}}
 The \texttt{Server} renders the GUI and deploys the agent simulation as a web application. It acts as a web server for remote or local access. A client for this application may be any computer with a reasonable up-to-date web browser. Therefore, simulations can be launched from anywhere without requiring any installation. It rests upon the lightweight Python web framework \emph{Bottle}\footnote{\url{http://bottlepy.org/docs/dev/} [accessed 16-September-2013]}.
 
-The web interface is based on HTML as well as Javascript. The communication between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's \emph{Bootstrap}\footnote{\url{http://getbootstrap.com/} [accessed 16-September-2013]} library are in use. The graphic renderings (see figure~\ref{micropsi2_nodenet}) utilise the JavaScript graphics library \emph{PaperJS}\footnote{\url{http://paperjs.org/} [accessed 16-September-2013]}. 
+The web interface is based on HTML as well as Javascript. The communication between the browser and the simulation is managed via JSON remote procedure calls. Many GUI components of Twitter's \emph{Bootstrap}\footnote{\url{http://getbootstrap.com/} [accessed 16-September-2013]} library are in use. The graphic renderings (see figure~\ref{micropsi2_nodenet}) utilise the Javascript graphics library \emph{PaperJS}\footnote{\url{http://paperjs.org/} [accessed 16-September-2013]}. 
 
 \begin{figure}[h]
   \centering
@@ -135,7 +133,7 @@ The \texttt{Server} communicates with its users through the server API. User ses
 In this setup, the \texttt{Server} starts the \texttt{Runtime}---even though it may also work independently of the \texttt{Server}. The \texttt{Runtime} component communicates with the \texttt{Server} through the MicroPsi API. It manages node nets and worlds.
 
         \paragraph{Node Nets}$\;$ \\
-MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an ``abstraction of the information processing provided by brain''~(\cite{conf/agi/Bach12}). Agents can be placed and researched in simulation environments or physically embodied as robots. 
+MicroPsi defines agents as node nets or to be more specific, hierarchical spreading activation networks. They are an ``abstraction of the information processing provided by brains''~(\cite{conf/agi/Bach12}). Agents can be placed and researched in simulation environments or physically embodied as robots. 
   
 A MicroPsi node net is defined as a set of states, a starting state, a network function, that defines how to advance to the next state, and a set of node types. Data sources and data targets serve as the input for nodes and the output towards a world. As such, data sources are filled with data from the world and data targets are linked to agent actions in the world.
 
